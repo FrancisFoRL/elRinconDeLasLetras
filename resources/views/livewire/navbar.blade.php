@@ -40,7 +40,7 @@
             <ul class="navbar-nav ms-auto me-2 align-items-center">
                 <li class="nav-item me-4" id="heart">
                     <a href="{{route('wishlist')}}">
-                        <i class="fa-solid fa-heart" style="text-decoration: none"></i>
+                        <i class="fa-solid fa-heart"></i>
                     </a>
 
                 </li>
@@ -239,6 +239,11 @@
     .fa-regular.fa-bars-sort {
         transition: transform 0.5s ease-in-out;
         transform: rotate(90deg);
+    }
+
+    a, a:hover {
+        color: unset;
+        text-decoration: none;
     }
 
 

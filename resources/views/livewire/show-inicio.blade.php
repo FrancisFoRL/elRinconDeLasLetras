@@ -41,29 +41,33 @@
     <section class="my-md-5 my-4">
         <article class="col-11 col-md-10 mx-auto">
             <h2 class="mb-4">Productos Destacados</h2>
-            <div class="row row-cols-2 row-cols-md-3 row-cols-lg-3 row-cols-xl-4 row-cols-xxl-6 g-2 g-md-4">
+            <div class="row row-cols-2 row-cols-md-2 row-cols-lg-4 row-cols-xl-4 row-cols-xxl-6 g-2 g-md-4">
                 @foreach ($books as $book)
-                <div class="col">
-                    <div class="card h-100">
-                        <img src="{{ asset($book->image) }}" class="card-img-top" alt="...">
-                        <div class="card-body pb-0 pt-2">
-                            <h3 class="card-title book-title">{{$book->title}}</h3>
-                        </div>
-                        <div class="card-footer p-2 align-items-center d-flex justify-content-between"
-                            style="background-color: #212121">
-                            <p class="card-text m-0 fw-bold">{{$book->price}}€</p>
-                            <div class="d-flex ">
-                                <button wire:click.prevent='store({{$book}})' class="card-button p-2 px-3 me-1" title="Añadir al carrito">
-                                    <i class="fa-solid fa-cart-plus"></i>
-                                </button>
-                                <button wire:click.prevent='addToWishlist({{ $book->id }})' class="card-button p-2 px-3" title="Añadir a favoritos el libro">
-                                    <i class="fa-solid fa-heart"></i>
-                                </button>
+                <div class="col-md-4">
+                    <div class="card shadow">
+                        <a href="{{ route('book.show', $book->slug) }}">
+                            <div class="card-img-container">
+                                <img src="{{ asset($book->image) }}" class="card-img-top" alt="...">
                             </div>
-
+                        </a>
+                        <div class="card-body text-center">
+                            <h3 class="card-title book-title">{{ $book->title }}</h3>
+                            <p class="card-text text-muted">{{ $book->author->name }}</p>
+                            <p class="card-text">{{ $book->price }}€</p>
+                        </div>
+                        <div class="card-footer d-flex justify-content-center align-items-center">
+                            <button wire:click.prevent="store({{ $book }})" class="btn btn-cart me-2"
+                                title="Añadir al carrito">
+                                <i class="fa-solid fa-cart-plus"></i>
+                            </button>
+                            <button wire:click.prevent="addToWishlist({{ $book->id }})" class="btn btn-fav"
+                                title="Añadir a favoritos el libro">
+                                <i class="fa-solid fa-heart"></i>
+                            </button>
                         </div>
                     </div>
                 </div>
+
                 @endforeach
             </div>
         </article>
@@ -76,29 +80,62 @@
 
 <!-- Styles -->
 <style>
-    .card-body {
-        background-color: #e9e9e9;
+    .card {
+        border-radius: 15px;
+        overflow: hidden;
+        transition: all 0.3s ease;
     }
 
-    .card img {
-        height: 210px;
+    .card:hover {
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+        transform: translateY(-5px);
     }
 
-    .card-title {
-        font-weight: bold;
+    .card-img-container {
+        position: relative;
     }
 
-    .card-text {
-        color: #6D9886;
+    .card-img-container::before {
+        content: "";
+        display: block;
+        padding-top: 100%;
     }
 
-    .card-button {
+    .card-img-top {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .book-title, .card-text {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .btn-cart {
         background-color: #6D9886;
-        border: none;
-        color: white;
-        padding: 5px 15px 5px 15px;
-        border-radius: 5px;
+        color: #f8fafc;
     }
+
+    .btn-cart:hover {
+        background-color: #4F766B;
+        color: #f8fafc;
+    }
+
+    .btn-fav {
+        background-color: #212121;
+        color: #f8fafc;
+    }
+
+    .btn-fav:hover {
+        background-color: #5a6268;
+        color: #DC143C;
+    }
+
 
     footer {
         background-color: #212121;
@@ -118,7 +155,7 @@
         }
     }
 </style>
-<script>
+{{-- <script>
     window.onload = function() {
             let bookTitle = document.getElementsByClassName("card-title");
             let limiteCaracteres = 30;
@@ -129,4 +166,4 @@
                 }
             }
         }
-</script>
+</script> --}}

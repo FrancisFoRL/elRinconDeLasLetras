@@ -45,11 +45,14 @@ class ShowInicio extends Component
 
     public function addToWishlist(Book $book)
     {
-        Wishlist::create([
-            'user_id' => auth()->id(),
-            'book_id' => $book->id,
-        ]);
-
-        session()->flash('success', 'Libro añadido de la lista de deseos');
+        if (Auth::user()) {
+            Wishlist::create([
+                'user_id' => auth()->id(),
+                'book_id' => $book->id,
+            ]);
+            session()->flash('success', 'Libro añadido de la lista de deseos');
+        } else {
+            return redirect()->route('login');
+        }
     }
 }

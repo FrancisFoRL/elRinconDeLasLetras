@@ -2,12 +2,7 @@
 
 namespace Database\Seeders;
 
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
-
-use Database\Seeders\BookSeeder as SeedersBookSeeder;
 use Illuminate\Database\Seeder;
-use Google\Client;
-use Google\Service\Books;
 
 class DatabaseSeeder extends Seeder
 {
@@ -29,5 +24,6 @@ class DatabaseSeeder extends Seeder
         // $this->call(UserSeeder::class);
         $this->call(BooksCategoriesSeeder::class);
         $this->call(CustomerSeeder::class);
+        $this->call(ReviewSeeder::class);
     }
 }

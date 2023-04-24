@@ -4,9 +4,11 @@
 use App\Http\Livewire\Cart\CartShow;
 use App\Http\Livewire\Cart\CartShowInicio;
 use App\Http\Livewire\Navbar;
+use App\Http\Livewire\ShowBook;
 use App\Http\Livewire\ShowInicio;
 use Illuminate\Support\Facades\Route;
 use \App\Http\Livewire\Wishlist;
+use App\Models\Book;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,6 +23,12 @@ use \App\Http\Livewire\Wishlist;
 
 Route::get('/', ShowInicio::class)->name('inicio');
 Route::get('/navbar', Navbar::class)->name('nav');
+Route::get('/book', ShowBook::class)->name('book');
+Route::get('/book/{slug}', function ($slug) {
+    $book = Book::where('slug', $slug)->first();
+    return view('livewire.show-book', compact('book'));
+})->name('book.show');
+
 Route::get('/cart/cart-show-inicio', CartShowInicio::class)->name('cartNav');
 Route::get('/cart/cart-show', CartShow::class)->name('cart');
 
