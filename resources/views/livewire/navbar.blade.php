@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-sm bg-body-tertiary d-none d-md-block" id="navPrincipal">
+<nav class="navbar navbar-expand-sm bg-body-tertiary d-none d-lg-block" id="navPrincipal">
     <div class="container-fluid">
         <div class="d-flex align-items-center">
             <a class="navbar-brand" href="{{route('inicio')}}">
@@ -8,12 +8,6 @@
         </div>
         <div class="collapse navbar-collapse" id="">
             <ul class="navbar-nav">
-                {{-- <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="#"></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Features</a>
-                </li> --}}
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                         aria-expanded="false">
@@ -33,10 +27,12 @@
                 </li>
             </ul>
             <div class="d-flex mx-auto justify-md-content-center">
-                <input class="form-control me-2 rounded-pill pl-2" id="inputSearch" type="search" placeholder="Buscar"
-                    aria-label="Search">
-                {{-- <button class="btn btn-outline-success" type="submit">Buscar</button> --}}
-            </div>
+                <div class="input-group">
+                  <input class="form-control" id="inputSearch" type="search" placeholder="Buscar" aria-label="Search">
+                  <button id="inputSearch-button" class="input-group-text"><i class="fa-solid fa-magnifying-glass"></i></button>
+                </div>
+              </div>
+
             <ul class="navbar-nav ms-auto me-2 align-items-center">
                 <li class="nav-item me-4" id="heart">
                     <a href="{{route('wishlist')}}">
@@ -118,6 +114,7 @@
                         </ul>
                         @endauth
                         @endif
+                    </div>
                 </li>
             </ul>
         </div>
@@ -125,27 +122,52 @@
 </nav>
 
 {{-- Menu Para moviles --}}
-<nav class="navbar d-md-none d-sm-block navbar-fixed-bottom" style="white">
-    <div class="d-flex align-items-center">
-        <a class="navbar-brand" href="{{route('inicio')}}">
-            <img src="{{ Storage::url('Logo.svg') }}" alt="El Rincón de las letras" id='logo' width="50" height="50"
-                class="me-4">
-        </a>
-    </div>
-    <div class="navbar-nav" id="navbarNav">
-        <ul class="navbar-nav">
-            <li class="nav-item">
-                <a class="nav-link" href="#">Link 1</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Link 2</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Link 3</a>
-            </li>
-        </ul>
+<nav
+    class="navbar navbar-expand d-block d-lg-none fixed-bottom navbar-dark bg-dark" id="nav-mobile">
+    <div class="container-fluid">
+        <div class="navbar-nav text-center">
+            <a class="nav-link mx-md-5" href="#">
+                <i class="fa-solid fa-cart-shopping" id="shopping-card" type="button" data-bs-toggle="offcanvas"
+                    data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
+                </i>
+                <div>Carrito</div>
+            </a>
+            <a class="nav-link mx-md-5" href="{{route('wishlist')}}">
+                <i class="fa-solid fa-heart"></i>
+                <div>Deseados</div>
+            </a>
+        </div>
+        <div class="d-flex justify-content-center align-items-center">
+            <a href="{{route('inicio')}}">
+                <img src="{{ Storage::url('Logo.svg') }}" alt="El Rincón de las letras" id='logo' width="50"
+                    height="50">
+            </a>
+        </div>
+        <div class="navbar-nav text-center">
+            <a class="nav-link mx-md-5" href="#">
+                <i class="fa-solid fa-paper-plane"></i>
+                <div>Contacto</div>
+            </a>
+            @if (Auth::user())
+            <a class="nav-link mx-md-5" href="{{ route('profile.show') }}">
+                <i class="fa-solid fa-user"></i>
+                <div>Perfil</div>
+            </a>
+            @else
+            <a class="nav-link mx-md-5" href="{{ route('login') }}">
+                <i class="fa-solid fa-user"></i>
+                <div>Perfil</div>
+            </a>
+            @endif
+
+        </div>
     </div>
 </nav>
+
+
+
+
+
 
 @livewire('cart.cart-show-inicio')
 
@@ -154,10 +176,15 @@
         background-color: #212121;
     }
 
+    .nav-link-span {
+        margin-left: -3px;
+    }
+
     #inputSearch {
         width: 40vw;
         background: transparent;
         border: 1px solid rgb(181, 189, 196);
+        border-radius: 20px 0 0 20px;
         font-size: 16px;
         height: 40px;
         line-height: 24px;
@@ -169,7 +196,19 @@
     #inputSearch:focus {
         background-color: transparent;
         border-color: #6D9886;
-        box-shadow: 2px 2px 0 #6D9886;
+        box-shadow: 0px 2px 0 #6D9886;
+    }
+
+    #inputSearch-button{
+        background-color: transparent;
+        border-radius: 0 20px 20px 0;
+        color: #D9D9D9;
+    }
+
+    #inputSearch-button:hover{
+        background-color: #6D9886;
+        box-shadow: 2px 2px 0 #D9D9D9;
+        border-color: #6D9999;
     }
 
     #table {
@@ -241,9 +280,14 @@
         transform: rotate(90deg);
     }
 
-    a, a:hover {
+    a,
+    a:hover {
         color: unset;
         text-decoration: none;
+    }
+
+    #nav-mobile{
+        margin-top: 200px;
     }
 
 

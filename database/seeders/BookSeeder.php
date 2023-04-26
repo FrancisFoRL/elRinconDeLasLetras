@@ -4,7 +4,6 @@ namespace Database\Seeders;
 use Illuminate\Support\Str;
 use App\Models\Book;
 use App\Models\Editorial;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use GuzzleHttp\Client;
 
@@ -99,5 +98,3 @@ class BookSeeder extends Seeder
         }
     }
 }
-
-//Editorial::all()->random()->id,

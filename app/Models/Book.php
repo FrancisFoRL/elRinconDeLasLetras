@@ -27,7 +27,6 @@ class Book extends Model
         return $this->hasMany(Review::class);
     }
 
-
     public function category()
     {
         return $this->belongsToMany(Category::class, 'books_categories', 'book_id', 'category_id');
@@ -42,8 +41,4 @@ class Book extends Model
     {
         return Str::slug($this->title);
     }
-
-    // public function shopping_carts(){
-    //     return $this->belongsToMany(ShoppingCart::class, 'books_shopping_carts', 'book_id', 'shopping_cart_id');
-    // }
 }

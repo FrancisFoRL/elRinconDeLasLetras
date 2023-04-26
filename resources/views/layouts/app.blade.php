@@ -7,9 +7,10 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
-
+    <title>El Rincon de las Letras</title>
+    {{-- {{ config('app.name', 'El Rincon de Las Letras') }} --}}
     <!-- Fonts -->
+    <link rel="shortcut icon" href="{{ Storage::url('Logo.svg') }}">
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
 

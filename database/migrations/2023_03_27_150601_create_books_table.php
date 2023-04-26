@@ -18,9 +18,9 @@ return new class extends Migration
             $table->text('description');
             $table->decimal('price', 6, 2);
             $table->string('isbn')->required();
-            $table->integer('pages');
+            $table->integer('pages')->nullable();
             $table->string('image');
-            $table->integer('stock');
+            $table->integer('stock')->required();
             $table->foreignId('editorial_id')->constrained()->onDelete('cascade');
             $table->foreignId('author_id')->constrained()->onDelete('cascade');
             $table->timestamps();

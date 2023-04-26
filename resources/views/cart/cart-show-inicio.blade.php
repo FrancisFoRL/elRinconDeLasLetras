@@ -63,7 +63,6 @@
             <div class="d-grid gap-2 position-absolute bottom-0 start-0 end-0 mb-3 mx-3">
                 <button class="btn btn-lg" type="button" id="buttonCart">Ir a caja</button>
             </div>
-
         </a>
     </div>
 </div>
