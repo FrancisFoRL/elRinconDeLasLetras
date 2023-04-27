@@ -1,6 +1,9 @@
 <?php
 
-
+use App\Http\Controllers\PaypalController;
+use App\Http\Controllers\RedsysController;
+use App\Http\Controllers\StripeController;
+use App\Http\Controllers\StripePaymentController;
 use App\Http\Livewire\Cart\CartShow;
 use App\Http\Livewire\Cart\CartShowInicio;
 use App\Http\Livewire\Navbar;
@@ -47,13 +50,22 @@ Route::middleware(['auth'])->group(function () {
     //Aqui meter ruta para validar pedido y la lista de favoritos
     Route::get('/wishlist', Wishlist::class)->name('wishlist');
     Route::delete('/wishlist/remove/{id}', [Wishlist::class, 'removeFromWishlist'])->name('wishlist.remove');
+
+
 });
 
 Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function () {
     Route::get('dashboard', [App\Http\Controllers\Admin\DashboardController::class, 'index']);
 });
 
+Route::controller(PaypalController::class)->group(function(){
+    Route::get('/checkout', 'index')->name('paymentindex');
+    Route::post('/request-payment', 'RequestPayment')->name('requestpayment');
+    Route::get('/payment-success', 'PaymentSuccess')->name('paymentsuccess');
+    Route::get('/payment-cancel', 'PaymentCancel')->name('paymentCancel');
+});
+
+
 // Route::get('/index', ShowCart::class)->name('cart.index');
 
-//AIzaSyCXitozlkM6Wnsxgk7qKR96VrY04ueNt1I
 Route::get('/home', [App\Http\Controllers\Admin\HomeController::class, 'index'])->name('home');

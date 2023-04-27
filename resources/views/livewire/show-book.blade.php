@@ -37,6 +37,7 @@
             </div>
         </div>
 
+        <h3 class="mt-3">Reviews</h3>
         <div class="mt-3">
             @foreach ($book->reviews as $review)
             <div class="card mb-4">

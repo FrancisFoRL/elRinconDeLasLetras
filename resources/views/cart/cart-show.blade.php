@@ -1,8 +1,8 @@
 <div class="container">
+    @if(Cart::count()>0)
     <div class="my-md-4 my-3">
         <h2>Carrito de Compra</h2>
     </div>
-    @if(Cart::count()>0)
     <div class="contenido">
         <div class="row">
             <div class="col-md-12 col-lg-8" id="contenedor_book">
@@ -101,7 +101,7 @@
 
     #btn-check:hover {
         background-color: transparent;
-        border: 2px solid #D4AF37;
+        border: 1px solid #D4AF37;
     }
 
     .btn {
