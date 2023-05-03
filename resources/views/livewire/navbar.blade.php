@@ -28,10 +28,11 @@
             </ul>
             <div class="d-flex mx-auto justify-md-content-center">
                 <div class="input-group">
-                  <input class="form-control" id="inputSearch" type="search" placeholder="Buscar" aria-label="Search">
-                  <button id="inputSearch-button" class="input-group-text"><i class="fa-solid fa-magnifying-glass"></i></button>
+                    <input class="form-control" id="inputSearch" type="search" placeholder="Buscar" aria-label="Search">
+                    <button id="inputSearch-button" class="input-group-text"><i
+                            class="fa-solid fa-magnifying-glass"></i></button>
                 </div>
-              </div>
+            </div>
 
             <ul class="navbar-nav ms-auto me-2 align-items-center">
                 <li class="nav-item me-4" id="heart">
@@ -122,56 +123,131 @@
 </nav>
 
 {{-- Menu Para moviles --}}
-<nav
-    class="navbar navbar-expand d-block d-lg-none fixed-bottom navbar-dark bg-dark" id="nav-mobile">
-    <div class="container-fluid">
-        <div class="navbar-nav text-center">
-            <a class="nav-link mx-md-5" href="#">
-                <i class="fa-solid fa-cart-shopping" id="shopping-card" type="button" data-bs-toggle="offcanvas"
-                    data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
-                </i>
-                <div>Carrito</div>
-            </a>
-            <a class="nav-link mx-md-5" href="{{route('wishlist')}}">
-                <i class="fa-solid fa-heart"></i>
-                <div>Deseados</div>
-            </a>
+<nav class="navbar navbar-expand d-flex align-items-center d-lg-none fixed-bottom rounded-pill mb-1 mx-1"
+    id="nav-mobile">
+    <div class="nav-item-mobile {{ Request::is('wishlist') ? 'active' : '' }}">
+        <a href="{{route('wishlist')}}">
+            <i class="material-icons favorite-icon">
+                favorite
+            </i>
+        </a>
+    </div>
+    <div class="nav-item-mobile">
+        <i class="material-icons search-icon" onclick="showSearch()">
+            search
+        </i>
+        <div class="search-box">
+            <input type="text" placeholder="Buscar..." class="search-input" name="search">
+            <div class="search-background"></div>
         </div>
-        <div class="d-flex justify-content-center align-items-center">
-            <a href="{{route('inicio')}}">
-                <img src="{{ Storage::url('Logo.svg') }}" alt="El Rincón de las letras" id='logo' width="50"
-                    height="50">
-            </a>
-        </div>
-        <div class="navbar-nav text-center">
-            <a class="nav-link mx-md-5" href="#">
-                <i class="fa-solid fa-paper-plane"></i>
-                <div>Contacto</div>
-            </a>
-            @if (Auth::user())
-            <a class="nav-link mx-md-5" href="{{ route('profile.show') }}">
-                <i class="fa-solid fa-user"></i>
-                <div>Perfil</div>
-            </a>
-            @else
-            <a class="nav-link mx-md-5" href="{{ route('login') }}">
-                <i class="fa-solid fa-user"></i>
-                <div>Perfil</div>
-            </a>
-            @endif
-
-        </div>
+        <a href="#">
+    </div>
+    <div class="nav-item-mobile">
+        <a href="{{route('inicio')}}">
+            <img src="{{ Storage::url('Logo.svg') }}" alt="El Rincón de las letras" id='logo' width="36" height="36">
+        </a>
+    </div>
+    <div class="nav-item-mobile {{ Request::is('cart/cart-show') ? 'active' : '' }}">
+        <a href="{{ route('cart') }}">
+            <i class="material-icons shopping_cart">
+                shopping_cart
+            </i>
+        </a>
+    </div>
+    <div class="nav-item-mobile">
+        <span class="material-icons outlined" type="button" data-bs-toggle="offcanvas"
+        data-bs-target="#offcanvasMobile" aria-controls="offcanvasRight">
+            menu_open
+        </span>
     </div>
 </nav>
 
-
-
-
-
-
+<x-offcanvas-mobile/> <!-- Offcanvas para moviles -->
 @livewire('cart.cart-show-inicio')
 
+<script>
+    function showSearch() {
+        var searchBox = document.querySelector('.search-box');
+        searchBox.classList.toggle('show');
+        searchBox.querySelector('input').focus();
+    }
+</script>
+
 <style>
+    /* NavBar pantalla mobiles y tablets */
+
+    #nav-mobile {
+        background-color: #212121;
+        padding: 25px 20px;
+        font-family: 'Poppins', sans-serif;
+    }
+
+    .nav-item-mobile {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-grow: 1;
+        padding: 10px 15px;
+        cursor: pointer;
+        transition: all 0.2s ease-out;
+    }
+
+    .nav-item-mobile.active a i {
+        color:  #6D9886;
+    }
+
+    .material-icons {
+        color: #D9D9D9;
+    }
+
+    .nav-text-mobile {
+        font-size: 20px;
+        margin: auto;
+        text-align: center;
+        font-weight: 500;
+        transition: all 0.3s ease;
+    }
+
+    #search-container {
+        position: relative;
+    }
+
+    .search-box {
+        position: absolute;
+        bottom: 85px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 63%;
+        max-width: 400px;
+        padding: 20px;
+        padding-bottom: 0px;
+        border-radius: 30px 30px 0 0;
+        background-color: #212121;
+        display: none;
+    }
+
+    .search-box.show {
+        display: block;
+    }
+
+    .search-input {
+        width: 100%;
+        border: none;
+        border-bottom: 1px solid #e9e9e9;
+        font-size: 16px;
+        background-color: transparent;
+        color: #D9D9D9
+    }
+
+    .search-background {
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        display: none;
+    }
+
+
+    /* NavBar pantallas grandes */
     nav {
         background-color: #212121;
     }
@@ -199,13 +275,13 @@
         box-shadow: 0px 2px 0 #6D9886;
     }
 
-    #inputSearch-button{
+    #inputSearch-button {
         background-color: transparent;
         border-radius: 0 20px 20px 0;
         color: #D9D9D9;
     }
 
-    #inputSearch-button:hover{
+    #inputSearch-button:hover {
         background-color: #6D9886;
         box-shadow: 2px 2px 0 #D9D9D9;
         border-color: #6D9999;
@@ -286,7 +362,7 @@
         text-decoration: none;
     }
 
-    #nav-mobile{
+    #nav-mobile {
         margin-top: 200px;
     }
 

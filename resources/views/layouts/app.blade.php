@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -14,14 +15,17 @@
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
 
+
     <!-- Bootstrap 5 (CSS y JS) -->
     @vite(['resources/js/app.js'])
 
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
-    {{-- <link rel="stylesheet" href="{{asset('assets/css/bootstrap.min.css')}}"> --}}
+    {{--
+    <link rel="stylesheet" href="{{asset('assets/css/bootstrap.min.css')}}"> --}}
     @livewireStyles
 </head>
+
 <body>
     <div id="app">
         @livewire('navbar')
@@ -31,13 +35,15 @@
         </main>
     </div>
 </body>
+
 </html>
 
 {{-- <script src="{{asset('assets/js/jquery-3.6.0.min.js')}}" defer></script>
 <script src="{{asset('assets/js/bootstrap.bundle.min.js')}}" defer></script> --}}
 
 
-{{-- <!DOCTYPE html>
+{{--
+<!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
 <head>
@@ -62,7 +68,9 @@
         integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-
+    <link
+        href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp"
+        rel="stylesheet">
     <!-- Styles -->
     @livewireStyles
 </head>
