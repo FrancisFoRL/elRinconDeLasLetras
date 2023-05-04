@@ -1,7 +1,7 @@
 <main>
     <section>
         <article>
-            <div id="carouselExampleIndicators" class="carousel slide h-" data-bs-ride="carousel">
+            <div id="carouselExampleIndicators" class="carousel slide   " data-bs-ride="carousel">
                 <ol class="carousel-indicators">
                     <li data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"></li>
                     <li data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"></li>
@@ -52,7 +52,8 @@
                         </a>
                         <div class="card-body text-center">
                             <h3 class="card-title book-title">{{ $book->title }}</h3>
-                            <p class="card-text text-muted">{{ $book->author->name }}</p>
+                            <p class="card-text text-muted" style="color:#3f3f3f !important;">{{ $book->author->name }}
+                            </p>
                             <p class="card-text">{{ $book->price }}€</p>
                         </div>
                         <div class="card-footer d-flex justify-content-center align-items-center">
@@ -80,13 +81,19 @@
 <!-- Styles -->
 <style>
     .card {
-        border-radius: 15px;
+        color: #212121;
         overflow: hidden;
         transition: all 0.3s ease;
+        background: rgba(248, 250, 252, 0);
+        border-radius: 16px;
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        backdrop-filter: blur(0px);
+        -webkit-backdrop-filter: blur(0px);
+        border: 1px solid rgba(248, 250, 252, 1);
     }
 
     .card:hover {
-        box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.4) !important;
         transform: translateY(-5px);
     }
 
@@ -109,7 +116,8 @@
         object-fit: cover;
     }
 
-    .book-title, .card-text {
+    .book-title,
+    .card-text {
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;

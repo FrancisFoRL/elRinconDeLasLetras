@@ -1,28 +1,29 @@
+<x-app-layout>
 <div class="container">
-    <h2 class="my-lg-4 my-4">Lista de deseos</h2>
+    <h2 class="my-lg-4 my-4">Se han encontrado {{$books->count()}} libro/s</h2>
     <hr>
     <div class="row">
-        @forelse($wishlist as $item)
+        @forelse($books as $book)
         <div class="col-lg-4 col-md-6 col-10 mb-4 mx-auto">
             <div class="card h-100 wishlist-card">
-                <img src="{{ $item->book->image }}" class="card-img-top" alt="...">
+                <img src="{{ $book->image }}" class="card-img-top" alt="...">
                 <div class="card-body">
-                    <h3 class="card-title">{{ $item->book->title }}</h3>
-                    <p class="card-text">{{ $item->book->price}}€</p>
+                    <h3 class="card-title">{{ $book->title }}</h3>
+                    <p class="card-text">{{ $book->price}}€</p>
                 </div>
                 <div class="card-footer d-flex justify-content-center">
                     <button class="btn w-25 rounded-pill" id="btn-delete"
-                        wire:click="removeFromWishlist({{ $item->id }})" aria-label="Eliminar artículo"><i
+                        wire:click="removeFromWishlist({{ $book->id }})" aria-label="Eliminar artículo"><i
                             class="fas fa-trash"></i></button>
                 </div>
             </div>
         </div>
         @empty
-        <div class="d-flex justify-content-center align-items-center">
+        <div class="d-flex justify-content-center align-books-center">
             <div class="col-md-12 text-center">
                 <p style="font-size: min(5vw, max(40px)); margin-top: 100px; font-weight: bold">Tu lista de deseos está
                     vacía</p>
-                <div class="d-flex justify-content-center align-items-center">
+                <div class="d-flex justify-content-center align-books-center">
                     <lottie-player src="https://assets5.lottiefiles.com/private_files/lf30_x8aowqs9.json"
                         background="transparent" speed="1" style="width: 60vw; height: 20vw; min-height: 200px" loop
                         autoplay>
@@ -82,3 +83,5 @@
         }
     }
 </style>
+
+</x-app-layout>

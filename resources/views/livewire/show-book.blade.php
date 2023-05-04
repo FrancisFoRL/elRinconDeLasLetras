@@ -21,15 +21,11 @@
                 <p class="mb-4">{{ $book->description }}</p>
                 <p class="mb-1 fw-bold">Autor: {{ $book->author->name }}</p>
                 <p class="mb-1"><span class="fw-bold">Género/s:</span>
-                    @if(count($book->category) > 1)
                 <ul>
                     @foreach($book->category as $category)
                     <li>{{ $category->name }}</li>
                     @endforeach
                 </ul>
-                @else
-                {{$book->category->name}}
-                @endif
 
                 </p>
                 <p class="mb-3"><span class="fw-bold">Editorial:</span> {{ $book->editorial->name }}</p>
@@ -45,7 +41,7 @@
                     <p class="mb-0">
                         @for($i = 1; $i <= 5; $i++) <i
                             class="fa-solid fa-star{{ $i <= $review->rating ? '' : '-regular' }}"></i>
-                        @endfor
+                            @endfor
                     </p>
                 </div>
                 <div class="card-body">
@@ -80,7 +76,7 @@
             }
         }
 
-        .card-header{
+        .card-header {
             background-color: #212121;
         }
     </style>

@@ -28,11 +28,21 @@
             </ul>
             <div class="d-flex mx-auto justify-md-content-center">
                 <div class="input-group">
-                    <input class="form-control" id="inputSearch" type="search" placeholder="Buscar" aria-label="Search">
-                    <button id="inputSearch-button" class="input-group-text"><i
-                            class="fa-solid fa-magnifying-glass"></i></button>
+                    <form action="{{route('search')}}" method="GET">
+                        @csrf
+                        <input class="form-control rounded-pill" name="titulo" id="inputSearch" type="search" placeholder="Buscar" aria-label="Search">
+                    </form>
                 </div>
             </div>
+
+            <script>
+                document.getElementById('search-form').addEventListener('submit', function(event) {
+                    var tituloInput = document.getElementById('inputSearch');
+                    if (!tituloInput.value.trim()) {
+                        event.preventDefault();
+                    }
+                });
+            </script>
 
             <ul class="navbar-nav ms-auto me-2 align-items-center">
                 <li class="nav-item me-4" id="heart">
@@ -155,14 +165,14 @@
         </a>
     </div>
     <div class="nav-item-mobile">
-        <span class="material-icons outlined" type="button" data-bs-toggle="offcanvas"
-        data-bs-target="#offcanvasMobile" aria-controls="offcanvasRight">
+        <span class="material-icons outlined" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasMobile"
+            aria-controls="offcanvasRight">
             menu_open
         </span>
     </div>
 </nav>
 
-<x-offcanvas-mobile/> <!-- Offcanvas para moviles -->
+<x-offcanvas-mobile /> <!-- Offcanvas para moviles -->
 @livewire('cart.cart-show-inicio')
 
 <script>
@@ -177,7 +187,11 @@
     /* NavBar pantalla mobiles y tablets */
 
     #nav-mobile {
-        background-color: #212121;
+        /* From https://css.glass */
+        background: rgba(33, 33, 33, 0.9);
+        backdrop-filter: blur(5px);
+        -webkit-backdrop-filter: blur(5px);
+        border: 1px solid rgba(33, 33, 33, 0.3);
         padding: 25px 20px;
         font-family: 'Poppins', sans-serif;
     }
@@ -193,7 +207,7 @@
     }
 
     .nav-item-mobile.active a i {
-        color:  #6D9886;
+        color: #6D9886;
     }
 
     .material-icons {
@@ -248,7 +262,7 @@
 
 
     /* NavBar pantallas grandes */
-    nav {
+    #navPrincipal {
         background-color: #212121;
     }
 
@@ -260,7 +274,6 @@
         width: 40vw;
         background: transparent;
         border: 1px solid rgb(181, 189, 196);
-        border-radius: 20px 0 0 20px;
         font-size: 16px;
         height: 40px;
         line-height: 24px;
@@ -360,18 +373,5 @@
     a:hover {
         color: unset;
         text-decoration: none;
-    }
-
-    #nav-mobile {
-        margin-top: 200px;
-    }
-
-
-    .navbar-fixed-bottom {
-        position: fixed;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        z-index: 1030;
     }
 </style>

@@ -3,11 +3,13 @@
 namespace App\Http\Livewire;
 
 use App\Models\Book;
+use App\Models\Review;
 use App\Models\Wishlist;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\DB;
 
 class ShowInicio extends Component
 {
@@ -17,7 +19,17 @@ class ShowInicio extends Component
             Cart::restore(auth()->user()->id);
         }
         $cartItemCount = Cart::count();
-        $books = Book::inRandomOrder()->take(12)->get();
+        $ratings = Review::select('book_id', DB::raw('avg(rating) as media'))
+            ->groupBy('book_id')
+            ->take(12)
+            ->get();
+
+        $sorted_ratings = $ratings->sort();
+
+        $books = Book::whereIn('id', $sorted_ratings->pluck('book_id'))
+            ->with('reviews')
+            ->get();
+
         return view('livewire.show-inicio', compact('books'));
     }
 
@@ -46,7 +58,7 @@ class ShowInicio extends Component
     public function addToWishlist(Book $book)
     {
         if (Auth::user()) {
-            Wishlist::create([
+            Wishlist::firstOrCreate([
                 'user_id' => auth()->id(),
                 'book_id' => $book->id,
             ]);

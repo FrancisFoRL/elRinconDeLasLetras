@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\PaypalController;
 use App\Http\Controllers\RedsysController;
+use App\Http\Controllers\SearchController;
 use App\Http\Controllers\StripeController;
 use App\Http\Controllers\StripePaymentController;
 use App\Http\Livewire\Cart\CartShow;
@@ -26,6 +27,7 @@ use App\Models\Book;
 
 Route::get('/', ShowInicio::class)->name('inicio');
 Route::get('/navbar', Navbar::class)->name('nav');
+Route::get('/search', [SearchController::class, 'search'])->name('search');
 Route::get('/book', ShowBook::class)->name('book');
 Route::get('/book/{slug}', function ($slug) {
     $book = Book::where('slug', $slug)->first();
@@ -50,15 +52,13 @@ Route::middleware(['auth'])->group(function () {
     //Aqui meter ruta para validar pedido y la lista de favoritos
     Route::get('/wishlist', Wishlist::class)->name('wishlist');
     Route::delete('/wishlist/remove/{id}', [Wishlist::class, 'removeFromWishlist'])->name('wishlist.remove');
-
-
 });
 
 Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function () {
     Route::get('dashboard', [App\Http\Controllers\Admin\DashboardController::class, 'index']);
 });
 
-Route::controller(PaypalController::class)->group(function(){
+Route::controller(PaypalController::class)->group(function () {
     Route::get('/checkout', 'index')->name('paymentindex');
     Route::post('/request-payment', 'RequestPayment')->name('requestpayment');
     Route::get('/payment-success', 'PaymentSuccess')->name('paymentsuccess');
