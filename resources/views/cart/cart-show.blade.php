@@ -57,8 +57,8 @@
                     <hr>
                     <div class="d-flex justify-content-between"><span>Total</span><span>{{$subtotal + 4,99}}
                             €</span></div>
-                    <div class="mt-3 d-flex justify-content-center"><button type="button" class="btn btn-lg w-50"
-                            id="btn-check">Pagar ahora</button>
+                    <div class="mt-3 d-flex justify-content-center">
+                        <button type="button" class="btn btn-lg w-50" id="btn-check" onclick="window.location.href='{{route('checkout')}}'">Pagar ahora</button>
                     </div>
                 </div>
             </div>
@@ -67,10 +67,12 @@
     @else
     <div class="d-flex justify-content-center align-items-center">
         <div class="col-md-12 text-center">
-            <p style="font-size: min(5vw, max(40px)); margin-top: 100px; font-weight: bold">Tu carrito de la compra está vacío</p>
+            <p style="font-size: min(5vw, max(40px)); margin-top: 100px; font-weight: bold">Tu carrito de la compra está
+                vacío</p>
             <div class="d-flex justify-content-center align-items-center">
                 <lottie-player src="https://assets1.lottiefiles.com/packages/lf20_z9agdrw6.json"
-                    background="transparent" speed="1" style="width: 60vw; height: 20vw; min-height: 200px;" loop autoplay>
+                    background="transparent" speed="1" style="width: 60vw; height: 20vw; min-height: 200px;" loop
+                    autoplay>
                 </lottie-player>
             </div>
         </div>
@@ -137,4 +139,3 @@
         }
     }
 </style>
-

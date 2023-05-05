@@ -37,7 +37,6 @@ Route::get('/book/{slug}', function ($slug) {
 Route::get('/cart/cart-show-inicio', CartShowInicio::class)->name('cartNav');
 Route::get('/cart/cart-show', CartShow::class)->name('cart');
 
-
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
@@ -52,6 +51,9 @@ Route::middleware(['auth'])->group(function () {
     //Aqui meter ruta para validar pedido y la lista de favoritos
     Route::get('/wishlist', Wishlist::class)->name('wishlist');
     Route::delete('/wishlist/remove/{id}', [Wishlist::class, 'removeFromWishlist'])->name('wishlist.remove');
+    Route::get('/checkout/checkout', function(){
+        return view('checkout.checkout');
+    })->name('checkout');
 });
 
 Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function () {

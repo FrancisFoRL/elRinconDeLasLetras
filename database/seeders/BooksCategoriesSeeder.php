@@ -35,13 +35,14 @@ class BooksCategoriesSeeder extends Seeder
             Con este bucle lo que se hace es añadir unas categorias mas de forma aleatoria a algunos
             libros.
         */
-        for ($i = 0; $i < 250; $i++) {
+        for ($i = 0; $i < 50; $i++) {
             $book = $books->random(); //Se elige un libro de forma aleatoria.
-            $existingCategories = $book->categories->pluck('id')->toArray(); //Traemos las categorias ya asignadas al libro para no repetirlas
+            $bookCreate = Book::find($book);
+            $existingCategories = $bookCreate->category->pluck('id')->toArray(); //Traemos las categorias ya asignadas al libro para no repetirlas
 
             do {
                 $category = $categories->random(); //Se elige un libro de forma aleatoria.
-            } while (in_array($category->id, $existingCategories) || $category->name === 'Sin categoria'); // Se comprueba si la categoría ya está asignada al libro actual
+            } while (in_array($category, $existingCategories) || $category == 13); // Se comprueba si la categoría ya está asignada al libro actual
 
             DB::table('books_categories')->insert([
                 'book_id' => $book,

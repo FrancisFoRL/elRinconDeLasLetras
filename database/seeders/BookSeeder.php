@@ -20,7 +20,7 @@ class BookSeeder extends Seeder
         // Credenciales de la API de Google Books
         $googleApiKey = 'AIzaSyCXitozlkM6Wnsxgk7qKR96VrY04ueNt1I';
         // Realizamos una búsqueda en la API de Open Library para obtener datos aleatorios de libros
-        $response = $client->get('https://openlibrary.org/search.json?q=isbn:*&limit=150&distinct=true&language=spa');
+        $response = $client->get('https://openlibrary.org/search.json?q=isbn:*&limit=140&distinct=true&language=spa');
         $books = json_decode($response->getBody(), true)['docs'];
 
         foreach ($books as $book) {
