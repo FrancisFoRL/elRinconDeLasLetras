@@ -18,6 +18,7 @@
         "livewire/livewire": "^2.11",
         "sermepa/sermepa": "^1.4",
         "srmklive/paypal": "^3.0",
+        "stripe/stripe-php": "^10.12",
         "twbs/bootstrap": "5.3.0-alpha1"
     },
     "require-dev": {

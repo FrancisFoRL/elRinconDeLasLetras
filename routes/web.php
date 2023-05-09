@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\PaypalController;
 use App\Http\Controllers\RedsysController;
 use App\Http\Controllers\SearchController;
@@ -51,21 +52,18 @@ Route::middleware(['auth'])->group(function () {
     //Aqui meter ruta para validar pedido y la lista de favoritos
     Route::get('/wishlist', Wishlist::class)->name('wishlist');
     Route::delete('/wishlist/remove/{id}', [Wishlist::class, 'removeFromWishlist'])->name('wishlist.remove');
-    Route::get('/checkout/checkout', function () {
-        $provincias = array("Álava", "Albacete", "Alicante", "Almería", "Asturias", "Ávila", "Badajoz", "Barcelona", "Burgos", "Cáceres", "Cádiz", "Cantabria", "Castellón", "Ciudad Real", "Córdoba", "Cuenca", "Gerona", "Granada", "Guadalajara", "Guipúzcoa", "Huelva", "Huesca", "Islas Baleares", "Jaén", "La Coruña", "La Rioja", "Las Palmas", "León", "Lérida", "Lugo", "Madrid", "Málaga", "Murcia", "Navarra", "Orense", "Palencia", "Pontevedra", "Salamanca", "Santa Cruz de Tenerife", "Segovia", "Sevilla", "Soria", "Tarragona", "Teruel", "Toledo", "Valencia", "Valladolid", "Vizcaya", "Zamora", "Zaragoza");
-        return view('checkout.checkout', compact('provincias'));
-    })->name('checkout');
 });
 
 Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function () {
     Route::get('dashboard', [App\Http\Controllers\Admin\DashboardController::class, 'index']);
 });
 
-Route::controller(PaypalController::class)->group(function () {
-    Route::get('/checkout', 'index')->name('paymentindex');
+Route::controller(CheckoutController::class)->group(function () {
+    Route::get('/checkout', 'index')->name('checkout');
     Route::post('/request-payment', 'RequestPayment')->name('requestpayment');
     Route::get('/payment-success', 'PaymentSuccess')->name('paymentsuccess');
     Route::get('/payment-cancel', 'PaymentCancel')->name('paymentCancel');
+    Route::post('/stripe', 'PaymentStripe')->name('paymentStripe');
 });
 
 
