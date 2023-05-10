@@ -67,6 +67,7 @@ Route::controller(CheckoutController::class)->group(function () {
 });
 
 
+
 // Route::get('/index', ShowCart::class)->name('cart.index');
 
 Route::get('/home', [App\Http\Controllers\Admin\HomeController::class, 'index'])->name('home');

@@ -1,224 +1,313 @@
-@vite(['resources/js/app.js'])
-<div class="container">
-    <div class="row vh-100">
-        <div class="col d-flex align-items-center justify-content-center">
-            <div id="form" class="w-50 p-4">
-                @if(Session::has('error'))
-                <div class="alert alert-danger">{{ Session::get('error') }}</div>
-                @endif
+<x-guest-layout>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&family=Ubuntu:wght@700&display=swap" rel="stylesheet">
+    <main>
+        <div class="container">
+            <div class="row vh-100">
+                <div class="col d-flex align-items-center justify-content-center">
+                    <div id="form" class="w-md-50 p-md-4 ">
+                        @if(Session::has('error'))
+                        <div class="alert alert-danger">{{ Session::get('error') }}</div>
+                        @endif
 
-                @if(Session::has('success'))
-                <div class="alert alert-success">{{ Session::get('success') }}</div>
-                @endif
-                <h1>Checkout</h1>
-                <div>
-                    <p class="text-left">Direccion de envio</p>
-                    <form action="{!!route('paymentStripe')!!}" class="mx-3">
-                        <div class="form-group d-flex">
-                            <div class="form-control-wrapper w-50">
-                                <input type="text" class="form-control" id="nombre" placeholder=" " autocomplete="on">
-                                <label for="nombre">Nombre</label>
-                            </div>
-                            <div class="form-control-wrapper w-50">
-                                <input type="text" class="form-control" id="apellidos" placeholder=" "
-                                    autocomplete="on">
-                                <label for="apellidos">Apellidos</label>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="form-control-wrapper">
-                                <input type="text" class="form-control" id="address" placeholder=" " autocomplete="on">
-                                <label for="address">Direccion de envio</label>
-                            </div>
-                        </div>
-                        <div class="form-group d-flex">
-                            <div class="form-control-wrapper w-50">
-                                <label for="provincia">Provincia</label>
-                                <select class="form-select" aria-label="Eliga un provincia" id="provincia">
-                                    <option selected>--Eliga un provincia--</option>
-                                    @foreach ($provincias as $provincia)
-                                    <option value="{{$provincia}}">{{$provincia}}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                            <div class="form-control-wrapper w-50">
-                                <input type="text" class="form-control" id="postal" autocomplete="on">
-                                <label for="postal">Código Postal</label>
-                            </div>
-                        </div>
-                        <div class="form-group d-flex justify-content-center">
-                            <div class="form-control-wrapper">
-                                <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
-                                    <input type="radio" class="btn-check" name="btnradio" id="btnradio1"
-                                        autocomplete="off">
-                                    <label class="btn btn-outline-secondary" for="btnradio1"><img
-                                            src="{{Storage::url('paypal-icon.png')}}" alt="Icono de Paypal"
-                                            width="30px"> Paypal</label>
-
-                                    <input type="radio" class="btn-check" name="btnradio" id="btnradio2"
-                                        autocomplete="off">
-                                    <label class="btn btn-outline-primary" for="btnradio2">Tarjeta <img
-                                            src="{{Storage::url('tarjeta-de-credito.png')}}"
-                                            alt="Icono de Tarjeta de Pago" width="30px"> </label>
+                        @if(Session::has('success'))
+                        <div class="alert alert-success">{{ Session::get('success') }}</div>
+                        @endif
+                        <h1 class="ubuntu-font text-center mb-4 display-5">Checkout</h1>
+                        <div>
+                            <form action="{{route('paymentStripe')}}" method="post" id="payment-form" role="form"
+                                class="mx-3">
+                                @csrf
+                                <p class="text-left text-lg ubuntu-font mb-3">Datos Personales</p>
+                                <div class="form-group d-flex">
+                                    <div class="form-control-wrapper">
+                                        <input type="text" class="form-control" name="nom" id="nombre" autocomplete="on"
+                                            required aria-label="Nombre completo" placeholder="">
+                                        <label for="nombre">Nombre*</label>
+                                        @error('nom')
+                                        <div class="text-danger">{{$message}}</div>
+                                        @enderror
+                                    </div>
+                                    <div class="w-1">
+                                    </div>
+                                    <div class="form-control-wrapper">
+                                        <input type="text" class="form-control" name="lastname" id="apellidos" required
+                                            aria-label="Apellidos" autocomplete="on" placeholder="">
+                                        <label for="apellidos">Apellidos*</label>
+                                        @error('lastname')
+                                        <div class="text-danger">*El nombre es obligatorio</div>
+                                        @enderror
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="form-group mt-5" id="tarjeta-formulario">
-                            <div class="card credit-card p-4">
-                                <div class="card-body p-0">
-                                    <div class="row">
-                                        <div class="col-12 text-end">
-                                            <p class="fw-bold fst-italic">Débito</p>
-                                        </div>
-                                        {{-- <div class="col-12 my-2">
-                                            <label for="" class="visually-hidden">Nombre del titular</label>
-                                            <input class="card-number w-100" placeholder="Nombre del titular"></input>
-                                        </div> --}}
-                                        <div class="col-12 mb-2">
-                                            <label for="" class="visually-hidden">Número de tarjeta</label>
-                                            <input class="card-title w-100" placeholder="Número de tarjeta" name="card_no"></input>
-                                        </div>
-                                        <div class="col-10 mb-2 d-flex">
-                                            {{-- <label for="" class="visually-hidden">Fecha de expiración</label>
-                                            <input class="card-title me-3 w-50"
-                                                placeholder="Fecha de expiración"></input> --}}
-                                            <input class="card-title me-3 w-50"
-                                                placeholder="Mes de expiración" name="expiracionMes"></input>
-                                            <input class="card-title me-3 w-50"
-                                                placeholder="Año de expiración" name="expiracionAnio"></input>
-                                            <label for="" class="visually-hidden">CCV</label>
-                                            <input class="card-title w-25" placeholder="CCV"></input>
-                                        </div>
-                                        <div class="col-2">
-                                            <img src="{{Storage::url('visa-logo.png')}}" alt="Icono de Tarjeta de Pago"
-                                                width="100px">
+                                <p class="text-left text-lg ubuntu-font mb-4">Datos de Envio</p>
+                                <div class="form-group">
+                                    <div class="form-control-wrapper">
+                                        <input type="text" class="form-control" input="address" id="address"
+                                            placeholder="" autocomplete="on" required
+                                            aria-label="Dirección de envio del pedido">
+                                        <label for="address">Direccion de envio*</label>
+                                    </div>
+                                </div>
+                                <div class="form-group d-flex">
+                                    <div class="form-control-wrapper w-50">
+                                        <label class="visually-hidden" for="provincia">Provincia</label>
+                                        <select class="form-select" name="provincia"
+                                            aria-label="Eliga la provincia de su dirección" id="provincia">
+                                            <option selected>--Eliga un provincia--</option>
+                                            @foreach ($provincias as $provincia)
+                                            <option value="{{$provincia}}">{{$provincia}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <div class="w-1">
+                                    </div>
+                                    <div class="form-control-wrapper w-50">
+                                        <input type="text" class="form-control" name="postal" id="postal"
+                                            autocomplete="on" required aria-label="Indique su código postal"
+                                            placeholder="">
+                                        <label for="postal">Código Postal*</label>
+                                    </div>
+                                </div>
+                                <div class="form-group d-flex justify-content-center">
+                                    <div class="form-control-wrapper">
+                                        <p class="text-center text-lg ubuntu-font m-0">Forma de Pago</p>
+                                        <div class="btn-group" role="group" aria-label="Metodos de pago de compra">
+                                            <input type="radio" class="btn-check" name="btnradio" id="btnradio1"
+                                                autocomplete="off">
+                                            <label class="btn btn-lg btn-outline-dark d-flex" for="btnradio1"><img
+                                                    src="{{Storage::url('paypal-icon.png')}}" alt="Icono de Paypal"
+                                                    width="30px" class="img img-fluid mr-2"> Paypal</label>
+
+                                            <input type="radio" class="btn-check" name="btnradio" id="btnradio2"
+                                                autocomplete="off">
+                                            <label class="btn btn-lg btn-outline-dark d-flex align-items-center"
+                                                for="btnradio2">Tarjeta <img
+                                                    src="{{Storage::url('tarjeta-de-credito.png')}}"
+                                                    class="h-75 img img-fluid ml-2" alt="Icono de Tarjeta de Pago"
+                                                    width="30px"></label>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="d-flex flex-row-reverse mt-3">
-                                <button class="btn btn-success" type="submit">Pagar</button>
+                                <div class="form-group mt-5" id="tarjeta-formulario">
+                                    <div class="card credit-card p-4">
+                                        <div class="card-body p-0">
+                                            <div class="row">
+                                                <div class="col-12 text-end">
+                                                    <p class="fst-italic ubuntu-font">Débito</p>
+                                                </div>
+                                                <div class="col-12 my-2">
+                                                    <label for="nomTitular" class="visually-hidden">Nombre del
+                                                        titular</label>
+                                                    <input class="card-number w-100" placeholder="Nombre del titular"
+                                                        id="nomTitular">
+                                                </div>
+                                                <div class="col-12 mb-2">
+                                                    <label for="card_num" class="visually-hidden">Número de
+                                                        tarjeta</label>
+                                                    <input class="card-title w-100" placeholder="Número de tarjeta"
+                                                        name="card_no" id="card_num">
+                                                </div>
+                                                <div>
+                                                    <p class="ubuntu-font">Fecha de expiración</p>
+                                                </div>
+                                                <div class="col-10 mb-2 d-flex">
+                                                    <label class="visually-hidden" for="expiraMes">Mes de
+                                                        Expiración</label>
+                                                    <input class="card-title me-3 w-50" placeholder="MM"
+                                                        name="ccExpiryMonth" id="expiraMes">
+                                                    <label class="visually-hidden" for="expiraAnio">Año de
+                                                        Expiración</label>
+                                                    <input class="card-title me-3 w-50" placeholder="YY"
+                                                        name="ccExpiryYear" id="expiraAnio">
+                                                    <label class="visually-hidden" for="cvv">CCV de la tarjeta</label>
+                                                    <input class="card-title w-25" placeholder="CVV" name="cvvNumber"
+                                                        id="cvv">
+                                                </div>
+                                                <div class="col-2">
+                                                    <img src="{{Storage::url('visa-logo.png')}}" alt="Logo de Visa"
+                                                        width="100px">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex justify-content-center mt-4">
+                                        <button type="submit" class="btn btn-success rounded-pill"
+                                            id="pay-button">Proceder al Pago <i
+                                                class="ml-2 fa-regular fa-credit-card"></i></button>
+                                    </div>
+                                </div>
+                            </form>
+                            <div class="form-group mt-5 d-flex justify-content-center">
+                                <form action="{{route('requestpayment')}}" method="POST" id="pagar-paypal">
+                                    @csrf
+                                    <button class="btn rounded-pill d-flex align-items-center px-3 py-2" type="submit"
+                                        id="paypal-button">
+                                        <i class="fa-brands fa-paypal mr-2"></i> Pagar con Paypal</button>
+                                </form>
                             </div>
                         </div>
-                    </form>
-                    <div class="form-group mt-5 d-flex justify-content-center" id="pagar-paypal">
-                        <form action="{{route('requestpayment')}}" method="POST">
-                            @csrf
-                            <button class="btn btn-primary" type="submit"><svg xmlns="http://www.w3.org/2000/svg"
-                                    width="16" height="16" fill="currentColor" class="bi bi-paypal" viewBox="0 0 16 16">
-                                    <path
-                                        d="M14.06 3.713c.12-1.071-.093-1.832-.702-2.526C12.628.356 11.312 0 9.626 0H4.734a.7.7 0 0 0-.691.59L2.005 13.509a.42.42 0 0 0 .415.486h2.756l-.202 1.28a.628.628 0 0 0 .62.726H8.14c.429 0 .793-.31.862-.731l.025-.13.48-3.043.03-.164.001-.007a.351.351 0 0 1 .348-.297h.38c1.266 0 2.425-.256 3.345-.91.379-.27.712-.603.993-1.005a4.942 4.942 0 0 0 .88-2.195c.242-1.246.13-2.356-.57-3.154a2.687 2.687 0 0 0-.76-.59l-.094-.061ZM6.543 8.82a.695.695 0 0 1 .321-.079H8.3c2.82 0 5.027-1.144 5.672-4.456l.003-.016c.217.124.4.27.548.438.546.623.679 1.535.45 2.71-.272 1.397-.866 2.307-1.663 2.874-.802.57-1.842.815-3.043.815h-.38a.873.873 0 0 0-.863.734l-.03.164-.48 3.043-.024.13-.001.004a.352.352 0 0 1-.348.296H5.595a.106.106 0 0 1-.105-.123l.208-1.32.845-5.214Z" />
-                                </svg> Pagar con Paypal</button>
-                        </form>
                     </div>
+
 
                 </div>
             </div>
-
-
         </div>
-    </div>
-</div>
-
-<script>
-    // Selecciona los elementos de radio
+    </main>
+    </x-app-layout>
+    <script>
+        // Seleccionamos los elementos de radio
     const paypalRadio = document.getElementById('btnradio1');
     const tarjetaRadio = document.getElementById('btnradio2');
 
-    // Selecciona el formulario de pago con tarjeta de crédito
+    // Seleccionamos el formulario de pago de la tarjeta de crédito y de Paypal
     const tarjetaFormulario = document.getElementById('tarjeta-formulario');
+    const paypalPay = document.getElementById('pagar-paypal');
 
-    // Oculta el formulario de pago con tarjeta de crédito al inicio
+    // Ocultamos el formulario de pago con tarjeta de crédito y Paypal al inicio
     tarjetaFormulario.style.display = 'none';
+    paypalPay.style.display = 'none';
 
     // Agrega un controlador de eventos para el cambio en los botones de radio
     paypalRadio.addEventListener('change', () => {
-    tarjetaFormulario.style.display = 'none';
+    if (paypalRadio.checked) {
+        tarjetaFormulario.style.display = 'none';
+        paypalPay.style.display = 'block';
+    } else {
+        tarjetaFormulario.style.display = 'block';
+        paypalPay.style.display = 'none';
+    }
     });
 
     tarjetaRadio.addEventListener('change', () => {
-    tarjetaFormulario.style.display = 'block';
-    });
-</script>
+    if (tarjetaRadio.checked) {
+        tarjetaFormulario.style.display = 'block';
+        paypalPay.style.display = 'none';
+    } else {
+        tarjetaFormulario.style.display = 'none';
+        paypalPay.style.display = 'block';
+  }
+});
 
-<style>
-    body {
-        background: linear-gradient(-45deg, #212121, #6D9886, #D9CAB3, #F6F6F6);
-        background-size: 400% 400%;
-        animation: change 10s ease-in-out infinite;
-        font-family: Arial, Helvetica, sans-serif;
-    }
+    </script>
 
-    @keyframes change {
-        0% {
-            background-position: 0 50%;
+    <style>
+        body {
+            background: linear-gradient(-45deg, #212121, #6D9886, #D9CAB3, #F6F6F6);
+            background-size: 400% 400%;
+            animation: change 10s ease-in-out infinite;
+            font-family: 'Roboto', sans-serif;
         }
 
-        50% {
-            background-position: 100% 50%;
+        .ubuntu-font {
+            font-family: 'Ubuntu', sans-serif;
         }
 
-        100% {
-            background-position: 0 50%;
+        @keyframes change {
+            0% {
+                background-position: 0 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0 50%;
+            }
         }
-    }
 
-    #form {
-        background: rgba(246, 246, 246, 0.41);
-        border-radius: 16px;
-        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-        backdrop-filter: blur(5px);
-        -webkit-backdrop-filter: blur(5px);
-        border: 1px solid rgba(246, 246, 246, 0.86);
-    }
+        #form {
+            background: rgba(246, 246, 246, 0.41);
+            border-radius: 16px;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            border: 1px solid #212121;
+        }
 
-    .form-group {
-        margin-bottom: 20px;
-    }
+        .form-group {
+            margin-bottom: 20px;
+        }
 
-    .form-control-wrapper {
-        position: relative;
-        padding-top: 10px;
-    }
+        .form-control-wrapper {
+            position: relative;
+            padding-top: 10px;
+        }
 
-    .form-control-wrapper input.form-control {
-        height: 50px;
-        padding: 10px 20px;
-        font-size: 16px;
-        line-height: 28px;
-        background-color: transparent;
-    }
+        .form-control-wrapper input.form-control,
+        .form-control-wrapper select.form-select {
+            height: 50px;
+            padding: 10px 20px;
+            font-size: 16px;
+            line-height: 28px;
+            background-color: transparent;
+            border: 1px solid #212121;
+        }
 
-    .form-control-wrapper input.form-control:focus {
-        border-bottom: 2px solid #007bff;
-        box-shadow: none;
-    }
+        .form-control-wrapper input.form-control:focus {
+            border-bottom: 2px solid #cc7e0a;
+            box-shadow: none;
+        }
 
-    .form-control-wrapper label {
-        position: absolute;
-        top: 22px;
-        left: 8px;
-        font-size: 17px;
-        transition: all 0.2s ease-out;
-    }
+        .form-control-wrapper label {
+            position: absolute;
+            top: 22px;
+            left: 8px;
+            font-size: 17px;
+            transition: all 0.2s ease-out;
+        }
 
-    .form-control-wrapper input.form-control:focus+label,
-    .form-control-wrapper input.form-control:not(:placeholder-shown)+label {
-        top: -10px;
-        font-size: 14px;
-        color: #007bff;
-    }
+        .form-control-wrapper input.form-control:focus+label,
+        .form-control-wrapper input.form-control:not(:placeholder-shown)+label {
+            top: -15px;
+            font-size: 16px;
+            color: #0086c4;
+        }
 
-    .credit-card {
-        border: 1px solid #ced4da;
-        border-radius: 8px;
-        box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
-        max-width: 400px;
-        margin: 0 auto;
-        background-color: #f8f9fa;
-    }
+        .credit-card {
+            border: 1px solid #212121;
+            border-radius: 8px;
+            box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            margin: 0 auto;
+            background-color: #f8f9fa;
+        }
 
-    .credit-card img {
-        max-width: 100%;
-    }
-</style>
+        .credit-card input {
+            background-color: transparent;
+            border: 1px solid #212121;
+            border-radius: 5px;
+            padding: 5px;
+        }
+
+        .credit-card input:focus {
+            border: 1px solid #cc7e0a;
+        }
+
+        .credit-card img {
+            max-width: 100%;
+        }
+
+        #paypal-button {
+            background-color: #1e477a;
+            color: #F6F6F6
+        }
+
+        #paypal-button:hover {
+            background-color: #3b6bae;
+            border-color: #F6F6F6;
+            color: #F6F6F6
+        }
+
+        #pay-button {
+            background-color: #212121;
+            color: #F6F6F6;
+            border: 2px solid #F6F6F6;
+        }
+
+        #pay-button:hover {
+            background-color: transparent;
+            color: #212121;
+        }
+    </style>

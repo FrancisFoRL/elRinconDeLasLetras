@@ -23,8 +23,6 @@ class CheckoutController extends Controller
         $provider->setApiCredentials(config('paypal'));
         $paypalToken = $provider->getAccessToken();
 
-        $amount = $request->amount;
-
         $response = $provider->createOrder([
             'intent' => 'CAPTURE',
             'application_context' => [
@@ -98,6 +96,8 @@ class CheckoutController extends Controller
                     ],
                 ]);
 
+
+
                 if (!isset($token['id'])) {
                     return redirect()->route('stripe.add.money');
                 }
@@ -109,18 +109,17 @@ class CheckoutController extends Controller
                     'description' => 'wallet',
                 ]);
 
-                if ($charge['status'] == 'succeeded') {
-                    dd($charge);
-                    return redirect()->route('addmoney.paymentstripe');
+                if($charge['status'] == 'succeeded') {
+                    return redirect()->route('inicio');
                 } else {
-                    return redirect()->route('addmoney.paymentstripe')->with('error', 'Money not add in wallet!');
+                    return redirect()->route('addmoney.paymentstripe')->with('error','Money not add in wallet!');
                 }
             } catch (Exception $e) {
-                return redirect()->route('addmoney.paymentstripe')->with('error', $e->getMessage());
-            } catch (\Cartalyst\Stripe\Exception\CardErrorException $e) {
-                return redirect()->route('addmoney.paymentstripe')->with('error', $e->getMessage());
-            } catch (\Cartalyst\Stripe\Exception\MissingParameterException $e) {
-                return redirect()->route('addmoney.paymentstripe')->with('error', $e->getMessage());
+                return redirect()->route('addmoney.paymentstripe')->with('error',$e->getMessage());
+            } catch(\Cartalyst\Stripe\Exception\CardErrorException $e) {
+                return redirect()->route('addmoney.paymentstripe')->with('error',$e->getMessage());
+            } catch(\Cartalyst\Stripe\Exception\MissingParameterException $e) {
+                return redirect()->route('addmoney.paymentstripe')->with('error',$e->getMessage());
             }
         }
     }
