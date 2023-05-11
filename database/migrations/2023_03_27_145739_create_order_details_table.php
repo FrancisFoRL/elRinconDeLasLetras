@@ -14,7 +14,13 @@ return new class extends Migration
         Schema::create('order_details', function (Blueprint $table) {
             $table->id();
             $table->foreignId('order_id')->constrained()->onDelete('cascade');
-            $table->integer('quantity');
+            $table->string('customer_name');
+            $table->string('customer_lastname');
+            $table->string('dataShipped');
+            $table->string('province');
+            $table->string('postal_code');
+            $table->enum('pay_method', ['Paypal', 'Tarjeta']);
+            $table->integer('items_quantity');
             $table->timestamps();
         });
     }

@@ -36,37 +36,46 @@
                                             aria-label="Apellidos" autocomplete="on" placeholder="">
                                         <label for="apellidos">Apellidos*</label>
                                         @error('lastname')
-                                        <div class="text-danger">*El nombre es obligatorio</div>
+                                        <div class="text-danger">*{{$message}}</div>
                                         @enderror
                                     </div>
                                 </div>
                                 <p class="text-left text-lg ubuntu-font mb-4">Datos de Envio</p>
                                 <div class="form-group">
                                     <div class="form-control-wrapper">
-                                        <input type="text" class="form-control" input="address" id="address"
+                                        <input type="text" class="form-control" name="address" id="address"
                                             placeholder="" autocomplete="on" required
                                             aria-label="Dirección de envio del pedido">
                                         <label for="address">Direccion de envio*</label>
+                                        @error('address')
+                                        <div class="text-danger">*{{$message}}</div>
+                                        @enderror
                                     </div>
                                 </div>
                                 <div class="form-group d-flex">
                                     <div class="form-control-wrapper w-50">
                                         <label class="visually-hidden" for="provincia">Provincia</label>
                                         <select class="form-select" name="provincia"
-                                            aria-label="Eliga la provincia de su dirección" id="provincia">
-                                            <option selected>--Eliga un provincia--</option>
+                                            aria-label="Eliga la provincia de su dirección" id="provincia" required>
+                                            <option value="" selected disabled>-- Elige una provincia --</option>
                                             @foreach ($provincias as $provincia)
                                             <option value="{{$provincia}}">{{$provincia}}</option>
                                             @endforeach
                                         </select>
+                                        @error('provincia')
+                                        <div class="text-danger">*{{$message}}</div>
+                                        @enderror
                                     </div>
                                     <div class="w-1">
                                     </div>
                                     <div class="form-control-wrapper w-50">
                                         <input type="text" class="form-control" name="postal" id="postal"
                                             autocomplete="on" required aria-label="Indique su código postal"
-                                            placeholder="">
+                                            placeholder="" maxlength="5">
                                         <label for="postal">Código Postal*</label>
+                                        @error('postal')
+                                        <div class="text-danger">*{{$message}}</div>
+                                        @enderror
                                     </div>
                                 </div>
                                 <div class="form-group d-flex justify-content-center">
@@ -89,6 +98,9 @@
                                         </div>
                                     </div>
                                 </div>
+                                @error('card_no')
+                                    <div class=" mt-5 text-danger d-flex justify-content-center">*Datos de tarjeta incorrectos</div>
+                                @enderror
                                 <div class="form-group mt-5" id="tarjeta-formulario">
                                     <div class="card credit-card p-4">
                                         <div class="card-body p-0">
@@ -100,13 +112,13 @@
                                                     <label for="nomTitular" class="visually-hidden">Nombre del
                                                         titular</label>
                                                     <input class="card-number w-100" placeholder="Nombre del titular"
-                                                        id="nomTitular">
+                                                        id="nomTitular" required>
                                                 </div>
                                                 <div class="col-12 mb-2">
                                                     <label for="card_num" class="visually-hidden">Número de
                                                         tarjeta</label>
                                                     <input class="card-title w-100" placeholder="Número de tarjeta"
-                                                        name="card_no" id="card_num">
+                                                        name="card_no" id="card_num" required>
                                                 </div>
                                                 <div>
                                                     <p class="ubuntu-font">Fecha de expiración</p>
@@ -119,17 +131,16 @@
                                                     <label class="visually-hidden" for="expiraAnio">Año de
                                                         Expiración</label>
                                                     <input class="card-title me-3 w-50" placeholder="YY"
-                                                        name="ccExpiryYear" id="expiraAnio">
+                                                        name="ccExpiryYear" id="expiraAnio" required>
                                                     <label class="visually-hidden" for="cvv">CCV de la tarjeta</label>
                                                     <input class="card-title w-25" placeholder="CVV" name="cvvNumber"
-                                                        id="cvv">
-                                                </div>
-                                                <div class="col-2">
-                                                    <img src="{{Storage::url('visa-logo.png')}}" alt="Logo de Visa"
-                                                        width="100px">
+                                                        id="cvv" required>
                                                 </div>
                                             </div>
                                         </div>
+                                        @error('card_no')
+                                        <div class="text-danger">*Datos de tarjeta incorrectos</div>
+                                        @enderror
                                     </div>
                                     <div class="d-flex justify-content-center mt-4">
                                         <button type="submit" class="btn btn-success rounded-pill"
@@ -141,11 +152,28 @@
                             <div class="form-group mt-5 d-flex justify-content-center">
                                 <form action="{{route('requestpayment')}}" method="POST" id="pagar-paypal">
                                     @csrf
-                                    <button class="btn rounded-pill d-flex align-items-center px-3 py-2" type="submit"
+                                    <input aria-label="Nombre completo" type="text" class="form-control visually-hidden"
+                                        name="nom" id="nombre-paypal">
+                                    <input aria-label="Apellidos" type="text" class="form-control visually-hidden"
+                                        name="lastname" id="apellidos-paypal">
+                                    <input type="text" class="form-control visually-hidden" name="address"
+                                        id="address-paypal" aria-label="Dirección de envio del pedido">
+                                    <select class="form-select visually-hidden" name="provincia"
+                                        aria-label="Eliga la provincia de su dirección" id="provincia-paypal">
+                                        <option disabled selected>-- Elige una provincia --</option>
+                                        @foreach ($provincias as $provincia)
+                                        <option value="{{$provincia}}">{{$provincia}}</option>
+                                        @endforeach
+                                    </select>
+                                    <input type="text" class="form-control visually-hidden" name="postal"
+                                        id="postal-paypal" aria-label="Indique su código postal">
+
+                                    <button class=" btn rounded-pill d-flex align-items-center px-3 py-2" type="submit"
                                         id="paypal-button">
                                         <i class="fa-brands fa-paypal mr-2"></i> Pagar con Paypal</button>
                                 </form>
                             </div>
+
                         </div>
                     </div>
 
@@ -180,15 +208,49 @@
     });
 
     tarjetaRadio.addEventListener('change', () => {
-    if (tarjetaRadio.checked) {
-        tarjetaFormulario.style.display = 'block';
-        paypalPay.style.display = 'none';
-    } else {
-        tarjetaFormulario.style.display = 'none';
-        paypalPay.style.display = 'block';
-  }
-});
+        if (tarjetaRadio.checked) {
+            tarjetaFormulario.style.display = 'block';
+            paypalPay.style.display = 'none';
+        } else {
+            tarjetaFormulario.style.display = 'none';
+            paypalPay.style.display = 'block';
+        }
+    });
 
+    //------------------------------------------------------------------------------
+
+    //Seleccinamos todos lo campos del primer y segundo formulario
+    const nombre = document.getElementById('nombre');
+    const nombrePaypal = document.getElementById('nombre-paypal');
+    const apellidos = document.getElementById('apellidos');
+    const apellidosPaypal = document.getElementById('apellidos-paypal');
+    const address = document.getElementById('address');
+    const addressPaypal = document.getElementById('address-paypal');
+    const provincia = document.getElementById('provincia');
+    const provinciaPaypal = document.getElementById('provincia-paypal');
+    const postal = document.getElementById('postal');
+    const postalPaypal = document.getElementById('postal-paypal');
+
+    nombre.addEventListener('input', () => {
+        nombrePaypal.value = nombre.value;
+    });
+
+    apellidos.addEventListener('input', () => {
+        apellidosPaypal.value = apellidos.value;
+    });
+
+    address.addEventListener('input', () => {
+        addressPaypal.value = address.value;
+    });
+
+    provincia.addEventListener('input', () => {
+        provinciaPaypal.value = provincia.value;
+    })
+
+    postal.addEventListener('input', () => {
+
+        postalPaypal.value = postal.value;
+    });
     </script>
 
     <style>

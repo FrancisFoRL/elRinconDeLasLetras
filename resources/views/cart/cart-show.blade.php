@@ -64,6 +64,9 @@
             </div>
         </div>
     </div>
+    <div>
+        <button class="btn btn-outline-danger" wire:click="clearCart">Borrar Carrito</button>
+    </div>
     @else
     <div class="d-flex justify-content-center align-items-center">
         <div class="col-md-12 text-center">

@@ -52,18 +52,17 @@ Route::middleware(['auth'])->group(function () {
     //Aqui meter ruta para validar pedido y la lista de favoritos
     Route::get('/wishlist', Wishlist::class)->name('wishlist');
     Route::delete('/wishlist/remove/{id}', [Wishlist::class, 'removeFromWishlist'])->name('wishlist.remove');
+    Route::controller(CheckoutController::class)->group(function () {
+        Route::get('/checkout', 'index')->name('checkout');
+        Route::post('/request-payment', 'RequestPayment')->name('requestpayment');
+        Route::get('/payment-success', 'PaymentSuccess')->name('paymentsuccess');
+        Route::get('/payment-cancel', 'PaymentCancel')->name('paymentCancel');
+        Route::post('/stripe', 'PaymentStripe')->name('paymentStripe');
+    });
 });
 
 Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function () {
     Route::get('dashboard', [App\Http\Controllers\Admin\DashboardController::class, 'index']);
-});
-
-Route::controller(CheckoutController::class)->group(function () {
-    Route::get('/checkout', 'index')->name('checkout');
-    Route::post('/request-payment', 'RequestPayment')->name('requestpayment');
-    Route::get('/payment-success', 'PaymentSuccess')->name('paymentsuccess');
-    Route::get('/payment-cancel', 'PaymentCancel')->name('paymentCancel');
-    Route::post('/stripe', 'PaymentStripe')->name('paymentStripe');
 });
 
 

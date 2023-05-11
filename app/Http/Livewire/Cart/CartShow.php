@@ -14,16 +14,12 @@ class CartShow extends Component
     public function render()
     {
 
-        if (Auth::user()) {
-            Cart::restore(auth()->user()->id);
-        }
-
-        $cart = Cart::content();
+        // if (Auth::user()) {
+        //     Cart::restore(auth()->user()->id);
+        // }
         $subtotal = Cart::subtotal();
 
-        return view('cart.cart-show', compact('cart'), [
-            'subtotal' => $subtotal,
-        ]);
+        return view('cart.cart-show', compact('subtotal'));
     }
 
     public function aumentarCantidad($rowId)
