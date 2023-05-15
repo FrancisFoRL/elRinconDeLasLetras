@@ -4,7 +4,7 @@
     <hr>
     <div class="row">
         @forelse($books as $book)
-        <div class="col-lg-4 col-md-6 col-10 mb-4 mx-auto">
+        <div class="col-lg-4 col-md-6 col-12 mb-4 mx-auto">
             <div class="card h-100 wishlist-card">
                 <img src="{{ $book->image }}" class="card-img-top" alt="...">
                 <div class="card-body">
@@ -12,9 +12,7 @@
                     <p class="card-text">{{ $book->price}}€</p>
                 </div>
                 <div class="card-footer d-flex justify-content-center">
-                    <button class="btn w-25 rounded-pill" id="btn-delete"
-                        wire:click="removeFromWishlist({{ $book->id }})" aria-label="Eliminar artículo"><i
-                            class="fas fa-trash"></i></button>
+
                 </div>
             </div>
         </div>

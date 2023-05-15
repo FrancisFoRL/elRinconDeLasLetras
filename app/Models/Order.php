@@ -11,11 +11,13 @@ class Order extends Model
 
     protected $fillable = ['user_id', 'total_paid', 'order_number'];
 
-    public function book(){
-        return $this->belongsTo(Book::class);
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 
-    public function user(){
-        return $this->belongsTo(User::class);
+    public function books()
+    {
+        return $this->belongsToMany(Book::class, 'books_orders', 'order_id', 'book_id');
     }
 }

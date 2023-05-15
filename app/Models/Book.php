@@ -32,10 +32,11 @@ class Book extends Model
         return $this->belongsToMany(Category::class, 'books_categories', 'book_id', 'category_id');
     }
 
-    public function orders_details()
+    public function orders()
     {
-        return $this->belongsToMany(Order_details::class, 'books_orders_details', 'order_details_id', 'book_id');
+        return $this->belongsToMany(Order::class, 'books_orders', 'book_id', 'order_id');
     }
+
 
     public function getSlugAttribute()
     {

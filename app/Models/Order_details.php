@@ -14,8 +14,4 @@ class Order_details extends Model
     public function order(){
         return $this->belongsTo(Order::class);
     }
-
-    public function books(){
-        return $this->belongsToMany(Book::class, 'books_orders_details', 'book_id', 'order_details_id');
-    }
 }

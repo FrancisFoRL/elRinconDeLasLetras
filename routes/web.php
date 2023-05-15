@@ -59,6 +59,9 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/payment-cancel', 'PaymentCancel')->name('paymentCancel');
         Route::post('/stripe', 'PaymentStripe')->name('paymentStripe');
     });
+    Route::get('/pedido-completado', function(){
+        return view('checkout.pedido-completado');
+    })->name('pay-success');
 });
 
 Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function () {

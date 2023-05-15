@@ -20,7 +20,7 @@ class CheckoutController extends Controller
     public function index()
     {
         $provincias = array("Álava", "Albacete", "Alicante", "Almería", "Asturias", "Ávila", "Badajoz", "Barcelona", "Burgos", "Cáceres", "Cádiz", "Cantabria", "Castellón", "Ciudad Real", "Córdoba", "Cuenca", "Gerona", "Granada", "Guadalajara", "Guipúzcoa", "Huelva", "Huesca", "Islas Baleares", "Jaén", "La Coruña", "La Rioja", "Las Palmas", "León", "Lérida", "Lugo", "Madrid", "Málaga", "Murcia", "Navarra", "Orense", "Palencia", "Pontevedra", "Salamanca", "Santa Cruz de Tenerife", "Segovia", "Sevilla", "Soria", "Tarragona", "Teruel", "Toledo", "Valencia", "Valladolid", "Vizcaya", "Zamora", "Zaragoza");
-        return view('paypal.index', compact('provincias'));
+        return view('checkout.pago', compact('provincias'));
     }
 
     public function RequestPayment(Request $request)
@@ -58,7 +58,7 @@ class CheckoutController extends Controller
                         'currency_code' => 'EUR',
                         // 'value' => Cart::subtotal() + 4.99,
                         'value' => 0.50,
-                    ]
+                    ],
                 ]
             ]
         ]);
@@ -101,16 +101,21 @@ class CheckoutController extends Controller
                 'items_quantity' => Cart::count()
             ]);
 
+
+
             foreach (Cart::content()->toArray() as $key => $value) {
                 $book = Book::find($value['id']); // Obtenemos el modelo del libro
-                $book->orders_details()->attach($order_details->id, ['bookName' => $value['name'], 'book_quantity' => $value['qty'], 'unitCost' => $book->price]); // Relacionamos el libro con el pedido
+
+                // dd(Cart::content()->toArray(), $order, Book::find($value['id']), $book->orders_details()->attach($order_details->order_id, ['bookName' => $value['name'], 'book_quantity' => $value['qty'], 'unitCost' => $book->price]));
+
+                $order->books()->attach($book->id, ['bookName' => $value['name'], 'book_quantity' => $value['qty'], 'unitCost' => $book->price]); // Relacionamos el libro con el pedido
             }
 
-            // Cart::instance()->destroy();
-            // Cart::destroy();
+            Cart::instance()->destroy();
+            Cart::destroy();
             DB::table('shoppingcart')->delete();
 
-            return redirect()->route('inicio')->with('success', 'Pago completado');
+            return redirect()->route('pay-success');
         } else {
             return redirect()->route('checkout')->with('error', $response['message'] ?? 'Errores3');
         }

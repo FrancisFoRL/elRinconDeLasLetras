@@ -228,7 +228,7 @@
 
     .search-box {
         position: absolute;
-        bottom: 85px;
+        bottom: 107px;
         left: 50%;
         transform: translateX(-50%);
         width: 63%;
@@ -236,7 +236,7 @@
         padding: 20px;
         padding-bottom: 0px;
         border-radius: 30px 30px 0 0;
-        background-color: #212121;
+        background: rgba(33, 33, 33, 0.9);
         display: none;
     }
 
