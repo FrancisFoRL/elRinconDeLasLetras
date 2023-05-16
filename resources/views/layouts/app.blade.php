@@ -8,13 +8,12 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>El Rincon de las Letras</title>
+    <title>{{ config('app.name') }}</title>
     {{-- {{ config('app.name', 'El Rincon de Las Letras') }} --}}
     <!-- Fonts -->
     <link rel="shortcut icon" href="{{ Storage::url('Logo.svg') }}">
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
-
 
     <!-- Bootstrap 5 (CSS y JS) -->
     @vite(['resources/js/app.js'])
@@ -23,6 +22,8 @@
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
     {{--
     <link rel="stylesheet" href="{{asset('assets/css/bootstrap.min.css')}}"> --}}
+
+
     @livewireStyles
 </head>
 

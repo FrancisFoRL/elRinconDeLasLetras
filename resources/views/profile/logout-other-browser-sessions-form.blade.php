@@ -1,6 +1,6 @@
 <x-action-section>
     <x-slot name="title">
-        {{ __('Browser Sessions') }}
+        {{ __('Sesiones Iniciadas') }}
     </x-slot>
 
     <x-slot name="description">
@@ -9,14 +9,14 @@
 
     <x-slot name="content">
         <div class="max-w-xl text-sm text-gray-600 dark:text-gray-400">
-            {{ __('If necessary, you may log out of all of your other browser sessions across all of your devices. Some of your recent sessions are listed below; however, this list may not be exhaustive. If you feel your account has been compromised, you should also update your password.') }}
+            {{ __('Si es necesario, puede cerrar todas sus sesiones de navegación en todos sus dispositivos. A continuación se enumeran algunas de sus sesiones recientes; sin embargo, esta lista puede no ser exhaustiva. Si cree que su cuenta se ha visto comprometida, actualice también su contraseña.') }}
         </div>
 
         @if (count($this->sessions) > 0)
             <div class="mt-5 space-y-6">
                 <!-- Other Browser Sessions -->
                 @foreach ($this->sessions as $session)
-                    <div class="flex items-center">
+                    <div class="d-flex align-items-center">
                         <div>
                             @if ($session->agent->isDesktop())
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8 text-gray-500">
@@ -30,18 +30,18 @@
                         </div>
 
                         <div class="ml-3">
-                            <div class="text-sm text-gray-600 dark:text-gray-400">
+                            <div class="fs-5">
                                 {{ $session->agent->platform() ? $session->agent->platform() : __('Unknown') }} - {{ $session->agent->browser() ? $session->agent->browser() : __('Unknown') }}
                             </div>
 
                             <div>
-                                <div class="text-xs text-gray-500">
+                                <div class="text-xs text-secondary">
                                     {{ $session->ip_address }},
 
                                     @if ($session->is_current_device)
-                                        <span class="text-green-500 font-semibold">{{ __('This device') }}</span>
+                                        <span class="text-success fw-bold">{{ __('Este dispositivo') }}</span>
                                     @else
-                                        {{ __('Last active') }} {{ $session->last_active }}
+                                        {{ __('Última dispositivo usado') }} {{ $session->last_active }}
                                     @endif
                                 </div>
                             </div>
@@ -53,7 +53,7 @@
 
         <div class="flex items-center mt-5">
             <x-button wire:click="confirmLogout" wire:loading.attr="disabled">
-                {{ __('Log Out Other Browser Sessions') }}
+                {{ __('Cerrar todas las sesiones existentes') }}
             </x-button>
 
             <x-action-message class="ml-3" on="loggedOut">

@@ -15,26 +15,30 @@
       </div>
       <div class="row">
         <div class="col-md-7 bg-dark p-0 d-none d-md-block">
-          <img src="{{ Storage::url('login.png') }}" class="img-fluid vh-100 vw-100">
+          <img src="{{ Storage::url('login.png') }}" class="img-fluid vh-100 vw-100" alt="Imagen de libro abierto">
         </div>
         <div class="col-md-5" style="background-color: #D9D9D9 ">
           <div class="row justify-content-center align-items-center d-flex vh-100">
             <div class="col-md-8 justify-content-center align-items">
               <a class="d-flex flex-column justify-content-center align-items-center" href="{{route('inicio')}}">
-                <img src="{{ Storage::url('Logo.svg') }}" alt="El Rincón de las letras" class="position-absolute d-md-none d-sm-block img-fluid" style="margin-bottom: 180px" width="120" height="120">
+                <img src="{{ Storage::url('Logo.svg') }}" alt="Ir a la página principal" class="position-absolute d-md-none d-sm-block img-fluid" style="margin-bottom: 180px" width="120" height="120">
               </a>
               <h1 class="text-center mb-4">Iniciar sesión</h1>
               <form>
                 @csrf
                 <div class="mb-3">
-                  <x-label for="email" value="{{ __('Email') }}" />
+                  {{-- <x-label for="email" value="{{ __('Email') }}" />
                   <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required
-                    autofocus autocomplete="username" />
+                    autofocus autocomplete="username" /> --}}
+                    <label for="email" class="form-label fw-bold">{{ __('Correo Electronico') }}</label>
+                    <input type="email" id="email" name="email" :value="old('email')" class="form-control"autocomplete="email" required >
                 </div>
                 <div class="mb-3">
-                  <x-label for="password" value="{{ __('Contraseña') }}" />
+                  {{-- <x-label for="password" value="{{ __('Contraseña') }}" />
                   <x-input id="password" class="block mt-1 w-full" type="password" name="password" required
-                    autocomplete="current-password" />
+                    autocomplete="current-password" /> --}}
+                    <label for="password" class="form-label fw-bold">{{ __('Contraseña') }}</label>
+                    <input type="password" id="password" name="password" :value="old('password')" class="form-control" autocomplete="current-password" required >
                 </div>
                 <div class="mb-3 form-check">
                   <input type="checkbox" class="form-check-input" id="recuerda" name="remember">

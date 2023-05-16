@@ -57,7 +57,7 @@ class CheckoutController extends Controller
                     'amount' => [
                         'currency_code' => 'EUR',
                         // 'value' => Cart::subtotal() + 4.99,
-                        'value' => 0.50,
+                        'value' => Cart::subtotal() + 4.99,
                     ],
                 ]
             ]

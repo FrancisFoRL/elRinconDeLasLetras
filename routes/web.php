@@ -37,6 +37,9 @@ Route::get('/book/{slug}', function ($slug) {
 
 Route::get('/cart/cart-show-inicio', CartShowInicio::class)->name('cartNav');
 Route::get('/cart/cart-show', CartShow::class)->name('cart');
+Route::get('/user/perfil', function(){
+    return view('user.perfil');
+})->name('perfil');
 
 Route::middleware([
     'auth:sanctum',
