@@ -40,18 +40,18 @@
 
     <section class="my-md-5 my-4">
         <article class="col-11 col-md-10 mx-auto">
-            <h2 class="mb-4">Productos Destacados</h2>
+            <h2 class="mb-5 display-6" style="font-family: 'Ubuntu', sans-serif;">Productos Destacados</h2>
             <div class="row row-cols-2 row-cols-md-2 row-cols-lg-4 row-cols-xl-4 row-cols-xxl-6 g-2 g-md-4">
                 @foreach ($books as $book)
                 <div class="col-md-4">
                     <div class="card shadow">
                         <a href="{{ route('book.show', $book->slug) }}">
                             <div class="card-img-container">
-                                <img src="{{ asset($book->image) }}" class="card-img-top" alt="...">
+                                <img src="{{ asset($book->image) }}" class="card-img-top" alt="{{$book->title}}">
                             </div>
                         </a>
                         <div class="card-body text-center">
-                            <h3 class="card-title book-title">{{ $book->title }}</h3>
+                            <h3 class="card-title book-title" style="font-family: 'Ubuntu', sans-serif;">{{ $book->title }}</h3>
                             <p class="card-text text-muted" style="color:#3f3f3f !important;">{{ $book->author->name }}
                             </p>
                             <p class="card-text">{{ $book->price }}€</p>

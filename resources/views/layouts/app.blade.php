@@ -14,6 +14,7 @@
     <link rel="shortcut icon" href="{{ Storage::url('Logo.svg') }}">
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&family=Ubuntu:wght@700&display=swap" rel="stylesheet">
 
     <!-- Bootstrap 5 (CSS y JS) -->
     @vite(['resources/js/app.js'])
@@ -28,7 +29,7 @@
 </head>
 
 <body>
-    <div id="app">
+    <div class="sticky-top" id="app">
         @livewire('navbar')
 
         <main>
@@ -153,5 +154,26 @@
     </script>
     @endif
 </body>
+
+<style>
+    /* :focus {
+        outline: none;
+    }
+
+    :focus-visible {
+        outline: none;
+        position: relative;
+    }
+
+    :focus-visible::before {
+        content: '';
+        position: absolute;
+        top: -2px;
+        left: -2px;
+        right: -2px;
+        bottom: -2px;
+        border: 2px solid red !important;
+    } */
+</style>
 
 </html>

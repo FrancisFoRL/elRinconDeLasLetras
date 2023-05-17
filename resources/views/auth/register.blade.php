@@ -1,4 +1,5 @@
 <x-guest-layout>
+
     @if (session('status'))
     <div class="mb-4 font-medium text-sm text-green-600">
         {{ session('status') }}
@@ -26,7 +27,7 @@
                                 <img src="{{ Storage::url('Logo.svg') }}" alt="El Rincón de las letras" class="position-absolute d-md-none d-sm-block img-fluid" style="margin-bottom: 180px" width="120" height="120">
 
                             </a>
-                            <h1 class="text-center mb-4">Registro</h1>
+                            <h1 class="text-center mb-4" style="font-family: Ubuntu;">Registro</h1>
                             <form>
                                 @csrf
                                 <div class="mb-3">
@@ -70,9 +71,14 @@
                                     </x-label>
                                 </div>
                                 @endif
-                                <button type="submit" class="btn w-100" id="btn-login">{{ __('Registrase') }}</button>
+                                <button type="submit" class="btn w-100" id="btn-login">{{ __('Registrarse') }}</button>
                             </form>
                             <x-validation-errors class="mb-4 mt-4" />
+                            <div class="mt-4 d-flex flex-row-reverse">
+                                <a href="{{route('login')}}" class="text-gray-600">
+                                    <span>Ir a iniciar sesión <i class="fa-solid fa-arrow-right mx-1"></i></span>
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>

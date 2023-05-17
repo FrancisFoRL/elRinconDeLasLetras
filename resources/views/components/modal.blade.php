@@ -4,6 +4,27 @@
 $id = $id ?? md5($attributes->wire('model'));
 
 $maxWidth = [
+    'sm' => 'modal-sm',
+    'md' => 'modal-md',
+    'lg' => 'modal-lg',
+    'xl' => 'modal-xl',
+    '2xl' => 'modal-2xl',
+][$maxWidth ?? '2xl'];
+@endphp
+
+<div class="modal fade" id="{{ $id }}" tabindex="-1" aria-labelledby="{{ $id }}Label" aria-hidden="true">
+    <div class="modal-dialog {{ $maxWidth }}">
+        <div class="modal-content">
+            {{ $slot }}
+        </div>
+    </div>
+</div>
+{{-- @props(['id', 'maxWidth'])
+
+@php
+$id = $id ?? md5($attributes->wire('model'));
+
+$maxWidth = [
     'sm' => 'sm:max-w-sm',
     'md' => 'sm:max-w-md',
     'lg' => 'sm:max-w-lg',
@@ -40,4 +61,4 @@ $maxWidth = [
                     x-transition:leave-end="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95">
         {{ $slot }}
     </div>
-</div>
+</div> --}}

@@ -1,6 +1,6 @@
-<nav class="navbar navbar-expand-sm bg-body-tertiary d-none d-lg-block" id="navPrincipal">
+<nav class="navbar navbar-expand-sm bg-body-tertiary d-none d-lg-block " id="navPrincipal">
     <div class="container-fluid">
-        <div class="d-flex align-items-center">
+        <div class="d-flex align-items-center ">
             <a class="navbar-brand" href="{{route('inicio')}}">
                 <img src="{{ Storage::url('Logo.svg') }}" alt="El Rincón de las letras" id='logo' width="50" height="50"
                     class="me-4">
@@ -89,7 +89,7 @@
                             <li><a href="{{ route('profile.show')}}"
                                     class="dropdown-item d-flex justify-content-between align-items-center">Mis Datos<i
                                         class="fa-regular fa-address-card"></i></i></a></li>
-                            <li><a href="" class="dropdown-item d-flex justify-content-between align-items-center">Mis
+                            <li><a href="{{ route('pedidos')}}" class="dropdown-item d-flex justify-content-between align-items-center">Mis
                                     Pedidos<i class="fa-solid fa-box-open"></i></a></li>
                             <li>
                                 <hr class="dropdown-divider">

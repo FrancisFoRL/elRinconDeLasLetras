@@ -14,6 +14,8 @@ use App\Http\Livewire\ShowInicio;
 use Illuminate\Support\Facades\Route;
 use \App\Http\Livewire\Wishlist;
 use App\Models\Book;
+use App\Models\Order;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,9 +39,7 @@ Route::get('/book/{slug}', function ($slug) {
 
 Route::get('/cart/cart-show-inicio', CartShowInicio::class)->name('cartNav');
 Route::get('/cart/cart-show', CartShow::class)->name('cart');
-Route::get('/user/perfil', function(){
-    return view('user.perfil');
-})->name('perfil');
+
 
 Route::middleware([
     'auth:sanctum',
@@ -62,9 +62,15 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/payment-cancel', 'PaymentCancel')->name('paymentCancel');
         Route::post('/stripe', 'PaymentStripe')->name('paymentStripe');
     });
+
     Route::get('/pedido-completado', function(){
         return view('checkout.pedido-completado');
     })->name('pay-success');
+
+    Route::get('/user/pedidos', function(){
+        $orders = Order::where('user_id', Auth::user()->id)->get();
+        return view('profile.pedidos', compact('orders'));
+    })->name('pedidos');
 });
 
 Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function () {
