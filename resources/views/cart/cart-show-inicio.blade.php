@@ -11,53 +11,46 @@
         </div>
         @endif
         @if (Cart::count()>0)
-        <div class="table-responsive">
-            <table id="table">
-                <thead>
-                    <tr>
-                        <th scope="col">Producto</th>
-                        <th scope="col">Cantidad</th>
-                        <th scope="col">Precio unitario</th>
-                        <th scope="col">Subtotal</th>
-                        <th scope="col">Eliminar</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (Cart::content() as $book)
-                    <tr>
-                        <td>{{$book->model->title}}</td>
-                        <td>
-                            <div class="d-flex align-items-center">
-                                <a class="btn btn-outline-secondary" type="button"
-                                    wire:click.prevent='disminuirCantidad("{{$book->rowId}}")'>-</a>
-                                <div class="mx-2">{{$book->qty}}</div>
-                                <a class="btn btn-outline-secondary" type="button"
-                                    wire:click.prevent='aumentarCantidad("{{$book->rowId}}")'>+</a>
-                            </div>
-                        </td>
-                        <td>{{$book->model->price}}€</td>
-                        <td>{{$book->model->price * $book->qty}}€</td>
-                        <td><button class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></button></td>
-                    </tr>
-                    @endforeach
-                </tbody>
-            </table>
+        @foreach (Cart::content() as $book)
+        <div class="row p-2">
+            <div class="col-4 text-center">
+                <img src="{{$book->model->image}}" alt="" class="border border-light rounded" width="95px"
+                    height="130px">
+            </div>
+            <div class="col-7 pt-2">
+                <p class="fw-bold fs-5 p-ellipsis">{{$book->model->title}}</p>
+                <p class="p-ellipsis">Unidades: {{$book->qty}}</p>
+                <p class="fs-5 p-ellipsis">{{$book->model->price * $book->qty}}€</p>
+            </div>
+            {{-- <div class="col-2 d-flex align-items-end pb-2">
+                <div class="col-2 d-flex align-items-end pb-4">
+                    <i class="fa-regular fa-circle-xmark fa-xl" style="color: #a51d2d; cursor: pointer"
+                        wire:click.self='eliminar("{{$book->rowId}}")'></i>
+                </div>
+            </div> --}}
+            <hr class="mt-3">
+            @endforeach
         </div>
-        <hr>
-        <div class="row">
+        <div class="row mt-3">
             <div class="col-6">Subtotal:</div>
-            <div class="col-6 text-end">{{$subtotal}}</div>
+            <div class="col-6 text-end">{{$subtotal}}€</div>
         </div>
         <div class="row">
-            <div class="col-6">Shipping:</div>
-            <div class="col-6 text-end">$5.00</div>
+            <div class="col-6">Envio:</div>
+            <div class="col-6 text-end">4,99€</div>
         </div>
         <hr>
         <div class="row">
             <div class="col-6">Total:</div>
-            <div class="col-6 text-end">$64.94</div>
+            <div class="col-6 text-end">{{$subtotal + 4.99}}€</div>
         </div>
-        <hr style="background-color: #D9D9D9; height: 4px; border-radius: 5px">
+        <hr style="background-color: #D9D9D9; height: 4px; border-radius: 5px; margin-bottom:70px;">
+        @else
+        <div class="mt-5 text-center">
+            <img src="https://cdn.pccomponentes.com/Unilae/svg/lensPickingPointsNoPostalCodeFound.svg" alt=""
+                width="150px">
+            <h2 class="mt-4">Tu carrito está vacío</h2>
+        </div>
         @endif
         <a href="{{ route('cart') }}">
             <div class="d-grid gap-2 position-absolute bottom-0 start-0 end-0 mb-3 mx-3">
@@ -66,3 +59,11 @@
         </a>
     </div>
 </div>
+
+<style>
+    .p-ellipsis {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+</style>

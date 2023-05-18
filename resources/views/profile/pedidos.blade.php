@@ -7,72 +7,73 @@
             <div class="col-12 col-lg-10">
                 <div class="mx-auto m-4 p-4" id="contendor-princ">
                     <h2 class="display-6 mb-4">Mis Pedidos</h2>
-                    <table class="table table-striped table-bordered">
-                        <thead>
-                            <tr class="fw-bold fs-5">
-                                <th>Nº Pedido</th>
-                                <th>Total Pagado</th>
-                                <th>Fecha de Pedido</th>
-                                <th>Mas Detalles sobre el Pedido</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($orders as $order)
-                            <tr>
-                                <td>{{$order->order_number}}</td>
-                                <td>{{$order->total_paid}}</td>
-                                <td>{{$order->created_at}}</td>
-                                <td class="text-center">
-                                    <button class="btn fw-bold pedido-details-btn rounded-pill" type="button"
-                                        data-bs-toggle="collapse" data-bs-target="#pedido-details-{{$order->id}}"
-                                        aria-expanded="false" aria-controls="pedido-details-{{$order->id}}">
-                                        Mas detalles sobre el pedido <i class="fas fa-arrow-down px-1"></i>
-                                    </button>
-                                </td>
+                    <div class="table-responsive">
+                        <table class="table table-striped table-bordered">
+                            <thead>
+                                <tr class="fw-bold fs-5">
+                                    <th>Nº Pedido</th>
+                                    <th>Total Pagado</th>
+                                    <th>Fecha de Pedido</th>
+                                    <th>Mas Detalles sobre el Pedido</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($orders as $order)
+                                <tr class="fs-6">
+                                    <td class="p-2 p-lg-3">{{$order->order_number}}</td>
+                                    <td class="p-2 p-lg-3">{{$order->total_paid}} €</td>
+                                    <td class="p-2 p-lg-3">{{$order->created_at}}</td>
+                                    <td class="text-center">
+                                        <button class="btn fw-bold pedido-details-btn rounded-pill" type="button"
+                                            data-bs-toggle="collapse" data-bs-target="#pedido-details-{{$order->id}}"
+                                            aria-expanded="false" aria-controls="pedido-details-{{$order->id}}">
+                                            <span class="d-none d-lg-block">Mas detalles sobre el pedido</span> <i
+                                                class="fas fa-arrow-down px-1"></i>
+                                        </button>
+                                    </td>
 
-                            </tr>
-                            <tr>
-                                <td colspan="3" class="hidden-row">
-                                    <div class="collapse" id="pedido-details-{{$order->id}}">
-                                        <!-- Contenido adicional del pedido -->
-                                        <!-- Puedes agregar aquí los detalles del pedido -->
-                                        <p>Detalles del pedido: {{$order->id}}</p>
-                                        <p>Otro detalle del pedido</p>
-                                    </div>
-                                </td>
-                            </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-
+                                </tr>
+                                <tr>
+                                    <td colspan="4" class="hidden-row">
+                                        <div class="collapse py-4 px-5" id="pedido-details-{{$order->id}}">
+                                            <!-- Contenido adicional del pedido -->
+                                            <h3 class="fw-bold text-center text-lg-start">Detalles del pedido</h3>
+                                            <hr>
+                                            @foreach ($books as $book)
+                                            @if($book->order_id == $order->id)
+                                            <div class="row align-items-center">
+                                                <div class="col-12 col-lg-3 text-center">
+                                                    <img src="{{$book->image}}" alt="Portada {{$book->title}}"
+                                                        class="img img-fluid rounded-3 border border-dark">
+                                                </div>
+                                                <div class="col-12 col-lg-3 text-center text-lg-start mt-3 mt-lg-0">
+                                                    <p class="fs-5 fw-bold">{{$book->title}}</p>
+                                                </div>
+                                                <div class="col-12 col-lg-3 text-center text-lg-start">
+                                                    <p> Número de unidades: {{$book->book_quantity}}</p>
+                                                    <p>Precio por unidad: {{$book->price}}€</p>
+                                                </div>
+                                                <div class="col-12 col-lg-3 text-center text-lg-start">
+                                                    <p>Total: {{$book->price * $book->book_quantity}} €</p>
+                                                </div>
+                                            </div>
+                                            <hr>
+                                            @endif
+                                            @endforeach
+                                            <div class="d-flex flex-row-reverse">
+                                                <p class="fs-3 fw-bold text-center text-lg-start">Total del pedido:
+                                                    {{$order->total_paid}}€ Envio Incl.</p>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
-
-
-            {{-- <div class="mx-auto m-4 p-4" id="contendor-princ">
-                <h2 class="display-6 mb-4">Mis Pedidos</h2>
-                <table class="table table-striped table-bordered">
-                    <thead>
-                        <tr class="fw-bold fs-5">
-                            <th>Nº Pedido</th>
-                            <th>Total Pagado</th>
-                            <th>Fecha de Pedido</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($orders as $order)
-                        <tr>
-                            <td>{{$order->order_number}}</td>
-                            <td>{{$order->total_paid}}</td>
-                            <td>{{$order->created_at}}</td>
-                        </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-
-            </div> --}}
         </div>
-    </div>
     </div>
 </x-app-layout>
 
@@ -126,5 +127,15 @@
     .btn:hover {
         border-color: #212121;
         color: #212121;
+    }
+
+    @media (max-width: 747px) {
+        th {
+            font-size: 14px;
+        }
+
+        td {
+            font-size: 12px;
+        }
     }
 </style>

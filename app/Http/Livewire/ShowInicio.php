@@ -18,6 +18,7 @@ class ShowInicio extends Component
         if (Auth::user()) {
             Cart::restore(auth()->user()->id);
         }
+
         $cartItemCount = Cart::count();
         $ratings = Review::select('book_id', DB::raw('avg(rating) as media'))
             ->groupBy('book_id')

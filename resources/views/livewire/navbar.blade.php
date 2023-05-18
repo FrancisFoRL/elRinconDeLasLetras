@@ -354,7 +354,7 @@
     }
 
     #buttonCart:hover {
-        background-color: transparent;
+        background-color: #212121;
         border-color: #6D9886;
         box-shadow: 3px 3px 0 #6D9886;
         color: #D9D9D9;

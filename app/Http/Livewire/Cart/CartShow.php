@@ -13,10 +13,6 @@ class CartShow extends Component
 {
     public function render()
     {
-
-        // if (Auth::user()) {
-        //     Cart::restore(auth()->user()->id);
-        // }
         $subtotal = Cart::subtotal();
 
         return view('cart.cart-show', compact('subtotal'));
@@ -29,6 +25,8 @@ class CartShow extends Component
         Cart::update($rowId, $quantity);
         if (Auth::user()) {
             Cart::store(auth()->user()->id);
+        }else{
+            Cart::store('');
         }
     }
 
@@ -39,6 +37,8 @@ class CartShow extends Component
         Cart::update($rowId, $quantity);
         if (Auth::user()) {
             Cart::store(auth()->user()->id);
+        }else{
+            Cart::store('');
         }
     }
 
@@ -47,6 +47,8 @@ class CartShow extends Component
         Cart::remove($id);
         if (Auth::user()) {
             Cart::store(auth()->user()->id);
+        }else{
+            Cart::store('');
         }
         $this->emit('info', 'Producto eliminado');
         session()->flash('success_message', 'Producto eliminado');
@@ -55,5 +57,10 @@ class CartShow extends Component
     public function clearCart()
     {
         Cart::destroy();
+        if (Auth::user()) {
+            Cart::store(auth()->user()->id);
+        }else{
+            Cart::store('');
+        }
     }
 }

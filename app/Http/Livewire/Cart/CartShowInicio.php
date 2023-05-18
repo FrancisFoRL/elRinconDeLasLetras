@@ -4,6 +4,7 @@ namespace App\Http\Livewire\Cart;
 
 use Livewire\Component;
 use Gloudemans\Shoppingcart\Facades\Cart;
+use Illuminate\Support\Facades\Auth;
 
 class CartShowInicio extends Component
 {
@@ -12,30 +13,6 @@ class CartShowInicio extends Component
         $subtotal = Cart::subtotal();
         $cartCount = Cart::count();
 
-        return view('cart.cart-show-inicio', [
-            'subtotal' => $subtotal,
-            'count' => $cartCount,
-        ]);
-    }
-
-    public function aumentarCantidad($rowId)
-    {
-        $book = Cart::get($rowId);
-        $quantity = $book->qty + 1;
-        Cart::update($rowId, $quantity);
-    }
-
-    public function disminuirCantidad($rowId)
-    {
-        $book = Cart::get($rowId);
-        $quantity = $book->qty - 1;
-        Cart::update($rowId, $quantity);
-    }
-
-    public function eliminar($id)
-    {
-        Cart::remove($id);
-        $this->emit('info', 'Producto eliminado');
-        session()->flash('success_message', 'Producto eliminado');
+        return view('cart.cart-show-inicio', compact('subtotal', 'cartCount'));
     }
 }

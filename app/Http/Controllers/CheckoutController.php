@@ -111,9 +111,12 @@ class CheckoutController extends Controller
                 $order->books()->attach($book->id, ['bookName' => $value['name'], 'book_quantity' => $value['qty'], 'unitCost' => $book->price]); // Relacionamos el libro con el pedido
             }
 
-            Cart::instance()->destroy();
             Cart::destroy();
-            DB::table('shoppingcart')->delete();
+            if (Auth::user()) {
+                Cart::store(auth()->user()->id);
+            } else {
+                Cart::store('');
+            }
 
             return redirect()->route('pay-success');
         } else {
@@ -179,16 +182,16 @@ class CheckoutController extends Controller
                 ]);
 
                 if ($charge['status'] == 'succeeded') {
-                    return redirect()->route('inicio');
+                    return redirect()->route('pay-success');
                 } else {
-                    return redirect()->route('addmoney.paymentstripe')->with('error', 'Money not add in wallet!');
+                    return redirect()->route('checkout')->with('error', 'Money not add in wallet!');
                 }
             } catch (Exception $e) {
-                return redirect()->route('addmoney.paymentstripe')->with('error', $e->getMessage());
+                return redirect()->route('checkout')->with('error', $e->getMessage());
             } catch (\Cartalyst\Stripe\Exception\CardErrorException $e) {
-                return redirect()->route('addmoney.paymentstripe')->with('error', $e->getMessage());
+                return redirect()->route('checkout')->with('error', $e->getMessage());
             } catch (\Cartalyst\Stripe\Exception\MissingParameterException $e) {
-                return redirect()->route('addmoney.paymentstripe')->with('error', $e->getMessage());
+                return redirect()->route('checkout')->with('error', $e->getMessage());
             }
         }
     }

@@ -1,11 +1,7 @@
 <?php
 
 use App\Http\Controllers\CheckoutController;
-use App\Http\Controllers\PaypalController;
-use App\Http\Controllers\RedsysController;
 use App\Http\Controllers\SearchController;
-use App\Http\Controllers\StripeController;
-use App\Http\Controllers\StripePaymentController;
 use App\Http\Livewire\Cart\CartShow;
 use App\Http\Livewire\Cart\CartShowInicio;
 use App\Http\Livewire\Navbar;
@@ -15,7 +11,9 @@ use Illuminate\Support\Facades\Route;
 use \App\Http\Livewire\Wishlist;
 use App\Models\Book;
 use App\Models\Order;
+use App\Models\Review;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 /*
 |--------------------------------------------------------------------------
@@ -63,14 +61,26 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/stripe', 'PaymentStripe')->name('paymentStripe');
     });
 
-    Route::get('/pedido-completado', function(){
+    Route::get('/pedido-completado', function () {
         return view('checkout.pedido-completado');
     })->name('pay-success');
 
-    Route::get('/user/pedidos', function(){
+    Route::get('/user/pedidos', function () {
         $orders = Order::where('user_id', Auth::user()->id)->get();
-        return view('profile.pedidos', compact('orders'));
+        $ordersId = Order::where('user_id', Auth::user()->id)->pluck('id');
+        $books = DB::table('books_orders')
+            ->whereIn('order_id', $ordersId)->join('books', 'books_orders.book_id', '=', 'books.id')->select('books_orders.*', 'books.*')->get();
+        return view('profile.pedidos', compact('orders', 'books'));
     })->name('pedidos');
+
+    Route::get('/user/review', function () {
+        $reviews = Review::where('user_id', Auth::user()->id)
+            ->join('books', 'reviews.book_id', '=', 'books.id')
+            ->select('reviews.*', 'books.title as book_title')
+            ->get();
+
+        return view('profile.review', compact('reviews'));
+    })->name('opiniones');
 });
 
 Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function () {

@@ -37,8 +37,15 @@
                                         </div>
                                     </div>
 
-                                    <div class="col-md-3 text-center text-md-start mt-sm-3">
+                                    <div class="col-md-2 text-center text-md-start mt-sm-3">
                                         <span>{{$book->model->price * $book->qty}} €</span>
+                                    </div>
+
+                                    <div class="col-md-1 mt-sm-4">
+                                        <div class="col-2 d-flex align-items-end pb-4">
+                                            <i class="fa-regular fa-circle-xmark fa-xl" style="color: #a51d2d; cursor: pointer"
+                                                wire:click.self='eliminar("{{$book->rowId}}")'></i>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -64,8 +71,8 @@
             </div>
         </div>
     </div>
-    <div>
-        <button class="btn btn-outline-danger" wire:click="clearCart">Borrar Carrito</button>
+    <div class="mt-3">
+        <button class="btn btn-outline-dark" wire:click="clearCart">Borrar Carrito</button>
     </div>
     @else
     <div class="d-flex justify-content-center align-items-center">
