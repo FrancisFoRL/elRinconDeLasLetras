@@ -8,21 +8,16 @@
         </div>
         <div class="collapse navbar-collapse" id="">
             <ul class="navbar-nav">
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                        aria-expanded="false">
-                        Categorias
+                <li class="nav-item px-2">
+                    <a class="nav-link dropdown-toggle" data-bs-toggle="collapse" href="#categorias-collapse"
+                        role="button" aria-expanded="false" aria-controls="categorias-collapse" id="categorias-link">
+                        Categorías
                     </a>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#">Action</a></li>
-                        <li><a class="dropdown-item" href="#">Another action</a></li>
-                        <li><a class="dropdown-item" href="#">Something else here</a></li>
-                    </ul>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item px-2">
                     <a class="nav-link" href="#">Contactanos</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item px-2">
                     <a class="nav-link" href="#">Sobre nosotros</a>
                 </li>
             </ul>
@@ -30,27 +25,30 @@
                 <div class="input-group">
                     <form action="{{route('search')}}" method="GET">
                         @csrf
-                        <input class="form-control rounded-pill" name="titulo" id="inputSearch" type="search" placeholder="Buscar" aria-label="Search">
+                        <label for="inputSearch" class="visually-hidden" style="color:#D9D9D9">Buscar un libro</label>
+                        <input class="form-control rounded-pill" name="titulo" id="inputSearch" type="search"
+                            placeholder="Buscar" aria-label="Buscar un libro">
                     </form>
                 </div>
             </div>
 
-            <script>
+            {{-- <script>
                 document.getElementById('search-form').addEventListener('submit', function(event) {
                     var tituloInput = document.getElementById('inputSearch');
                     if (!tituloInput.value.trim()) {
                         event.preventDefault();
                     }
                 });
-            </script>
+            </script> --}}
 
             <ul class="navbar-nav ms-auto me-2 align-items-center">
                 <li class="nav-item me-4" id="heart">
-                    <a href="{{route('wishlist')}}">
-                        <i class="fa-solid fa-heart"></i>
+                    <a href="{{ route('wishlist') }}">
+                        <i class="fa-solid fa-heart wishlist"></i>
+                        <span class="visually-hidden" style="color:#D9D9D9">Wishlist</span>
                     </a>
-
                 </li>
+
                 @if(url()->current() != url('/cart/cart-show'))
                 <li class="nav-item me-4">
                     <!-- Contenedor del icono y el badge -->
@@ -89,8 +87,13 @@
                             <li><a href="{{ route('profile.show')}}"
                                     class="dropdown-item d-flex justify-content-between align-items-center">Mis Datos<i
                                         class="fa-regular fa-address-card"></i></i></a></li>
-                            <li><a href="{{ route('pedidos')}}" class="dropdown-item d-flex justify-content-between align-items-center">Mis
+                            <li><a href="{{ route('pedidos')}}"
+                                    class="dropdown-item d-flex justify-content-between align-items-center">Mis
                                     Pedidos<i class="fa-solid fa-box-open"></i></a></li>
+                            <li>
+                            <li><a href="{{ route('opiniones')}}"
+                                    class="dropdown-item d-flex justify-content-between align-items-center">Mis Reseñas
+                                    <i class="fa-regular fa-star"></i></a></li>
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
@@ -132,6 +135,17 @@
     </div>
 </nav>
 
+<div class="collapse" id="categorias-collapse" data-bs-parent="#navPrincipal">
+    <div class="mx-auto row p-5 pt-0 align-items-center">
+        <hr>
+        @foreach ($categorias as $categoria)
+        <div class="col-2 p-2 fs-5">
+            <a href="{{ route('category.show', $categoria->slug) }}">{{ $categoria->name }}</a>
+        </div>
+        @endforeach
+    </div>
+</div>
+
 {{-- Menu Para moviles --}}
 <nav class="navbar navbar-expand d-flex align-items-center d-lg-none fixed-bottom rounded-pill mb-1 mx-1"
     id="nav-mobile">
@@ -147,10 +161,10 @@
             search
         </i>
         <div class="search-box">
-            <input type="text" placeholder="Buscar..." class="search-input" name="search">
+            <label for="search-mob" class="visually-hidden" style="color:#D9D9D9">Buscar un libro</label>
+            <input type="text" placeholder="Buscar..." class="search-input" name="search" id="search-mob">
             <div class="search-background"></div>
         </div>
-        <a href="#">
     </div>
     <div class="nav-item-mobile">
         <a href="{{route('inicio')}}">
@@ -183,11 +197,25 @@
     }
 </script>
 
+{{-- <script>
+    var categoriasCollapse = document.getElementById('categorias-collapse');
+            var categoriasLink = document.querySelector('[href="#categorias-collapse"]');
+
+            categoriasLink.addEventListener('focus', function () {
+                categoriasCollapse.classList.add('show');
+            });
+
+            categoriasCollapse.addEventListener('focusout', function (event) {
+                if (!categoriasCollapse.contains(event.relatedTarget)) {
+                    categoriasCollapse.classList.remove('show');
+                }
+            });
+</script> --}}
+
 <style>
     /* NavBar pantalla mobiles y tablets */
 
     #nav-mobile {
-        /* From https://css.glass */
         background: rgba(33, 33, 33, 0.9);
         backdrop-filter: blur(5px);
         -webkit-backdrop-filter: blur(5px);
@@ -204,10 +232,6 @@
         padding: 10px 15px;
         cursor: pointer;
         transition: all 0.2s ease-out;
-    }
-
-    .nav-item-mobile.active a i {
-        color: #6D9886;
     }
 
     .material-icons {
@@ -264,6 +288,15 @@
     /* NavBar pantallas grandes */
     #navPrincipal {
         background-color: #212121;
+    }
+
+    #categorias-collapse {
+        background-color: #212121;
+        color: #D9D9D9;
+    }
+
+    #categorias-collapse a:hover {
+        color: #6D9886;
     }
 
     .nav-link-span {

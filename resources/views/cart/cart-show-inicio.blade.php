@@ -22,15 +22,11 @@
                 <p class="p-ellipsis">Unidades: {{$book->qty}}</p>
                 <p class="fs-5 p-ellipsis">{{$book->model->price * $book->qty}}€</p>
             </div>
-            {{-- <div class="col-2 d-flex align-items-end pb-2">
-                <div class="col-2 d-flex align-items-end pb-4">
-                    <i class="fa-regular fa-circle-xmark fa-xl" style="color: #a51d2d; cursor: pointer"
-                        wire:click.self='eliminar("{{$book->rowId}}")'></i>
-                </div>
-            </div> --}}
+
             <hr class="mt-3">
-            @endforeach
         </div>
+        @endforeach
+
         <div class="row mt-3">
             <div class="col-6">Subtotal:</div>
             <div class="col-6 text-end">{{$subtotal}}€</div>

@@ -3,6 +3,7 @@
 namespace App\Http\Livewire;
 
 use App\Models\Book;
+use App\Models\Category;
 use Livewire\Component;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Http\Request;
@@ -15,8 +16,9 @@ class Navbar extends Component
     public function render()
     {
         $contenido = Cart::count();
+        $categorias = Category::all();
 
-        return view('livewire.navbar', compact('contenido'));
+        return view('livewire.navbar', compact('contenido', 'categorias'));
     }
 
     public function autocomplete(Request $request)

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\SearchController;
 use App\Http\Livewire\Cart\CartShow;
@@ -10,6 +11,7 @@ use App\Http\Livewire\ShowInicio;
 use Illuminate\Support\Facades\Route;
 use \App\Http\Livewire\Wishlist;
 use App\Models\Book;
+use App\Models\Category;
 use App\Models\Order;
 use App\Models\Review;
 use Illuminate\Support\Facades\Auth;
@@ -29,12 +31,8 @@ use Illuminate\Support\Facades\DB;
 Route::get('/', ShowInicio::class)->name('inicio');
 Route::get('/navbar', Navbar::class)->name('nav');
 Route::get('/search', [SearchController::class, 'search'])->name('search');
-Route::get('/book', ShowBook::class)->name('book');
-Route::get('/book/{slug}', function ($slug) {
-    $book = Book::where('slug', $slug)->first();
-    return view('livewire.show-book', compact('book'));
-})->name('book.show');
-
+Route::get('/book/{slug}', ShowBook::class)->name('book.show');
+Route::get('/category/{slug}', [CategoryController::class, 'index'])->name('category.show');
 Route::get('/cart/cart-show-inicio', CartShowInicio::class)->name('cartNav');
 Route::get('/cart/cart-show', CartShow::class)->name('cart');
 

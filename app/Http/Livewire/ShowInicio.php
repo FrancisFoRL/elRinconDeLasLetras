@@ -53,7 +53,7 @@ class ShowInicio extends Component
 
         session()->flash('success_message', 'Producto añadido al carrito');
 
-        return redirect()->route('cart');
+        return redirect()->route('inicio');
     }
 
     public function addToWishlist(Book $book)

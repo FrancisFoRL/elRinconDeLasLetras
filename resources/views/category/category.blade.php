@@ -1,10 +1,10 @@
 <x-app-layout>
     <div class="container">
-        <h2 class="my-lg-4 my-4">Se han encontrado {{$total}} libro/s que corresponde a la busqueda</h2>
+        <h2 class="text-center mt-4 display-6" style="font-family: Ubuntu">Libros de {{$category->name}}</h2>
         <hr>
         <div class="row">
             @forelse($books as $book)
-            <div class="col-lg-4 col-md-6 col-12 mb-4 mx-auto">
+            <div class="col-lg-3 col-md-5 col-12 mb-4 mx-auto">
                 <div class="card h-100 wishlist-card">
                     <img src="{{ $book->image }}" class="card-img-top" alt="...">
                     <div class="card-body">
@@ -33,7 +33,7 @@
             @endforelse
 
         </div>
-        {{ $books->withQueryString()->links() }}
+        {{-- {{ $books->withQueryString()->links() }} --}}
     </div>
 
     <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>

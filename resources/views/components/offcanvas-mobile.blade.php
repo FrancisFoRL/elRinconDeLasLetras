@@ -1,6 +1,7 @@
 <!-- Offcanvas Shopping Card -->
 <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasMobile" aria-labelledby="offcanvasMobileLabel">
     <div class="offcanvas-header">
+        <h2 id="offcanvasMobileLabel" class="visually-hidden">Menú móvil</h2>
         @if (Route::has('login'))
 
                         @auth
