@@ -1,17 +1,20 @@
 <div class="container">
-    <h2 class="my-lg-4 my-4">Lista de deseos</h2>
+    <h2 class="text-center mt-4 display-6" style="font-family: Ubuntu">Lista de deseos</h2>
     <hr>
     <div class="row">
         @forelse($wishlist as $item)
         <div class="col-lg-4 col-md-6 col-10 mb-4 mx-auto">
             <div class="card h-100 wishlist-card">
-                <img src="{{ $item->book->image }}" class="card-img-top" alt="...">
+                <a href="{{ route('book.show', $item->book->slug) }}">
+                    <img src="{{ $item->book->image }}" class="card-img-top pointer"
+                        alt="Portada libro {{ $item->book->title }}">
+                </a>
                 <div class="card-body">
                     <h3 class="card-title">{{ $item->book->title }}</h3>
                     <p class="card-text">{{ $item->book->price}}€</p>
                 </div>
-                <div class="card-footer d-flex justify-content-center">
-                    <button class="btn w-25 rounded-pill" id="btn-delete"
+                <div class="card-footer d-flex justify-content-center" style="background-color:#212121">
+                    <button class="btn w-25 rounded-pill pointer" id="btn-delete"
                         wire:click="removeFromWishlist({{ $item->id }})" aria-label="Eliminar artículo"><i
                             class="fas fa-trash"></i></button>
                 </div>
@@ -52,6 +55,10 @@
     .wishlist-card:hover {
         box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
         opacity: 0.9;
+    }
+
+    .pointer{
+        cursor: pointer;
     }
 
     #btn-delete {

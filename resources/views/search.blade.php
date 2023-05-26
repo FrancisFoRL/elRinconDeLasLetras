@@ -1,17 +1,19 @@
 <x-app-layout>
     <div class="container">
-        <h2 class="my-lg-4 my-4">Se han encontrado {{$total}} libro/s que corresponde a la busqueda</h2>
+        <h2 class="my-lg-4 my-4 text-center text-lg-left" style="font-family: Ubuntu">Se han encontrado {{$total}} libro/s que corresponde a la busqueda</h2>
         <hr>
         <div class="row">
             @forelse($books as $book)
-            <div class="col-lg-4 col-md-6 col-12 mb-4 mx-auto">
+            <div class="col-lg-3 col-md-6 col-11 mb-4 mx-auto">
                 <div class="card h-100 wishlist-card">
-                    <img src="{{ $book->image }}" class="card-img-top" alt="...">
+                    <a href="{{ route('book.show', $book->slug) }}">
+                        <img src="{{ $book->image }}" class="card-img-top" alt="Portada libro {{ $book->title }}">
+                    </a>
                     <div class="card-body">
-                        <h3 class="card-title">{{ $book->title }}</h3>
+                        <h3 class="card-title fs-5 fw-bold" style="font-family: Roboto">{{ $book->title }}</h3>
                         <p class="card-text">{{ $book->price}}€</p>
                     </div>
-                    <div class="card-footer d-flex justify-content-center">
+                    <div class="card-footer d-flex justify-content-center" style="background-color:#212121">
 
                     </div>
                 </div>

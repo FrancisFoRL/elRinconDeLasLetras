@@ -2,8 +2,7 @@
     <div class="row">
         <div class="col-lg-4 col-12 me-5">
             <h2 class="mb-3 d-md-none d-block text-center" style="font-family: Ubuntu">{{ $book->title }}</h2>
-            <hr>
-            <img src="{{ asset($book->image) }}" id="book-image" class="img-fluid rounded w-100"
+            <img src="{{ asset($book->image) }}" id="book-image" class="img img-fluid rounded w-100"
                 alt="Portada de {{ $book->title }}">
         </div>
         <div class="col-lg-6 mt-4 mt-lg-0">
@@ -28,18 +27,20 @@
                         <p class="mb-2"><span class="fw-bold fs-5">Número de páginas:</span> {{ $book->pages }}</p>
                     </div>
                 </div>
-                <div class="col-12 col-lg-6 mt-5 px-lg-5 ">
-                    <div class="d-flex align-items-center mb-4 mt-2">
+                <div class="col-12 col-lg-6 mt-5 px-lg-5 text-center text-lg-start">
+                    <div class=" align-items-center mb-4 mt-0 mt-lg-1">
                         <h2 class="display-6" style="font-family:Ubuntu">PVP: {{ $book->price }} €</h2>
                     </div>
                     <div>
-                    <button wire:click.prevent="store({{ $book }})" class="btn buttons" id="compra"
-                        title="Añadir al carrito">
-                        <i class="fa-solid fa-cart-plus me-1"></i> Añadir al carrito
-                    </button>
-                    <button wire:click.prevent="addToWishlist({{ $book->id }})" class="btn mt-lg-3 mx-2 mx-lg-0 buttons" id="wishlist" title="Añadir a favoritos el libro">
-                        <i class="fa-solid fa-heart m-1"></i> Añadir a favoritos
-                    </button>
+                        <button wire:click.prevent="store({{ $book }})" class="btn buttons" id="compra"
+                            title="Añadir al carrito">
+                            <i class="fa-solid fa-cart-plus me-1"></i> Añadir al carrito
+                        </button>
+                        <button wire:click.prevent="addToWishlist({{ $book->id }})" class="btn buttons mt-2 mt-lg-3"
+                            id="wishlist" title="Añadir a favoritos el libro">
+                            <i class="fa-solid fa-heart m-1"></i> Añadir a favoritos
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -47,6 +48,7 @@
 
     <h3 class="mt-5 display-6" style="font-family: Ubuntu">Reviews</h3>
     <div class="mt-4">
+        @if(count($book->reviews) != 0)
         @foreach ($book->reviews as $review)
         <div class="card mb-4">
             <div class="card-header d-flex flex-row-reverse align-items-center text-white">
@@ -72,6 +74,9 @@
             </div>
         </div>
         @endforeach
+        @else
+        <p class="text-center fw-bold fs-4 text-decoration-underline" style="color:#7B0000">No hay reviews de este libro</p>
+        @endif
     </div>
 </div>
 <style>

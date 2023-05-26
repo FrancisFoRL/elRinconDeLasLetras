@@ -42,8 +42,8 @@
             </script> --}}
 
             <ul class="navbar-nav ms-auto me-2 align-items-center">
-                <li class="nav-item me-4" id="heart">
-                    <a href="{{ route('wishlist') }}">
+                <li class="nav-item me-4">
+                    <a href="{{ route('wishlist') }}" class="text-decoration-none" id="heart">
                         <i class="fa-solid fa-heart wishlist"></i>
                         <span class="visually-hidden" style="color:#D9D9D9">Wishlist</span>
                     </a>
@@ -59,7 +59,7 @@
                             data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
                         </i>
 
-                        <!-- Badge con la cantidad de elementos en el carrito -->
+                        <!-- Offcanvas con productos en el carrito -->
                         @if($contenido > 0)
                         <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
                             {{$contenido}}
@@ -140,7 +140,7 @@
         <hr>
         @foreach ($categorias as $categoria)
         <div class="col-2 p-2 fs-5">
-            <a href="{{ route('category.show', $categoria->slug) }}">{{ $categoria->name }}</a>
+            <a href="{{ route('category.show', $categoria->slug) }}" class="text-decoration-none categorias">{{ $categoria->name }}</a>
         </div>
         @endforeach
     </div>
@@ -402,9 +402,13 @@
         transform: rotate(90deg);
     }
 
-    a,
+    .categorias{
+        color:#D9D9D9;
+    }
+
+    /* a,
     a:hover {
         color: unset;
         text-decoration: none;
     }
-</style>
+</style> */
