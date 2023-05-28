@@ -59,11 +59,21 @@ class ShowInicio extends Component
     public function addToWishlist(Book $book)
     {
         if (Auth::user()) {
-            Wishlist::firstOrCreate([
+            $wishlist = Wishlist::firstOrCreate([
                 'user_id' => auth()->id(),
                 'book_id' => $book->id,
             ]);
-            session()->flash('success', 'Libro añadido de la lista de deseos');
+
+            if ($wishlist->wasRecentlyCreated) {
+                // El registro fue creado recientemente
+                // Es decir, no existía previamente en la base de datos
+                session()->flash('wishlist', 'Libro añadido a la lista de deseos');
+                return redirect(url()->previous());
+            } else {
+                // El registro ya existía en la base de datos
+                session()->flash('wishlist-error', 'El libro ya se encuentra en la lista de deseos');
+                return redirect(url()->previous());
+            }
         } else {
             return redirect()->route('login');
         }

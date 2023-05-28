@@ -1,4 +1,5 @@
 <main>
+    <x-messages/>
     <section>
         <article>
             <div id="carouselExampleIndicators" class="carousel slide   " data-bs-ride="carousel">
@@ -51,7 +52,8 @@
                             </div>
                         </a>
                         <div class="card-body text-center">
-                            <h3 class="card-title book-title" style="font-family: 'Ubuntu', sans-serif;">{{ $book->title }}</h3>
+                            <h3 class="card-title book-title" style="font-family: 'Ubuntu', sans-serif;">{{ $book->title
+                                }}</h3>
                             <p class="card-text text-muted" style="color:#3f3f3f !important;">{{ $book->author->name }}
                             </p>
                             <p class="card-text">{{ $book->price }}€</p>
@@ -74,9 +76,9 @@
     </section>
 </main>
 
-<footer>
-    footer
-</footer>
+<x-footer/>
+
+<script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
 
 <!-- Styles -->
 <style>
@@ -143,11 +145,6 @@
         color: #DC143C;
     }
 
-
-    footer {
-        background-color: #212121;
-    }
-
     @media (min-width: 992px) {
         .carousel-item {
             height: 500px;
@@ -159,6 +156,30 @@
 
         article h2 {
             font-size: 35px;
+        }
+    }
+
+    #flash-message-success {
+        position: fixed;
+        top: 100px;
+        right: 20px;
+        background-color: #333;
+        color: #fff;
+        padding: 20px;
+        border-radius: 5px;
+        font-family: Arial, sans-serif;
+        font-size: 18px;
+        z-index: 999;
+    }
+
+    @keyframes slideOutRight {
+        0% {
+            opacity: 1;
+        }
+
+        100% {
+            opacity: 0;
+            transform: translateX(100%);
         }
     }
 </style>

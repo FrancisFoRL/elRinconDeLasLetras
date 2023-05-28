@@ -5,11 +5,6 @@
         <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
     <div class="offcanvas-body">
-        @if(session()->has('success_message'))
-        <div class="alert alert-success">
-            {{ session()->get('success_message') }}
-        </div>
-        @endif
         @if (Cart::count()>0)
         @foreach (Cart::content() as $book)
         <div class="row p-2">

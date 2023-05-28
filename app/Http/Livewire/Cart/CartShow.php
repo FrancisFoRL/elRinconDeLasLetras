@@ -50,8 +50,8 @@ class CartShow extends Component
         }else{
             Cart::store('');
         }
-        $this->emit('info', 'Producto eliminado');
-        session()->flash('success_message', 'Producto eliminado');
+        session()->flash('delete', 'Producto eliminado del carrito');
+        return redirect(url()->previous());
     }
 
     public function clearCart()
@@ -62,5 +62,7 @@ class CartShow extends Component
         }else{
             Cart::store('');
         }
+        session()->flash('delete', 'Carrito eliminado correctamente');
+        return redirect(url()->previous());
     }
 }

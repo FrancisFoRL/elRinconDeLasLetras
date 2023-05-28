@@ -1,4 +1,5 @@
 <div class="container">
+    <x-messages/>
     <h2 class="text-center mt-4 display-6" style="font-family: Ubuntu">Lista de deseos</h2>
     <hr>
     <div class="row">

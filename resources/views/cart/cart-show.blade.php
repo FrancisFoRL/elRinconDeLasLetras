@@ -1,8 +1,10 @@
 <div class="container">
+    <x-messages/>
     @if(Cart::count()>0)
     <div class="my-md-4 my-3">
-        <h2>Carrito de Compra</h2>
+        <h2 style="font-family: Ubuntu" class="display-6">Carrito de Compra</h2>
     </div>
+
     <div class="contenido">
         <div class="row">
             <div class="col-md-12 col-lg-8" id="contenedor_book">
@@ -43,7 +45,8 @@
 
                                     <div class="col-md-1 mt-sm-4">
                                         <div class="col-2 d-flex align-items-end pb-4">
-                                            <i class="fa-regular fa-circle-xmark fa-xl" style="color: #a51d2d; cursor: pointer"
+                                            <i class="fa-regular fa-circle-xmark fa-xl"
+                                                style="color: #a51d2d; cursor: pointer"
                                                 wire:click.self='eliminar("{{$book->rowId}}")'></i>
                                         </div>
                                     </div>
@@ -65,7 +68,8 @@
                     <div class="d-flex justify-content-between"><span>Total</span><span>{{$subtotal + 4,99}}
                             €</span></div>
                     <div class="mt-3 d-flex justify-content-center">
-                        <button type="button" class="btn btn-lg w-50" id="btn-check" onclick="window.location.href='{{route('checkout')}}'">Pagar ahora</button>
+                        <button type="button" class="btn btn-lg w-50" id="btn-check"
+                            onclick="window.location.href='{{route('checkout')}}'">Pagar ahora</button>
                     </div>
                 </div>
             </div>

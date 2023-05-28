@@ -1,4 +1,5 @@
 <div class="container py-4 mt-lg-5">
+    <x-messages/>
     <div class="row">
         <div class="col-lg-4 col-12 me-5">
             <h2 class="mb-3 d-md-none d-block text-center" style="font-family: Ubuntu">{{ $book->title }}</h2>

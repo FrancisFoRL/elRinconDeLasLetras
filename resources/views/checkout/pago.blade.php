@@ -21,7 +21,7 @@
                                 @csrf
                                 <p class="text-left text-lg ubuntu-font mb-3">Datos Personales</p>
                                 <div class="form-group d-flex">
-                                    <div class="form-control-wrapper">
+                                    <div class="form-control-wrapper me-1">
                                         <input type="text" class="form-control" name="nom" id="nombre" autocomplete="on"
                                             required aria-label="Nombre completo" placeholder="">
                                         <label for="nombre">Nombre*</label>
@@ -53,7 +53,7 @@
                                     </div>
                                 </div>
                                 <div class="form-group d-flex">
-                                    <div class="form-control-wrapper w-50">
+                                    <div class="form-control-wrapper w-50 me-1">
                                         <label class="visually-hidden" for="provincia">Provincia</label>
                                         <select class="form-select" name="provincia"
                                             aria-label="Eliga la provincia de su dirección" id="provincia" required>

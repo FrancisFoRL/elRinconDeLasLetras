@@ -12,7 +12,7 @@
             <div class="position-relative text-center">
                 <a href="{{route('inicio')}}">
                     <img src="{{ Storage::url('Logo.svg') }}" alt="El Rincón de las letras"
-                        class="position-absolute top-5 start-3 d-none d-md-block img-fluid" width="100" height="100">
+                        class="position-absolute top-5 start-3 mt-3 d-none d-md-block img-fluid" width="100" height="100">
                 </a>
             </div>
             <div class="row">
@@ -34,7 +34,7 @@
                                 @csrf
                                 <div class="mb-3">
                                     <x-label for="email" value="{{ __('Email') }}" />
-                                    <x-input id="email" class="block mt-1 w-full" type="email" name="email"
+                                    <x-input id="email" class="block mt-1 w-100" type="email" name="email"
                                         :value="old('email')" required autofocus autocomplete="username"
                                         :value="old('email')" />
                                     {{-- <label for="email" class="form-label fw-bold">{{ __('Correo Electronico')
@@ -44,7 +44,7 @@
                                 </div>
                                 <div class="mb-3">
                                     <x-label for="password" value="{{ __('Contraseña') }}" />
-                                    <x-input id="password" class="d-block mt-1 w-full" type="password" name="password"
+                                    <x-input id="password" class="d-block mt-1 w-100" type="password" name="password"
                                         required autocomplete="current-password" :value="old('password')" />
                                     {{-- <label for="password" class="form-label fw-bold">{{ __('Contraseña') }}</label>
                                     <input type="password" id="password" name="password" :value="old('password')"

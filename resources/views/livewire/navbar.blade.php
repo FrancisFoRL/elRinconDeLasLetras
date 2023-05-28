@@ -140,7 +140,8 @@
         <hr>
         @foreach ($categorias as $categoria)
         <div class="col-2 p-2 fs-5">
-            <a href="{{ route('category.show', $categoria->slug) }}" class="text-decoration-none categorias">{{ $categoria->name }}</a>
+            <a href="{{ route('category.show', $categoria->slug) }}" class="text-decoration-none categorias">{{
+                $categoria->name }}</a>
         </div>
         @endforeach
     </div>
@@ -149,15 +150,15 @@
 {{-- Menu Para moviles --}}
 <nav class="navbar navbar-expand d-flex align-items-center d-lg-none fixed-bottom rounded-pill mb-1 mx-1"
     id="nav-mobile">
-    <div class="nav-item-mobile {{ Request::is('wishlist') ? 'active' : '' }}">
-        <a href="{{route('wishlist')}}">
+    <div class="nav-item-mobile d-flex align-items-center flex-column {{ Request::is('wishlist') ? 'active' : '' }}">
+        <a href="{{route('wishlist')}}" class="d-flex align-items-center text-decoration-none">
             <i class="material-icons favorite-icon">
                 favorite
             </i>
         </a>
     </div>
-    <div class="nav-item-mobile">
-        <i class="material-icons search-icon" onclick="showSearch()">
+    <div class="nav-item-mobile d-flex align-items-center flex-column">
+        <i class="material-icons search-icon m-auto" onclick="showSearch()">
             search
         </i>
         <div class="search-box">
@@ -166,25 +167,27 @@
             <div class="search-background"></div>
         </div>
     </div>
-    <div class="nav-item-mobile">
-        <a href="{{route('inicio')}}">
+    <div class="nav-item-mobile d-flex align-items-center flex-column">
+        <a href="{{route('inicio')}}" class="d-flex align-items-center text-decoration-none">
             <img src="{{ Storage::url('Logo.svg') }}" alt="El Rincón de las letras" id='logo' width="36" height="36">
         </a>
     </div>
-    <div class="nav-item-mobile {{ Request::is('cart/cart-show') ? 'active' : '' }}">
-        <a href="{{ route('cart') }}">
+    <div
+        class="nav-item-mobile d-flex align-items-center flex-column {{ Request::is('cart/cart-show') ? 'active' : '' }}">
+        <a href="{{ route('cart') }}" class="d-flex align-items-center text-decoration-none">
             <i class="material-icons shopping_cart">
                 shopping_cart
             </i>
         </a>
     </div>
-    <div class="nav-item-mobile">
+    <div class="nav-item-mobile d-flex align-items-center flex-column">
         <span class="material-icons outlined" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasMobile"
             aria-controls="offcanvasRight">
             menu_open
         </span>
     </div>
 </nav>
+
 
 <x-offcanvas-mobile /> <!-- Offcanvas para moviles -->
 @livewire('cart.cart-show-inicio')
@@ -220,7 +223,7 @@
         backdrop-filter: blur(5px);
         -webkit-backdrop-filter: blur(5px);
         border: 1px solid rgba(33, 33, 33, 0.3);
-        padding: 25px 20px;
+        padding: 5px 20px;
         font-family: 'Poppins', sans-serif;
     }
 
@@ -402,13 +405,7 @@
         transform: rotate(90deg);
     }
 
-    .categorias{
-        color:#D9D9D9;
+    .categorias {
+        color: #D9D9D9;
     }
-
-    /* a,
-    a:hover {
-        color: unset;
-        text-decoration: none;
-    }
-</style> */
+</style>
