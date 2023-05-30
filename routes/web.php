@@ -3,6 +3,7 @@
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\SearchController;
+use App\Http\Controllers\ShowContacto;
 use App\Http\Livewire\Cart\CartShow;
 use App\Http\Livewire\Cart\CartShowInicio;
 use App\Http\Livewire\Navbar;
@@ -30,11 +31,17 @@ use Illuminate\Support\Facades\DB;
 
 Route::get('/', ShowInicio::class)->name('inicio');
 Route::get('/navbar', Navbar::class)->name('nav');
-Route::get('/search', [SearchController::class, 'search'])->name('search');
-Route::get('/book/{slug}', ShowBook::class)->name('book.show');
-Route::get('/category/{slug}', [CategoryController::class, 'index'])->name('category.show');
+Route::get('/busqueda', [SearchController::class, 'search'])->name('search');
+Route::get('/libros/{slug}', ShowBook::class)->name('book.show');
+Route::get('/categorias/{slug}', [CategoryController::class, 'index'])->name('category.show');
 Route::get('/cart/cart-show-inicio', CartShowInicio::class)->name('cartNav');
-Route::get('/cart/cart-show', CartShow::class)->name('cart');
+Route::get('/carrito', CartShow::class)->name('cart');
+Route::get('/sobre-nosotros', function(){
+    return view('sobrenost');
+})->name('sobrenost');
+Route::get('/contacto', [ShowContacto::class, 'index'])->name('contacto.show');
+Route::post('/contacto', [ShowContacto::class, 'send'])->name('contacto.send');
+Route::get('/información-legal');
 
 
 Route::middleware([
@@ -49,7 +56,7 @@ Route::middleware([
 
 Route::middleware(['auth'])->group(function () {
     //Aqui meter ruta para validar pedido y la lista de favoritos
-    Route::get('/wishlist', Wishlist::class)->name('wishlist');
+    Route::get('/lista-de-deseos', Wishlist::class)->name('wishlist');
     Route::delete('/wishlist/remove/{id}', [Wishlist::class, 'removeFromWishlist'])->name('wishlist.remove');
     Route::controller(CheckoutController::class)->group(function () {
         Route::get('/checkout', 'index')->name('checkout');
@@ -63,7 +70,7 @@ Route::middleware(['auth'])->group(function () {
         return view('checkout.pedido-completado');
     })->name('pay-success');
 
-    Route::get('/user/pedidos', function () {
+    Route::get('/perfil/pedidos', function () {
         $orders = Order::where('user_id', Auth::user()->id)->get();
         $ordersId = Order::where('user_id', Auth::user()->id)->pluck('id');
         $books = DB::table('books_orders')
@@ -71,7 +78,7 @@ Route::middleware(['auth'])->group(function () {
         return view('profile.pedidos', compact('orders', 'books'));
     })->name('pedidos');
 
-    Route::get('/user/review', function () {
+    Route::get('/perfil/reseñas', function () {
         $reviews = Review::where('user_id', Auth::user()->id)
             ->join('books', 'reviews.book_id', '=', 'books.id')
             ->select('reviews.*', 'books.title as book_title')

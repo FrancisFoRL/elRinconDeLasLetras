@@ -12,7 +12,8 @@
             <div class="position-relative">
                 <a href="{{route('inicio')}}">
                     <img src="{{ Storage::url('Logo.svg') }}" alt="El Rincón de las letras"
-                        class="position-absolute top-5 start-3 d-none d-md-block img-fluid" width="100" height="100">
+                        class="position-absolute top-5 start-3 mt-3 d-none d-md-block img-fluid" width="100"
+                        height="100">
                 </a>
             </div>
             <div class="row">
@@ -24,8 +25,10 @@
                         <div class="col-md-8 justify-content-center align-items">
                             <a class="d-flex flex-column justify-content-center align-items-center"
                                 href="{{route('inicio')}}">
-                                <img src="{{ Storage::url('Logo.svg') }}" alt="El Rincón de las letras" class="position-absolute d-md-none d-sm-block img-fluid" style="margin-bottom: 180px" width="120" height="120">
-
+                                <img src="{{ Storage::url('Logo.svg') }}"
+                                    alt="Logo El Rincon de las Letras - Ir a la página principal"
+                                    class="position-absolute d-md-none d-sm-block img-fluid"
+                                    style="margin-bottom: 180px" width="120" height="120">
                             </a>
                             <h1 class="text-center mb-4" style="font-family: Ubuntu;">Registro</h1>
                             <form>
@@ -75,7 +78,7 @@
                             </form>
                             <x-validation-errors class="mb-4 mt-4" />
                             <div class="mt-4 d-flex flex-row-reverse">
-                                <a href="{{route('login')}}" class="text-gray-600">
+                                <a href="{{route('login')}}" style="color:#24547D">
                                     <span>Ir a iniciar sesión <i class="fa-solid fa-arrow-right mx-1"></i></span>
                                 </a>
                             </div>

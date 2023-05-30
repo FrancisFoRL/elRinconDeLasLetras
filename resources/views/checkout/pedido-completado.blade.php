@@ -3,7 +3,7 @@
         <h2 class="display-4 fw-bold">Pedido Completado</h2>
     </div>
     <div class="d-flex justify-content-center mt-2">
-        <p class="fs-5" id="pedido-text">Puedes ver el pedido en el apartado de <a href="/" class="fw-bold" style="color:#DC143C;">"Mis pedidos"</a></p>
+        <p class="fs-5" id="pedido-text">Puedes ver el pedido en el apartado de <a href=" {{route('pedidos')}}" class="fw-bold text-decoration-none" style="color:#DC143C;">"Mis pedidos"</a></p>
     </div>
     <div class="d-flex justify-content-center align-items-center">
         <lottie-player src="https://assets2.lottiefiles.com/packages/lf20_k10ku8at.json"

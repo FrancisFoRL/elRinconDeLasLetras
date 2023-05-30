@@ -2,7 +2,7 @@
     <div class="container-fluid">
         <div class="d-flex align-items-center ">
             <a class="navbar-brand" href="{{route('inicio')}}">
-                <img src="{{ Storage::url('Logo.svg') }}" alt="El Rincón de las letras" id='logo' width="50" height="50"
+                <img src="{{ Storage::url('Logo.svg') }}" alt="Logo El Rincon de las Letras - Ir a la página principal" id='logo' width="50" height="50"
                     class="me-4">
             </a>
         </div>
@@ -15,10 +15,10 @@
                     </a>
                 </li>
                 <li class="nav-item px-2">
-                    <a class="nav-link" href="#">Contactanos</a>
+                    <a class="nav-link" href="{{route('contacto.show')}}">Contactanos</a>
                 </li>
                 <li class="nav-item px-2">
-                    <a class="nav-link" href="#">Sobre nosotros</a>
+                    <a class="nav-link" href="{{route('sobrenost')}}">Sobre nosotros</a>
                 </li>
             </ul>
             <div class="d-flex mx-auto justify-md-content-center">
@@ -169,7 +169,7 @@
     </div>
     <div class="nav-item-mobile d-flex align-items-center flex-column">
         <a href="{{route('inicio')}}" class="d-flex align-items-center text-decoration-none">
-            <img src="{{ Storage::url('Logo.svg') }}" alt="El Rincón de las letras" id='logo' width="36" height="36">
+            <img src="{{ Storage::url('Logo.svg') }}" alt="Logo El Rincon de las Letras - Ir a la página principal" id='logo' width="36" height="36">
         </a>
     </div>
     <div
@@ -255,7 +255,7 @@
 
     .search-box {
         position: absolute;
-        bottom: 107px;
+        bottom: 67px;
         left: 50%;
         transform: translateX(-50%);
         width: 63%;

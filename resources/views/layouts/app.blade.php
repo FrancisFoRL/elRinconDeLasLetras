@@ -77,7 +77,7 @@
     @livewireStyles
 </head>
 
-<body class="antialiased">
+<body class="antialiased" style="background-color: #F6F6F6;">
     <x-banner />
 
     <div class="min-h-screen bg-gray-100">

@@ -6,49 +6,49 @@
         <div class="container">
             <div class="row vh-100">
                 <div class="col d-flex align-items-center justify-content-center">
-                    <div id="form" class="w-md-50 p-md-4 ">
-                        @if(Session::has('error'))
+                    <div id="form" class="w-md-50 p-md-4 p-2 pt-4">
+                        @if (Session::has('error'))
                         <div class="alert alert-danger">{{ Session::get('error') }}</div>
                         @endif
 
-                        @if(Session::has('success'))
+                        @if (Session::has('success'))
                         <div class="alert alert-success">{{ Session::get('success') }}</div>
                         @endif
                         <h1 class="ubuntu-font text-center mb-4 display-5">Checkout</h1>
                         <div>
-                            <form action="{{route('paymentStripe')}}" method="post" id="payment-form" role="form"
+                            <form action="{{ route('paymentStripe') }}" method="post" id="payment-form" role="form"
                                 class="mx-3">
                                 @csrf
                                 <p class="text-left text-lg ubuntu-font mb-3">Datos Personales</p>
                                 <div class="form-group d-flex">
                                     <div class="form-control-wrapper me-1">
-                                        <input type="text" class="form-control" name="nom" id="nombre" autocomplete="on"
+                                        <input type="text" class="form-control" name="nombre" id="nombre" autocomplete="on"
                                             required aria-label="Nombre completo" placeholder="">
                                         <label for="nombre">Nombre*</label>
-                                        @error('nom')
-                                        <div class="text-danger">{{$message}}</div>
+                                        @error('nombre')
+                                        <div class="text-danger">*{{ $message }}</div>
                                         @enderror
                                     </div>
                                     <div class="w-1">
                                     </div>
                                     <div class="form-control-wrapper">
-                                        <input type="text" class="form-control" name="lastname" id="apellidos" required
+                                        <input type="text" class="form-control" name="apellidos" id="apellidos" required
                                             aria-label="Apellidos" autocomplete="on" placeholder="">
                                         <label for="apellidos">Apellidos*</label>
-                                        @error('lastname')
-                                        <div class="text-danger">*{{$message}}</div>
+                                        @error('apellidos')
+                                        <div class="text-danger">*{{ $message }}</div>
                                         @enderror
                                     </div>
                                 </div>
                                 <p class="text-left text-lg ubuntu-font mb-4">Datos de Envio</p>
                                 <div class="form-group">
                                     <div class="form-control-wrapper">
-                                        <input type="text" class="form-control" name="address" id="address"
+                                        <input type="text" class="form-control" name="direccion" id="address"
                                             placeholder="" autocomplete="on" required
                                             aria-label="Dirección de envio del pedido">
                                         <label for="address">Direccion de envio*</label>
-                                        @error('address')
-                                        <div class="text-danger">*{{$message}}</div>
+                                        @error('direccion')
+                                        <div class="text-danger">*{{ $message }}</div>
                                         @enderror
                                     </div>
                                 </div>
@@ -59,11 +59,11 @@
                                             aria-label="Eliga la provincia de su dirección" id="provincia" required>
                                             <option value="" selected disabled>-- Elige una provincia --</option>
                                             @foreach ($provincias as $provincia)
-                                            <option value="{{$provincia}}">{{$provincia}}</option>
+                                            <option value="{{ $provincia }}">{{ $provincia }}</option>
                                             @endforeach
                                         </select>
                                         @error('provincia')
-                                        <div class="text-danger">*{{$message}}</div>
+                                        <div class="text-danger">*{{ $message }}</div>
                                         @enderror
                                     </div>
                                     <div class="w-1">
@@ -74,7 +74,7 @@
                                             placeholder="" maxlength="5">
                                         <label for="postal">Código Postal*</label>
                                         @error('postal')
-                                        <div class="text-danger">*{{$message}}</div>
+                                        <div class="text-danger">*{{ $message }}</div>
                                         @enderror
                                     </div>
                                 </div>
@@ -84,22 +84,23 @@
                                         <div class="btn-group" role="group" aria-label="Metodos de pago de compra">
                                             <input type="radio" class="btn-check" name="btnradio" id="btnradio1"
                                                 autocomplete="off">
-                                            <label class="btn btn-lg btn-outline-dark d-flex" for="btnradio1"><img
-                                                    src="{{Storage::url('paypal-icon.png')}}" alt="Icono de Paypal"
-                                                    width="30px" class="img img-fluid mr-2"> Paypal</label>
+                                            <label class="btn btn-lg btn-outline-dark d-flex align-items-center" for="btnradio1"><img
+                                                    src="{{ Storage::url('paypal-icon.png') }}" alt="Icono de Paypal"
+                                                    width="30px" class="img img-fluid me-1 btn-img"> Paypal</label>
 
                                             <input type="radio" class="btn-check" name="btnradio" id="btnradio2"
                                                 autocomplete="off">
                                             <label class="btn btn-lg btn-outline-dark d-flex align-items-center"
                                                 for="btnradio2">Tarjeta <img
-                                                    src="{{Storage::url('tarjeta-de-credito.png')}}"
-                                                    class="h-75 img img-fluid ml-2" alt="Icono de Tarjeta de Pago"
+                                                    src="{{ Storage::url('tarjeta-de-credito.png') }}"
+                                                    class="h-75 img img-fluid ms-2 btn-img" alt="Icono de Tarjeta de Pago"
                                                     width="30px"></label>
                                         </div>
                                     </div>
                                 </div>
                                 @error('card_no')
-                                    <div class=" mt-5 text-danger d-flex justify-content-center">*Datos de tarjeta incorrectos</div>
+                                <div class=" mt-5 text-danger d-flex justify-content-center">*Datos de tarjeta
+                                    incorrectos</div>
                                 @enderror
                                 <div class="form-group mt-5" id="tarjeta-formulario">
                                     <div class="card credit-card p-4">
@@ -132,8 +133,9 @@
                                                         Expiración</label>
                                                     <input class="card-title me-3 w-50" placeholder="YY"
                                                         name="ccExpiryYear" id="expiraAnio" required>
-                                                    <label class="visually-hidden" for="cvv">CCV de la tarjeta</label>
-                                                    <input class="card-title w-25" placeholder="CVV" name="cvvNumber"
+                                                    <label class="visually-hidden" for="cvv">CCV de la
+                                                        tarjeta</label>
+                                                    <input class="card-title w-50" placeholder="CVV" name="cvvNumber"
                                                         id="cvv" required>
                                                 </div>
                                             </div>
@@ -150,19 +152,19 @@
                                 </div>
                             </form>
                             <div class="form-group mt-5 d-flex justify-content-center">
-                                <form action="{{route('requestpayment')}}" method="POST" id="pagar-paypal">
+                                <form action="{{ route('requestpayment') }}" method="POST" id="pagar-paypal">
                                     @csrf
                                     <input aria-label="Nombre completo" type="text" class="form-control visually-hidden"
-                                        name="nom" id="nombre-paypal">
+                                        name="nombre" id="nombre-paypal">
                                     <input aria-label="Apellidos" type="text" class="form-control visually-hidden"
-                                        name="lastname" id="apellidos-paypal">
-                                    <input type="text" class="form-control visually-hidden" name="address"
+                                        name="apellidos" id="apellidos-paypal">
+                                    <input type="text" class="form-control visually-hidden" name="direccion"
                                         id="address-paypal" aria-label="Dirección de envio del pedido">
                                     <select class="form-select visually-hidden" name="provincia"
                                         aria-label="Eliga la provincia de su dirección" id="provincia-paypal">
                                         <option disabled selected>-- Elige una provincia --</option>
                                         @foreach ($provincias as $provincia)
-                                        <option value="{{$provincia}}">{{$provincia}}</option>
+                                        <option value="{{ $provincia }}">{{ $provincia }}</option>
                                         @endforeach
                                     </select>
                                     <input type="text" class="form-control visually-hidden" name="postal"
@@ -170,7 +172,7 @@
 
                                     <button class=" btn rounded-pill d-flex align-items-center px-3 py-2" type="submit"
                                         id="paypal-button">
-                                        <i class="fa-brands fa-paypal mr-2"></i> Pagar con Paypal</button>
+                                        <i class="fa-brands fa-paypal me-2"></i> Pagar con Paypal</button>
                                 </form>
                             </div>
 
@@ -185,72 +187,72 @@
     </x-app-layout>
     <script>
         // Seleccionamos los elementos de radio
-    const paypalRadio = document.getElementById('btnradio1');
-    const tarjetaRadio = document.getElementById('btnradio2');
+        const paypalRadio = document.getElementById('btnradio1');
+        const tarjetaRadio = document.getElementById('btnradio2');
 
-    // Seleccionamos el formulario de pago de la tarjeta de crédito y de Paypal
-    const tarjetaFormulario = document.getElementById('tarjeta-formulario');
-    const paypalPay = document.getElementById('pagar-paypal');
+        // Seleccionamos el formulario de pago de la tarjeta de crédito y de Paypal
+        const tarjetaFormulario = document.getElementById('tarjeta-formulario');
+        const paypalPay = document.getElementById('pagar-paypal');
 
-    // Ocultamos el formulario de pago con tarjeta de crédito y Paypal al inicio
-    tarjetaFormulario.style.display = 'none';
-    paypalPay.style.display = 'none';
-
-    // Agrega un controlador de eventos para el cambio en los botones de radio
-    paypalRadio.addEventListener('change', () => {
-    if (paypalRadio.checked) {
+        // Ocultamos el formulario de pago con tarjeta de crédito y Paypal al inicio
         tarjetaFormulario.style.display = 'none';
-        paypalPay.style.display = 'block';
-    } else {
-        tarjetaFormulario.style.display = 'block';
         paypalPay.style.display = 'none';
-    }
-    });
 
-    tarjetaRadio.addEventListener('change', () => {
-        if (tarjetaRadio.checked) {
-            tarjetaFormulario.style.display = 'block';
-            paypalPay.style.display = 'none';
-        } else {
-            tarjetaFormulario.style.display = 'none';
-            paypalPay.style.display = 'block';
-        }
-    });
+        // Agrega un controlador de eventos para el cambio en los botones de radio
+        paypalRadio.addEventListener('change', () => {
+            if (paypalRadio.checked) {
+                tarjetaFormulario.style.display = 'none';
+                paypalPay.style.display = 'block';
+            } else {
+                tarjetaFormulario.style.display = 'block';
+                paypalPay.style.display = 'none';
+            }
+        });
 
-    //------------------------------------------------------------------------------
+        tarjetaRadio.addEventListener('change', () => {
+            if (tarjetaRadio.checked) {
+                tarjetaFormulario.style.display = 'block';
+                paypalPay.style.display = 'none';
+            } else {
+                tarjetaFormulario.style.display = 'none';
+                paypalPay.style.display = 'block';
+            }
+        });
 
-    //Seleccinamos todos lo campos del primer y segundo formulario
-    const nombre = document.getElementById('nombre');
-    const nombrePaypal = document.getElementById('nombre-paypal');
-    const apellidos = document.getElementById('apellidos');
-    const apellidosPaypal = document.getElementById('apellidos-paypal');
-    const address = document.getElementById('address');
-    const addressPaypal = document.getElementById('address-paypal');
-    const provincia = document.getElementById('provincia');
-    const provinciaPaypal = document.getElementById('provincia-paypal');
-    const postal = document.getElementById('postal');
-    const postalPaypal = document.getElementById('postal-paypal');
+        //------------------------------------------------------------------------------
 
-    nombre.addEventListener('input', () => {
-        nombrePaypal.value = nombre.value;
-    });
+        //Seleccinamos todos lo campos del primer y segundo formulario
+        const nombre = document.getElementById('nombre');
+        const nombrePaypal = document.getElementById('nombre-paypal');
+        const apellidos = document.getElementById('apellidos');
+        const apellidosPaypal = document.getElementById('apellidos-paypal');
+        const address = document.getElementById('address');
+        const addressPaypal = document.getElementById('address-paypal');
+        const provincia = document.getElementById('provincia');
+        const provinciaPaypal = document.getElementById('provincia-paypal');
+        const postal = document.getElementById('postal');
+        const postalPaypal = document.getElementById('postal-paypal');
 
-    apellidos.addEventListener('input', () => {
-        apellidosPaypal.value = apellidos.value;
-    });
+        nombre.addEventListener('input', () => {
+            nombrePaypal.value = nombre.value;
+        });
 
-    address.addEventListener('input', () => {
-        addressPaypal.value = address.value;
-    });
+        apellidos.addEventListener('input', () => {
+            apellidosPaypal.value = apellidos.value;
+        });
 
-    provincia.addEventListener('input', () => {
-        provinciaPaypal.value = provincia.value;
-    })
+        address.addEventListener('input', () => {
+            addressPaypal.value = address.value;
+        });
 
-    postal.addEventListener('input', () => {
+        provincia.addEventListener('input', () => {
+            provinciaPaypal.value = provincia.value;
+        })
 
-        postalPaypal.value = postal.value;
-    });
+        postal.addEventListener('input', () => {
+
+            postalPaypal.value = postal.value;
+        });
     </script>
 
     <style>
@@ -371,5 +373,40 @@
         #pay-button:hover {
             background-color: transparent;
             color: #212121;
+        }
+
+        @media(max-width:576px) {
+            .form-control-wrapper label {
+                position: absolute;
+                top: 17px;
+                left: 5.5px;
+                font-size: 12px;
+                transition: all 0.2s ease-out;
+            }
+
+            .form-control-wrapper input.form-control:focus+label,
+            .form-control-wrapper input.form-control:not(:placeholder-shown)+label {
+                top: -10px;
+                font-size: 12px;
+                color: #0086c4;
+            }
+
+            .form-control-wrapper input.form-control,
+            .form-control-wrapper select.form-select {
+                height: 35px;
+                padding: 5px;
+                font-size: 12px;
+                line-height: 0px;
+            }
+
+            .btn-img{
+                width: 22px;
+            }
+
+            #tarjeta-formulario, #pay-button, #paypal-button{
+                font-size: 12px;
+            }
+
+
         }
     </style>

@@ -1,17 +1,17 @@
 <footer class="container-fluid p-5">
     <div class="row align-items-center pb-5">
         <div class="col-3 col-md-4 col-lg-3 col-xl-3 col-xxl-4">
-            <div class="line mx-0 mx-md-3 mx-xl-5"></div>
+            <div class="line mx-1 mx-md-3 mx-xl-5"></div>
         </div>
         <div class="col-6 col-md-4 col-lg-6 col-xl-6 col-xxl-4 d-flex align-items-center justify-content-center">
-            <i class="fa-brands fa-facebook mx-2 mx-lg-4 mx-xl-5" style="color:#3b5998 "></i>
-            <i class="fa-brands fa-instagram mx-2 mx-lg-4 mx-xl-5" id="insta"></i>
-            <i class="fa-brands fa-youtube mx-2 mx-lg-4 mx-xl-5" style="color:#c4302b"></i>
-            <i class="fa-brands fa-twitter mx-2 mx-lg-4 mx-xl-5" style="color:#00acee"></i>
-            <i class="fa-brands fa-linkedin-in mx-2 mx-lg-4 mx-xl-5" style="color:#0072b1"></i>
+            <i class="fa-brands fa-facebook mx-2 mx-lg-4 mx-xl-5 iconos" style="color:#3b5998 "></i>
+            <i class="fa-brands fa-instagram mx-2 mx-lg-4 mx-xl-5 iconos" id="insta"></i>
+            <i class="fa-brands fa-youtube mx-2 mx-lg-4 mx-xl-5 iconos" style="color:#c4302b"></i>
+            <i class="fa-brands fa-twitter mx-2 mx-lg-4 mx-xl-5 iconos" style="color:#00acee"></i>
+            <i class="fa-brands fa-linkedin-in mx-2 mx-lg-4 mx-xl-5 iconos" style="color:#0072b1"></i>
         </div>
         <div class="col-3 col-md-4 col-lg-3 col-xl-3 col-xxl-4">
-            <div class="line mx-0 mx-md-3 mx-xl-5"></div>
+            <div class="line mx-1 mx-md-3 mx-xl-5"></div>
         </div>
     </div>
     <div class="text-center mt-2">
@@ -69,26 +69,26 @@
     }
 
     @media(max-width:576px) {
-        footer i {
-            font-size: 18px;
+        .iconos {
+            font-size: 15px !important;
         }
 
         footer a{
-            font-size: 2.5vw;
+            font-size: 2vw;
         }
 
         #copy{
-            font-size: 2.5vw;
+            font-size: 2vw;
         }
 
         .separator{
-            font-size: 2.5vw;
+            font-size: 2vw;
         }
     }
 
     @media(max-width:768px) {
-        footer i {
-            font-size: 24px;
+        .iconos {
+            font-size: 23px;
         }
     }
 </style>

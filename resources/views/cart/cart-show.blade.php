@@ -1,13 +1,13 @@
-<div class="container">
+<div class="container mb-5">
     <x-messages/>
     @if(Cart::count()>0)
     <div class="my-md-4 my-3">
-        <h2 style="font-family: Ubuntu" class="display-6">Carrito de Compra</h2>
+        <h2 style="font-family: Ubuntu" class="display-6 text-center text-md-start">Carrito de Compra</h2>
     </div>
 
     <div class="contenido">
         <div class="row">
-            <div class="col-md-12 col-lg-8" id="contenedor_book">
+            <div class="col-11 col-md-12 col-lg-8 mx-auto" id="contenedor_book">
                 <div class="p-5">
                     @foreach (Cart::content() as $book)
                     <div class="row my-3">
@@ -18,19 +18,21 @@
                         <div class="col-md-8">
                             <div>
                                 <div class="row">
-                                    <div class="col-md-5 text-center text-md-start mt-sm-3">
+                                    <div class="col-12 col-md-5 text-center text-md-start mt-3 mt-lg-0">
                                         <div>
                                             <span style="" class="fw-bold">{{$book->model->title}}</span>
                                         </div>
-                                        <div class="mt-3">
-                                            <div><b>Autor: </b><span class="value">{{$book->model->author->name}}</span>
+                                        <div>
+                                            <div class="mt-2">
+                                                <b>Autor: </b><span class="value">{{$book->model->author->name}}</span>
                                             </div>
-                                            <div><b>Nº Páginas: </b><span class="value">{{$book->model->pages}}</span>
+                                            <div class="mt-2">
+                                                <b>Nº Páginas: </b><span class="value">{{$book->model->pages}}</span>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-md-4 mt-sm-3">
-                                        <div class="d-flex align-items-center justify-content-sm-center">
+                                    <div class="col-12 col-md-4 mt-3 mt-lg-0">
+                                        <div class="d-flex align-items-center justify-content-center">
                                             <a class="btn fw-bold" type="button"
                                                 wire:click.prevent='disminuirCantidad("{{$book->rowId}}")'>-</a>
                                             <div class="mx-2">{{$book->qty}}</div>
@@ -39,12 +41,12 @@
                                         </div>
                                     </div>
 
-                                    <div class="col-md-2 text-center text-md-start mt-sm-3">
+                                    <div class="col-12 col-md-2 text-center text-md-start mt-2 mt-lg-0">
                                         <span>{{$book->model->price * $book->qty}} €</span>
                                     </div>
 
-                                    <div class="col-md-1 mt-sm-4">
-                                        <div class="col-2 d-flex align-items-end pb-4">
+                                    <div class="col-12 col-md-1 mt-3 mt-lg-5">
+                                        <div class="d-flex align-items-end pb-4 justify-content-center">
                                             <i class="fa-regular fa-circle-xmark fa-xl"
                                                 style="color: #a51d2d; cursor: pointer"
                                                 wire:click.self='eliminar("{{$book->rowId}}")'></i>
@@ -57,7 +59,7 @@
                     @endforeach
                 </div>
             </div>
-            <div class="col-md-12 col-lg-4 p-5" id="detalles">
+            <div class="col-11 col-md-12 col-lg-4 p-5 mx-auto" id="detalles">
                 <div>
                     <h2 class="mb-md-3">Detalles</h2>
                     <div class="d-flex justify-content-between"><span>Subtotal</span><span>{{$subtotal}} €</span>
@@ -75,8 +77,8 @@
             </div>
         </div>
     </div>
-    <div class="mt-3">
-        <button class="btn btn-outline-dark" wire:click="clearCart">Borrar Carrito</button>
+    <div class="mt-3 text-center text-lg-start">
+        <button class="btn rounded-pill" id="btn-delete" wire:click="clearCart">Borrar Carrito</button>
     </div>
     @else
     <div class="d-flex justify-content-center align-items-center">
@@ -128,6 +130,19 @@
     .btn:hover {
         background-color: #2E524B;
         color: #000000;
+    }
+
+    #btn-delete {
+        background-color: #6D9886;
+        border: 2px solid #212121;
+        color: #212121;
+        padding: 10px 30px 10px 30px;
+    }
+
+    #btn-delete:hover {
+        background-color: transparent;
+        box-shadow: 3px 3px 0 #6D9886;
+        color: #212121;
     }
 
     #contenedor_book {

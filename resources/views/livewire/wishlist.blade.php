@@ -4,15 +4,15 @@
     <hr>
     <div class="row">
         @forelse($wishlist as $item)
-        <div class="col-lg-4 col-md-6 col-10 mb-4 mx-auto">
+        <div class="col-lg-3 col-md-5 col-10 mb-4 mx-auto">
             <div class="card h-100 wishlist-card">
                 <a href="{{ route('book.show', $item->book->slug) }}">
                     <img src="{{ $item->book->image }}" class="card-img-top pointer"
                         alt="Portada libro {{ $item->book->title }}">
                 </a>
                 <div class="card-body">
-                    <h3 class="card-title">{{ $item->book->title }}</h3>
-                    <p class="card-text">{{ $item->book->price}}€</p>
+                    <h3 class="card-title" style="font-family: Ubuntu">{{ $item->book->title }}</h3>
+                    <p class="card-text text-center text-md-start" >{{ $item->book->price}}€</p>
                 </div>
                 <div class="card-footer d-flex justify-content-center" style="background-color:#212121">
                     <button class="btn w-25 rounded-pill pointer" id="btn-delete"

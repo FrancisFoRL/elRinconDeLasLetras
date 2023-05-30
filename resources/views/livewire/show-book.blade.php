@@ -80,6 +80,8 @@
         @endif
     </div>
 </div>
+
+<x-footer/>
 <style>
     .container {
         font-family: 'Roboto', sans-serif;

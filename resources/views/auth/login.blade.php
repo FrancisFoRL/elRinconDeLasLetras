@@ -12,7 +12,8 @@
             <div class="position-relative text-center">
                 <a href="{{route('inicio')}}">
                     <img src="{{ Storage::url('Logo.svg') }}" alt="El Rincón de las letras"
-                        class="position-absolute top-5 start-3 mt-3 d-none d-md-block img-fluid" width="100" height="100">
+                        class="position-absolute top-5 start-3 mt-3 d-none d-md-block img-fluid" width="100"
+                        height="100">
                 </a>
             </div>
             <div class="row">
@@ -25,10 +26,12 @@
                         <div class="col-md-8 justify-content-center align-items">
                             <a class="d-flex flex-column justify-content-center align-items-center"
                                 href="{{route('inicio')}}">
-                                <img src="{{ Storage::url('Logo.svg') }}" alt="Ir a la página principal"
+                                <img src="{{ Storage::url('Logo.svg') }}"
+                                    alt="Logo El Rincon de las Letras - Ir a la página principal"
                                     class="position-absolute d-md-none d-sm-block img-fluid"
                                     style="margin-bottom: 180px" width="120" height="120">
                             </a>
+
                             <h1 class="text-center mb-4 display-6" style="font-family: Ubuntu;">Iniciar sesión</h1>
                             <form>
                                 @csrf
@@ -52,30 +55,31 @@
                                 </div> --}}
                                 <div class="mt-3 form-check d-flex justify-content-between">
                                     <div>
-                                        {{-- <input type="checkbox" class="form-check-input" id="recuerda" name="remember">
+                                        {{-- <input type="checkbox" class="form-check-input" id="recuerda"
+                                            name="remember">
                                         <label class="form-check-label" for="recuerda">Recuérdame</label> --}}
                                         <label for="remember_me" class="flex items-center">
                                             <x-checkbox id="remember_me" name="remember" />
                                             <span class="ml-2 text-sm fw-bold">{{ __('Recuerdame') }}</span>
                                         </label>
                                     </div>
-                                    <div class="d-flex flex-row-reverse">
+                                    {{-- <div class="d-flex flex-row-reverse">
                                         @if (Route::has('password.request'))
                                         <a class="underline text-sm text-gray-600"
                                             href="{{ route('password.request') }}">
                                             {{ __('¿Olvidaste tu contraseña?') }}
                                         </a>
                                         @endif
-                                    </div>
+                                    </div> --}}
                                 </div>
                                 <button type="submit" class="btn w-100 mt-3" id="btn-login">Iniciar Sesión</button>
                             </form>
-                            <x-validation-errors class="mb-4 mt-4" />
                             <div class="mt-4 d-flex flex-row-reverse">
-                                <a href="{{route('register')}}" class="text-gray-600">
+                                <a href="{{route('register')}}" style="color:#24547D">
                                     <span>Ir a registro <i class="fa-solid fa-arrow-right mx-1"></i></span>
                                 </a>
                             </div>
+                            <x-validation-errors class="mb-4 mt-4 text-center text-md-start p-3" />
                         </div>
                     </div>
                 </div>

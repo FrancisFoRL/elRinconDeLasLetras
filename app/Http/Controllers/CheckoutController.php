@@ -25,39 +25,38 @@ class CheckoutController extends Controller
 
     public function RequestPayment(Request $request)
     {
-        // foreach(Cart::content()->toArray() as $key=>$value){
-        //     dd($value['id']);
-        // }
         $request->validate([
-            'nom' => 'required|string|min:3|max:30',
-            'lastname' => 'required|string|min:3|max:50',
-            'address' => 'required|string|min:10|max:100',
+            'nombre' => 'required|string|min:3|max:30',
+            'apellidos' => 'required|string|min:3|max:50',
+            'direccion' => 'required|string|min:10|max:100',
             'provincia' => 'required|string',
             'postal' => 'required|numeric|min:5',
         ]);
 
-        session()->put('nombre', $request->nom);
-        session()->put('lastname', $request->lastname);
-        session()->put('address', $request->address);
+        session()->put('nombre', $request->nombre);
+        session()->put('apellidos', $request->apellidos);
+        session()->put('direccion', $request->direccion);
         session()->put('provincia', $request->provincia);
         session()->put('postal', $request->postal);
 
         $provider = new PayPalClient;
         $provider->setApiCredentials(config('paypal'));
         $paypalToken = $provider->getAccessToken();
+        $amount = Cart::subtotal() + 4.99;
+
 
         $response = $provider->createOrder([
             'intent' => 'CAPTURE',
             'application_context' => [
                 'return_url' => route('paymentsuccess'),
                 'cancel_url' => route('paymentCancel'),
+                'brand_name' => 'El Rincón de las Letras',
             ],
             'purchase_units' => [
                 0 => [
                     'amount' => [
                         'currency_code' => 'EUR',
-                        // 'value' => Cart::subtotal() + 4.99,
-                        'value' => Cart::subtotal() + 4.99,
+                        'value' => strval($amount),
                     ],
                 ]
             ]
@@ -93,8 +92,8 @@ class CheckoutController extends Controller
             $order_details = Order_details::create([
                 'order_id' => $order->id,
                 'customer_name' => session()->get('nombre'),
-                'customer_lastname' => session()->get('lastname'),
-                'dataShipped' => session()->get('address'),
+                'customer_lastname' => session()->get('apellidos'),
+                'dataShipped' => session()->get('direccion'),
                 'province' => session()->get('provincia'),
                 'postal_code' => session()->get('postal'),
                 'pay_method' => 'Paypal',
@@ -133,9 +132,9 @@ class CheckoutController extends Controller
     {
 
         $request->validate([
-            'nom' => 'required|string|min:3|max:30',
-            'lastname' => 'required|string|min:3|max:50',
-            'address' => 'required|string|min:10|max:100',
+            'nombre' => 'required|string|min:3|max:30',
+            'apellidos' => 'required|string|min:3|max:50',
+            'direccion' => 'required|string|min:10|max:100',
             'provincia' => 'required|string',
             'postal' => 'required|numeric|min:5',
             'nomTitular' => 'required|string',

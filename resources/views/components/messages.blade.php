@@ -30,6 +30,22 @@
 </div>
 @endif
 
+@if(session()->has('email-error'))
+<div class="d-flex align-items-center p-3 rounded-pill flash-message mt-lg-3">
+    <lottie-player src="https://assets8.lottiefiles.com/packages/lf20_bdnjxekx.json" background="transparent"
+        speed="1" style="width: 50px; height: 50px;" autoplay></lottie-player>
+    <span class="mx-2 fw-bold" style="font-family: Roboto">Error al enviar el email</span>
+</div>
+@endif
+
+@if(session()->has('email-send'))
+<div class="d-flex align-items-center p-3 rounded-pill flash-message mt-lg-3">
+    <lottie-player src="https://assets5.lottiefiles.com/private_files/lf30_zmscd3x6.json" background="transparent"
+        speed="1" style="width: 50px; height: 50px;" autoplay></lottie-player>
+    <span class="mx-2 fw-bold" style="font-family: Roboto">El email se envio correctamente</span>
+</div>
+@endif
+
 <script>
     setTimeout(function(){
         var flashMessages = document.getElementsByClassName("flash-message");
