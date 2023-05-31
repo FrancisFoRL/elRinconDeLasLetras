@@ -1,3 +1,6 @@
+@section('page-title')
+Checkout |
+@endsection
 <x-guest-layout>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

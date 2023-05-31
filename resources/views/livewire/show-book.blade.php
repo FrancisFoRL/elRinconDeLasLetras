@@ -1,5 +1,9 @@
+@section('page-title')
+{{ $book->title }} |
+@endsection
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <div class="container py-4 mt-lg-5">
-    <x-messages/>
+    <x-messages />
     <div class="row">
         <div class="col-lg-4 col-12 me-5">
             <h2 class="mb-3 d-md-none d-block text-center" style="font-family: Ubuntu">{{ $book->title }}</h2>
@@ -47,8 +51,13 @@
         </div>
     </div>
 
-    <h3 class="mt-5 display-6" style="font-family: Ubuntu">Reviews</h3>
-    <div class="mt-4">
+    <div class="d-flex justify-content-between align-items-center mt-5">
+        <div>
+            <h3 class="display-6" style="font-family: Ubuntu">Reviews</h3>
+        </div>
+        @livewire('add-opinion')
+    </div>
+    <div class="mt-3">
         @if(count($book->reviews) != 0)
         @foreach ($book->reviews as $review)
         <div class="card mb-4">
@@ -76,12 +85,14 @@
         </div>
         @endforeach
         @else
-        <p class="text-center fw-bold fs-4 text-decoration-underline" style="color:#7B0000">No hay reviews de este libro</p>
+        <p class="text-center fw-bold fs-4 text-decoration-underline" style="color:#7B0000">No hay reviews de este libro
+        </p>
         @endif
     </div>
 </div>
 
-<x-footer/>
+
+<x-footer />
 <style>
     .container {
         font-family: 'Roboto', sans-serif;
@@ -111,7 +122,7 @@
     #compra {
         background-color: #6D9886;
         border: 2px solid #212121;
-        color: #212121;
+        color: #2121http://127.0.0.1:8002/contacto21;
     }
 
     #compra:hover {
@@ -129,9 +140,27 @@
         color: #212121;
     }
 
+    #stars li {
+        color: black;
+        font-size: 20px;
+    }
+
+    #stars li:hover {
+        color: #FFD700;
+    }
+
+    #stars li.active,
+    #stars li.secondary-active {
+        color: #FFD700;
+    }
+
+    #stars input[type="radio"] {
+        display: none;
+    }
+
     @media (max-width: 650px) {
         #book-image {
-            height: 530px;
+            height: 490px !important;
         }
     }
 
@@ -145,3 +174,4 @@
         background-color: #212121;
     }
 </style>
+

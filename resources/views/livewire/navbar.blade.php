@@ -2,8 +2,8 @@
     <div class="container-fluid">
         <div class="d-flex align-items-center ">
             <a class="navbar-brand" href="{{route('inicio')}}">
-                <img src="{{ Storage::url('Logo.svg') }}" alt="Logo El Rincon de las Letras - Ir a la página principal" id='logo' width="50" height="50"
-                    class="me-4">
+                <img src="{{ Storage::url('Logo.svg') }}" alt="Logo El Rincon de las Letras - Ir a la página principal"
+                    id='logo' width="50" height="50" class="me-4">
             </a>
         </div>
         <div class="collapse navbar-collapse" id="">
@@ -23,7 +23,7 @@
             </ul>
             <div class="d-flex mx-auto justify-md-content-center">
                 <div class="input-group">
-                    <form action="{{route('search')}}" method="GET">
+                    <form action="{{route('search')}}" method="GET" id="searchForm">
                         @csrf
                         <label for="inputSearch" class="visually-hidden" style="color:#D9D9D9">Buscar un libro</label>
                         <input class="form-control rounded-pill" name="titulo" id="inputSearch" type="search"
@@ -162,14 +162,18 @@
             search
         </i>
         <div class="search-box">
-            <label for="search-mob" class="visually-hidden" style="color:#D9D9D9">Buscar un libro</label>
-            <input type="text" placeholder="Buscar..." class="search-input" name="search" id="search-mob">
-            <div class="search-background"></div>
+            <form action="{{ route('search') }}" method="GET" id="searchForm">
+                @csrf
+                <label for="search-mob" class="visually-hidden" style="color:#D9D9D9">Buscar un libro</label>
+                <input type="text" placeholder="Buscar..." class="search-input" name="titulo" id="search-mob">
+                <div class="search-background"></div>
+            </form>
         </div>
     </div>
     <div class="nav-item-mobile d-flex align-items-center flex-column">
         <a href="{{route('inicio')}}" class="d-flex align-items-center text-decoration-none">
-            <img src="{{ Storage::url('Logo.svg') }}" alt="Logo El Rincon de las Letras - Ir a la página principal" id='logo' width="36" height="36">
+            <img src="{{ Storage::url('Logo.svg') }}" alt="Logo El Rincon de las Letras - Ir a la página principal"
+                id='logo' width="36" height="36">
         </a>
     </div>
     <div

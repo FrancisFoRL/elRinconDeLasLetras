@@ -1,3 +1,6 @@
+@section('page-title')
+Perfil |
+@endsection
 <x-app-layout>
     <div class="container-fluid">
         <div class="row">

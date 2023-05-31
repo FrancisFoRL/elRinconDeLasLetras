@@ -8,7 +8,6 @@
         class="list-group-item list-group-item-action fs-5 {{ Request::is('user/pedidos') ? 'active' : '' }}">Mis
         pedidos</a>
     <a href="{{route('opiniones')}}" class="list-group-item list-group-item-action fs-5 {{ Request::is('user/review') ? 'active' : '' }}">Mis Opiniones</a>
-    <a href="#" class="list-group-item list-group-item-action fs-5">A fourth link item</a>
 </div>
 <style>
     .list-group {

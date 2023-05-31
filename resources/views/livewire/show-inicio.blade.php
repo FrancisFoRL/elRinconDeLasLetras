@@ -41,7 +41,7 @@
 
     <section class="my-md-5 my-4">
         <article class="col-11 col-md-10 mx-auto">
-            <h2 class="mb-5 display-6" style="font-family: 'Ubuntu', sans-serif;">Productos Destacados</h2>
+            <h2 class="mb-4 mb-md-5 display-6" style="font-family: 'Ubuntu', sans-serif;">Productos Destacados</h2>
             <div class="row row-cols-2 row-cols-md-2 row-cols-lg-4 row-cols-xl-4 row-cols-xxl-6 g-2 g-md-4">
                 @foreach ($books as $book)
                 <div class="col-md-4">
@@ -54,7 +54,7 @@
                         <div class="card-body text-center">
                             <h3 class="card-title book-title" style="font-family: 'Ubuntu', sans-serif;">{{ $book->title
                                 }}</h3>
-                            <p class="card-text text-muted" style="color:#3f3f3f !important;">{{ $book->author->name }}
+                            <p class="card-text text-muted" style="color:#3f3f3f !important;" id="subtitle">{{ $book->author->name }}
                             </p>
                             <p class="card-text">{{ $book->price }}€</p>
                         </div>
@@ -156,6 +156,16 @@
 
         article h2 {
             font-size: 35px;
+        }
+    }
+
+    @media (max-width: 572px){
+        h3{
+            font-size: 15px;
+        }
+
+        #subtitle{
+            font-size: 12px;
         }
     }
 

@@ -1,3 +1,6 @@
+@section('page-title')
+Pedido Completado |
+@endsection
 <x-app-layout>
     <div class="d-flex justify-content-center mt-5">
         <h2 class="display-4 fw-bold">Pedido Completado</h2>

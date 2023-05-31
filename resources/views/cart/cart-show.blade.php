@@ -1,3 +1,6 @@
+@section('page-title')
+Carrito |
+@endsection
 <div class="container mb-5">
     <x-messages/>
     @if(Cart::count()>0)
@@ -77,7 +80,7 @@
             </div>
         </div>
     </div>
-    <div class="mt-3 text-center text-lg-start">
+    <div class="mt-3 pb-5 pb-0 text-center text-lg-start">
         <button class="btn rounded-pill" id="btn-delete" wire:click="clearCart">Borrar Carrito</button>
     </div>
     @else
@@ -165,6 +168,10 @@
 
         .container {
             margin-bottom: 100px;
+        }
+
+        #btn-check{
+            width: 170px !important;
         }
     }
 </style>

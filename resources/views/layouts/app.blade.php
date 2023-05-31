@@ -8,8 +8,8 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name') }}</title>
-    {{-- {{ config('app.name', 'El Rincon de Las Letras') }} --}}
+    <title>@yield('page-title') {{ config('app.name') }}</title>
+
     <!-- Fonts -->
     <link rel="shortcut icon" href="{{ Storage::url('Logo.svg') }}">
     <link rel="dns-prefetch" href="//fonts.gstatic.com">

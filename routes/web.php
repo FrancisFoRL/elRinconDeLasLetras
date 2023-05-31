@@ -41,18 +41,15 @@ Route::get('/sobre-nosotros', function(){
 })->name('sobrenost');
 Route::get('/contacto', [ShowContacto::class, 'index'])->name('contacto.show');
 Route::post('/contacto', [ShowContacto::class, 'send'])->name('contacto.send');
-Route::get('/información-legal');
-
-
-Route::middleware([
-    'auth:sanctum',
-    config('jetstream.auth_session'),
-    'verified'
-])->group(function () {
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard');
-});
+Route::get('/información-legal', function() {
+    return view('legal');
+})->name('info-legal');
+Route::get('/politica-de-privacidad', function() {
+    return view('privacidad');
+})->name('privacidad');
+Route::get('mapa-web', function(){
+    return view('mapa');
+})->name('mapa');
 
 Route::middleware(['auth'])->group(function () {
     //Aqui meter ruta para validar pedido y la lista de favoritos
@@ -64,6 +61,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/payment-success', 'PaymentSuccess')->name('paymentsuccess');
         Route::get('/payment-cancel', 'PaymentCancel')->name('paymentCancel');
         Route::post('/stripe', 'PaymentStripe')->name('paymentStripe');
+        Route::post('/new-opinion', [ShowBook::class, 'saveOpinion'])->name('new-opinion');
     });
 
     Route::get('/pedido-completado', function () {
@@ -88,11 +86,20 @@ Route::middleware(['auth'])->group(function () {
     })->name('opiniones');
 });
 
+
+// Route::middleware([
+//     'auth:sanctum',
+//     config('jetstream.auth_session'),
+//     'verified'
+// ])->group(function () {
+//     Route::get('/dashboard', function () {
+//         return view('dashboard');
+//     })->name('dashboard');
+// });
+
 Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function () {
     Route::get('dashboard', [App\Http\Controllers\Admin\DashboardController::class, 'index']);
 });
-
-
 
 // Route::get('/index', ShowCart::class)->name('cart.index');
 

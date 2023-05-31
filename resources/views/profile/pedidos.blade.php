@@ -1,3 +1,6 @@
+@section('page-title')
+Pedidos |
+@endsection
 <x-app-layout>
     <div class="container-fluid">
         <div class="row">

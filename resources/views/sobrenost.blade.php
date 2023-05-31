@@ -1,3 +1,6 @@
+@section('page-title')
+Sobre Nosotros |
+@endsection
 <x-app-layout>
     <div class="container">
         <h2 class="text-center mt-4 display-6" style="font-family: Ubuntu">Sobre Nosotros</h2>

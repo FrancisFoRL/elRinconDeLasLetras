@@ -19,19 +19,19 @@
         <p class="m-0 mt-3" id="copy" style="color:#D9D9D9;">Copyright © 2023 El Rincón de las Letras</p>
     </div>
     <div class="mt-2 d-flex justify-content-center fs-5 pb-5 pb-lg-0 align-items-center" style="color:#D9D9D9;">
-        <a href="" class="text-decoration-none">
+        <a href="{{route('mapa')}}" class="text-decoration-none">
             <span>Mapa web</span>
         </a>
         <span class="mx-1 separator"> | </span>
-        <a href="" class="text-decoration-none">
+        <a href="{{route('info-legal')}}" class="text-decoration-none">
             <span>Información Legal</span>
         </a>
         <span class="mx-1 separator"> | </span>
-        <a href="" class="text-decoration-none">
+        <a href="{{route('privacidad')}}" class="text-decoration-none">
             <span>Política de privacidad</span>
         </a>
         <span class="mx-1 separator"> | </span>
-        <a href="" class="text-decoration-none">
+        <a href="{{route('contacto.show')}}" class="text-decoration-none">
             <span>Contacto</span>
         </a>
     </div>

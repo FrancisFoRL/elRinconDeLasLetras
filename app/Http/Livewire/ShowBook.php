@@ -6,12 +6,18 @@ use App\Models\Book;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Wishlist;
+use Illuminate\Support\Facades\Request;
 use Livewire\Component;
+use Livewire\WithFileUploads;
 
 class ShowBook extends Component
 {
+    use WithFileUploads;
+
     public $slug;
     public $book;
+    public $content;
+    public $rating;
 
     public function mount($slug)
     {

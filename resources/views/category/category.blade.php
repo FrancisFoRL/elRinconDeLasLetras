@@ -1,3 +1,6 @@
+@section('page-title')
+{{$category->name}} |
+@endsection
 <x-app-layout>
     <div class="container">
         <h2 class="text-center mt-4 display-6" style="font-family: Ubuntu">Libros de {{$category->name}}</h2>
