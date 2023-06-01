@@ -115,23 +115,23 @@
                         <p class="fw-bold mb-1">Valoración</p>
                         <ul class="d-flex list-unstyled pt" id="stars">
                             <li class="me-2">
-                                <label for="rating1"><i class="fa-regular fa-star"></i></label>
+                                <label for="rating1"><span class="visually-hidden">Estrella 1</span><i class="fa-regular fa-star"></i></label>
                                 <input type="radio" id="rating1" name="ratings" value="1">
                             </li>
                             <li class="mx-2">
-                                <label for="rating2"><i class="fa-regular fa-star"></i></label>
+                                <label for="rating2"><span class="visually-hidden">Estrella 2</span><i class="fa-regular fa-star"></i></label>
                                 <input type="radio" id="rating2" name="ratings" value="2">
                             </li>
                             <li class="mx-2">
-                                <label for="rating3"><i class="fa-regular fa-star"></i></label>
+                                <label for="rating3"><span class="visually-hidden">Estrella 3</span><i class="fa-regular fa-star"></i></label>
                                 <input type="radio" id="rating3" name="ratings" value="3">
                             </li>
                             <li class="mx-2">
-                                <label for="rating4"><i class="fa-regular fa-star"></i></label>
+                                <label for="rating4"><span class="visually-hidden">Estrella 4</span><i class="fa-regular fa-star"></i></label>
                                 <input type="radio" id="rating4" name="ratings" value="4">
                             </li>
                             <li class="ms-2">
-                                <label for="rating5"><i class="fa-regular fa-star"></i></label>
+                                <label for="rating5"><span class="visually-hidden">Estrella 5</span><i class="fa-regular fa-star"></i></label>
                                 <input type="radio" id="rating5" name="ratings" value="5">
                             </li>
                         </ul>
