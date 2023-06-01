@@ -27,7 +27,7 @@
                 <!-- Current Profile Photo -->
                 <div class="mt-2" x-show="! photoPreview">
                     <img src="{{ $this->user->profile_photo_url }}" alt="{{ $this->user->name }}"
-                        class="rounded-circle object-cover" style="border: 5px solid #6D9886" width="350" height="350">
+                        class="rounded-circle object-cover img-perfil" style="border: 5px solid #6D9886" width="350" height="350">
                 </div>
 
                 <!-- New Profile Photo Preview -->
@@ -123,5 +123,12 @@
     #cont-img {
         background-color: #212121;
         border-radius: 12px 12px 0 0;
+    }
+
+    @media(max-width:495px){
+        .img-perfil{
+            width: 100%;
+            height: 10%;
+        }
     }
 </style>

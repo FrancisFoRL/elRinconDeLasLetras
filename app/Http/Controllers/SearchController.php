@@ -14,7 +14,7 @@ class SearchController extends Controller
             // Si el campo de entrada está vacío, redirige al usuario a la página anterior
             return redirect()->back();
         }else{
-            $books = Book::where('title', 'like', '%'.$titulo.'%')->paginate(12);
+            $books = Book::where('title', 'like', '%'.$titulo.'%')->orderBy('title', 'asc')->paginate(12);
             $total = count(Book::where('title', 'like', '%'.$titulo.'%')->get());
             return view('search', compact('books', 'total'));
         }

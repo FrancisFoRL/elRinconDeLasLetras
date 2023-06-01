@@ -7,7 +7,7 @@
         <hr>
         <div class="row">
             @forelse($books as $book)
-            <div class="col-lg-3 col-md-5 col-12 mb-4 mx-auto">
+            <div class="col-lg-3 col-md-5 col-10 mb-4 mx-auto">
                 <div class="card h-100 wishlist-card">
                     <a href="{{ route('book.show', $book->slug) }}">
                     <img src="{{ $book->image }}" class="card-img-top" alt="Portada libro {{ $book->title }}">

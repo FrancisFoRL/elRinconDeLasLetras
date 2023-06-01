@@ -22,8 +22,8 @@
                 </div>
                 <div class="col-md-5" style="background-color: #D9D9D9 ">
                     <div class="row justify-content-center align-items-center d-flex vh-100">
-                        <div class="col-md-8 justify-content-center align-items">
-                            <a class="d-flex flex-column justify-content-center align-items-center"
+                        <div class="col-md-8 justify-content-center align-items mt-5 pt-5">
+                            <a class="d-flex flex-column justify-content-center align-items-center mt-5 pt-3"
                                 href="{{route('inicio')}}">
                                 <img src="{{ Storage::url('Logo.svg') }}"
                                     alt="Logo El Rincon de las Letras - Ir a la página principal"

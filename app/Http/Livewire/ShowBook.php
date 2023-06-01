@@ -3,10 +3,12 @@
 namespace App\Http\Livewire;
 
 use App\Models\Book;
+use App\Models\Review;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Wishlist;
-use Illuminate\Support\Facades\Request;
+use Illuminate\Http\Request;
+use Illuminate\Validation\ValidationException;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 
@@ -75,5 +77,34 @@ class ShowBook extends Component
         } else {
             return redirect()->route('login');
         }
+    }
+
+    public function addOpinion(Request $request)
+    {
+        try {
+            $request->validate([
+                'opinion' => ['required', 'string', 'min:3'],
+                'ratings' => ['required', 'numeric', 'between:1,5'],
+            ]);
+
+            Review::create([
+                'user_id' => auth()->user()->id,
+                'book_id' => $request->book_id,
+                'comment' => $request->opinion,
+                'rating' => $request->ratings,
+            ]);
+            session()->flash('send-opinion', 'La opinión se añadió correctamente');
+            return redirect(url()->previous());
+        } catch (ValidationException $e) {
+            session()->flash('wishlist-error', 'La opinión no se añadió correctamente');
+            return redirect(url()->previous());
+        }
+    }
+
+    public function deleteOpinion($id){
+        $review = Review::find($id);
+        $review->delete();
+        session()->flash('delete', 'La opinión del libro se elimino correctamente');
+        return redirect()->back();
     }
 }

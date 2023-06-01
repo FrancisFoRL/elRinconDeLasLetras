@@ -25,7 +25,6 @@
                             <li>{{ $category->name }}</li>
                             @endforeach
                         </ul>
-
                         </p>
                         <p class="mb-3"><span class="fw-bold fs-5">Editorial:</span> {{ $book->editorial->name }}
                         </p>
@@ -55,7 +54,13 @@
         <div>
             <h3 class="display-6" style="font-family: Ubuntu">Reviews</h3>
         </div>
-        @livewire('add-opinion')
+        @if (Auth::user())
+        <div>
+            <button type="button" class="btn rounded-pill fw-bold" id="addNewOpinion" data-bs-toggle="modal" data-bs-target="#addOpinion">
+                <i class="fa-solid fa-plus mx-1"></i> Añadir nueva opinión
+            </button>
+        </div>
+        @endif
     </div>
     <div class="mt-3">
         @if(count($book->reviews) != 0)
@@ -76,11 +81,6 @@
                     <p class="mb-0">{{ $review->user->name }}</p>
                     <small style="color:#3a3a3a">{{ $review->created_at->diffForHumans() }}</small>
                 </div>
-                {{-- <div>
-                    Boton de likes reviews
-                    <button class="btn btn-sm btn-outline-secondary"><i class="fa-solid fa-thumbs-up"></i></button>
-                    <button class="btn btn-sm btn-outline-secondary"><i class="fa-solid fa-thumbs-down"></i></button>
-                </div> --}}
             </div>
         </div>
         @endforeach
@@ -93,6 +93,84 @@
 
 
 <x-footer />
+
+@if (Auth::user())
+ <!-- Modal añadir opinión -->
+ <div class="modal fade" id="addOpinion" tabindex="-1" aria-labelledby="newOpinion" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header" style="background-color: #212121; color:#F6F6F6;">
+                <h1 class="modal-title fs-5" id="newOpinion">Añadir nueva opinión</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" style="background-color: #F6F6F6">
+                <form id="opinionForm" action="{{ route('addOpinion') }}" method="POST">
+                    @csrf
+                    <div class="mb-3">
+                        <input type="hidden" name="book_id" value="{{ $book->id }}">
+                        <label for="content" class="form-label fw-bold">Opinión</label>
+                        <textarea class="form-control" id="content" name="opinion" rows="3" style="resize: none;"></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <p class="fw-bold mb-1">Valoración</p>
+                        <ul class="d-flex list-unstyled pt" id="stars">
+                            <li class="me-2">
+                                <label for="rating1"><i class="fa-regular fa-star"></i></label>
+                                <input type="radio" id="rating1" name="ratings" value="1">
+                            </li>
+                            <li class="mx-2">
+                                <label for="rating2"><i class="fa-regular fa-star"></i></label>
+                                <input type="radio" id="rating2" name="ratings" value="2">
+                            </li>
+                            <li class="mx-2">
+                                <label for="rating3"><i class="fa-regular fa-star"></i></label>
+                                <input type="radio" id="rating3" name="ratings" value="3">
+                            </li>
+                            <li class="mx-2">
+                                <label for="rating4"><i class="fa-regular fa-star"></i></label>
+                                <input type="radio" id="rating4" name="ratings" value="4">
+                            </li>
+                            <li class="ms-2">
+                                <label for="rating5"><i class="fa-regular fa-star"></i></label>
+                                <input type="radio" id="rating5" name="ratings" value="5">
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="d-flex flex-row-reverse">
+                        <button type="submit" id="sendOpinion" class="btn fw-bold rounded-pill">
+                            <i class="fa-regular fa-paper-plane mx-1"></i> Enviar
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+@endif
+
+</div>
+<script>
+    $('li').on('click', function(){
+        var clickedIndex = $(this).index();
+        var stars = $('#stars li');
+        $('li').removeClass('active');
+        $('li').removeClass('secondary-active');
+        $(this).addClass('active');
+        $(this).prevAll().addClass('secondary-active');
+        stars.each(function (index) {
+            var star = $(this);
+            var starIcon = star.find('i');
+
+            if (index <= clickedIndex) {
+                star.addClass('active');
+                starIcon.removeClass('fa-regular').addClass('fa-solid');
+            } else {
+                starIcon.removeClass('fa-solid').addClass('fa-regular');
+            }
+        });
+    });
+</script>
+
 <style>
     .container {
         font-family: 'Roboto', sans-serif;
@@ -156,6 +234,17 @@
 
     #stars input[type="radio"] {
         display: none;
+    }
+
+    #addNewOpinion, #sendOpinion{
+        background-color: #003366;
+        border: 2px solid #66B2FF;
+        color: #F6F6F6;
+    }
+
+    #addNewOpinion:hover, #sendOpinion:hover{
+        background-color: transparent;
+        color: #212121;
     }
 
     @media (max-width: 650px) {

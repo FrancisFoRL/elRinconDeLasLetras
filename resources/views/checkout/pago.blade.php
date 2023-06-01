@@ -116,7 +116,7 @@ Checkout |
                                                     <label for="nomTitular" class="visually-hidden">Nombre del
                                                         titular</label>
                                                     <input class="card-number w-100" placeholder="Nombre del titular"
-                                                        id="nomTitular" required>
+                                                        id="nomTitular" name="nomTitular" required>
                                                 </div>
                                                 <div class="col-12 mb-2">
                                                     <label for="card_num" class="visually-hidden">Número de

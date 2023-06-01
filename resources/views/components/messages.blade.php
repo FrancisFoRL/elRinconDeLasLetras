@@ -46,6 +46,14 @@
 </div>
 @endif
 
+@if(session()->has('send-opinion'))
+<div class="d-flex align-items-center p-3 rounded-pill flash-message mt-lg-3">
+    <lottie-player src="https://assets8.lottiefiles.com/packages/lf20_YSMTHj.json" background="transparent"
+        speed="1" style="width: 50px; height: 50px;" autoplay></lottie-player>
+    <span class="mx-2 fw-bold" style="font-family: Roboto">{{ session()->get('send-opinion') }}</span>
+</div>
+@endif
+
 <script>
     setTimeout(function(){
         var flashMessages = document.getElementsByClassName("flash-message");

@@ -7,7 +7,7 @@ Pedidos |
             <div class="col-2 d-none d-lg-block">
                 <x-nav-perfil />
             </div>
-            <div class="col-12 col-lg-10">
+            <div class="col-12 col-lg-10 mb-5 mb-md-0">
                 <div class="mx-auto m-4 p-4" id="contendor-princ">
                     <h2 class="display-6 mb-4">Mis Pedidos</h2>
                     <div class="table-responsive">

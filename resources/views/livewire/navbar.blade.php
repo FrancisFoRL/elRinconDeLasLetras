@@ -193,7 +193,7 @@
 </nav>
 
 
-<x-offcanvas-mobile /> <!-- Offcanvas para moviles -->
+<x-offcanvas-mobile :categorias="$categorias"/> <!-- Offcanvas para moviles -->
 @livewire('cart.cart-show-inicio')
 
 <script>
@@ -203,21 +203,6 @@
         searchBox.querySelector('input').focus();
     }
 </script>
-
-{{-- <script>
-    var categoriasCollapse = document.getElementById('categorias-collapse');
-            var categoriasLink = document.querySelector('[href="#categorias-collapse"]');
-
-            categoriasLink.addEventListener('focus', function () {
-                categoriasCollapse.classList.add('show');
-            });
-
-            categoriasCollapse.addEventListener('focusout', function (event) {
-                if (!categoriasCollapse.contains(event.relatedTarget)) {
-                    categoriasCollapse.classList.remove('show');
-                }
-            });
-</script> --}}
 
 <style>
     /* NavBar pantalla mobiles y tablets */

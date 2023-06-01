@@ -19,7 +19,7 @@ Perfil |
 
 
                     @if (Laravel\Fortify\Features::enabled(Laravel\Fortify\Features::updatePasswords()))
-                    <div class="mt-5 mb-5">
+                    <div class="mt-5 mb-5 pb-3">
                         @livewire('profile.update-password-form')
                     </div>
 
