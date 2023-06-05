@@ -9,32 +9,32 @@ use Livewire\Component;
 
 class Wishlist extends Component
 {
-    public $wishlist;
+    public $wishlist; //Lista de deseos del usuario.
 
     public function mount()
     {
         $this->wishlist = auth()->user()->wishlist;
     }
 
-
+    /**
+     * Elimina un libro de la lista de deseos.
+     *
+     * @param int $id ID del producto de la lista de desea eliminar.
+     * @return Url la ruta de donde se venía
+     */
     public function removeFromWishlist($id)
     {
-        // Busca la lista de deseos con el ID proporcionado
+        // Se busca el id del producto de la wishlist a eliminar
         $wishlist = ModelsWishlist::findOrFail($id);
 
-        // Elimina la lista de deseos
+        // Elimina el producto de la lista de deseos
         $wishlist->delete();
 
-        // Muestra un mensaje de éxito
+        // Se muestra un mensaje de éxito
         session()->flash('delete', 'El libro ha sido eliminado de tu lista de deseos');
 
+        //Se volvera a la ruta anterior
         return redirect(url()->previous());
-
-        // Actualiza la lista de deseos del usuario
-        // $this->wishlist = auth()->user()->wishlist;
-
-
-
     }
 
     public function render()

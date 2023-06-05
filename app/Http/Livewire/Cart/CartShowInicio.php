@@ -10,8 +10,8 @@ class CartShowInicio extends Component
 {
     public function render()
     {
-        $subtotal = Cart::subtotal();
-        $cartCount = Cart::count();
+        $subtotal = Cart::subtotal(); // Se obtiene el precio total de carrito
+        $cartCount = Cart::count(); // Obtiene la cantidad de productos en el carrito de compras
 
         return view('cart.cart-show-inicio', compact('subtotal', 'cartCount'));
     }

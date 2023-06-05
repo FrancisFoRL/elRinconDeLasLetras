@@ -9,7 +9,7 @@ use Illuminate\Database\Seeder;
 class ReviewSeeder extends Seeder
 {
     /**
-     * Run the database seeds.
+     * Ejecuta la tarea de crear 200 instancias de la clase Review utilizando factory.
      *
      * @return void
      */

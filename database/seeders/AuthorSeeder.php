@@ -9,7 +9,9 @@ use Illuminate\Database\Seeder;
 class AuthorSeeder extends Seeder
 {
     /**
-     * Run the database seeds.
+     * Ejecuta la tarea de crear 60 instancias de la clase Author utilizando factory.
+     *
+     * @return void
      */
     public function run(): void
     {

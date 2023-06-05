@@ -10,23 +10,14 @@ use Illuminate\Http\Request;
 
 class Navbar extends Component
 {
-    public $query;
-    public $books;
+    public $query; // Variable para almacenar la consulta de búsqueda ingresada por el usuario
+    public $books; // Variable para almacenar los libros que coinciden con la búsqueda
 
     public function render()
     {
-        $contenido = Cart::count();
-        $categorias = Category::all();
+        $contenido = Cart::count(); // Devuelve la cantidad de elementos en el carrito
+        $categorias = Category::all(); // Obtiene todas las categorías de libros
 
         return view('livewire.navbar', compact('contenido', 'categorias'));
-    }
-
-    public function autocomplete(Request $request)
-    {
-        $data = Book::select("title")
-            ->where('title', 'LIKE', '%' . $request->get('query') . '%')
-            ->get();
-        dd($data);
-        return response()->json($data);
     }
 }

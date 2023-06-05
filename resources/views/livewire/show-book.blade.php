@@ -1,7 +1,7 @@
 @section('page-title')
 {{ $book->title }} |
 @endsection
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 <div class="container py-4 mt-lg-5">
     <x-messages />
     <div class="row">
@@ -95,7 +95,7 @@
 <x-footer />
 
 @if (Auth::user())
- <!-- Modal añadir opinión -->
+ <!-- Modal de añadir opinión -->
  <div class="modal fade" id="addOpinion" tabindex="-1" aria-labelledby="newOpinion" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -149,23 +149,26 @@
 @endif
 
 </div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
     $('li').on('click', function(){
-        var clickedIndex = $(this).index();
-        var stars = $('#stars li');
-        $('li').removeClass('active');
-        $('li').removeClass('secondary-active');
-        $(this).addClass('active');
-        $(this).prevAll().addClass('secondary-active');
+        var clickedIndex = $(this).index(); // Se obtiene el índice del elemento 'li' clicado
+        var stars = $('#stars li'); // Obtiene todos los elementos <li> con la class "stars"
+        $('li').removeClass('active'); // Remueve la clase 'active' de todos los elementos <li>
+        $('li').removeClass('secondary-active'); // Remueve la clase 'secondary-active' de todos los elementos <li>
+        $(this).addClass('active'); // Agrega la clase 'active' al elemento clicado
+        $(this).prevAll().addClass('secondary-active'); //Agrega la clase 'secondary-active' a todos los elementos anteriores al elemento clicado
         stars.each(function (index) {
-            var star = $(this);
-            var starIcon = star.find('i');
+            var star = $(this); // Obtiene el elemento <li> actual
+            var starIcon = star.find('i'); // Obtiene el elemento <i> dentro del elemento <li> actual
 
+            // Se comparan el índice actual con el índice del elemento clicado
             if (index <= clickedIndex) {
-                star.addClass('active');
-                starIcon.removeClass('fa-regular').addClass('fa-solid');
+                star.addClass('active'); // Agrega la clase 'active' al elemento <li> actual
+                starIcon.removeClass('fa-regular').addClass('fa-solid'); // Remueve la clase 'fa-regular' y agrega la clase 'fa-solid' al elemento <i>
             } else {
-                starIcon.removeClass('fa-solid').addClass('fa-regular');
+                starIcon.removeClass('fa-solid').addClass('fa-regular'); // Remueve la clase 'fa-solid' y agrega la clase 'fa-regular' al elemento <i>
             }
         });
     });

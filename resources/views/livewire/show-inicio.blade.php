@@ -193,15 +193,3 @@
         }
     }
 </style>
-{{-- <script>
-    window.onload = function() {
-            let bookTitle = document.getElementsByClassName("card-title");
-            let limiteCaracteres = 30;
-
-            for (var i = 0; i < bookTitle.length; i++) {
-                if (bookTitle[i].textContent.length > 30){
-                    bookTitle[i].textContent = bookTitle[i].textContent.slice(0, limiteCaracteres) + "...";
-                }
-            }
-        }
-</script> --}}

@@ -9,7 +9,9 @@ use Illuminate\Database\Seeder;
 class CustomerSeeder extends Seeder
 {
     /**
-     * Run the database seeds.
+     * Ejecuta la tarea de crear 50 instancias de la clase Customer utilizando el factory.
+     *
+     * @return void
      */
     public function run(): void
     {

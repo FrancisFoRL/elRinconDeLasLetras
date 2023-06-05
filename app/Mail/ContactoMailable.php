@@ -17,13 +17,13 @@ class ContactoMailable extends Mailable
     public $datos = [];
 
     /**
-     * Create a new message instance.
+     * Se crea una nueva instancia de mensaje.
      *
      * @return void
      */
     public function __construct($datos)
     {
-        $this->datos = $datos;
+        $this->datos = $datos; //Se da el valor de datos a la varibale de la clase Contacto
     }
 
     /**
@@ -34,7 +34,7 @@ class ContactoMailable extends Mailable
     public function envelope()
     {
         return new Envelope(
-            from: new Address($this->datos['email'], $this->datos['nombre']),
+            from: new Address($this->datos['email'], $this->datos['nombre']), //Se crea una nueva intancia de Address y se le añade el email y nombre proporcionados
             subject: 'Formulario de Contacto',
         );
     }
@@ -47,11 +47,11 @@ class ContactoMailable extends Mailable
     public function content()
     {
         return new Content(
-            markdown: 'mail.index',
+            markdown: 'mail.index', //Se usa la plantilla de markdown que se encuentra en mail
             with: [
-                'nombre' => $this->datos['nombre'],
-                'email' => $this->datos['email'],
-                'contenido' => $this->datos['contenido']
+                'nombre' => $this->datos['nombre'], //Se pasa el campo nombre a la plantilla
+                'email' => $this->datos['email'], //Se pasa el campo email a la plantilla
+                'contenido' => $this->datos['contenido'] //Se pasa el campo contenido a la plantilla
             ]
         );
     }

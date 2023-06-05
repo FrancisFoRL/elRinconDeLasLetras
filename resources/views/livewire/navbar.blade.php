@@ -31,16 +31,6 @@
                     </form>
                 </div>
             </div>
-
-            {{-- <script>
-                document.getElementById('search-form').addEventListener('submit', function(event) {
-                    var tituloInput = document.getElementById('inputSearch');
-                    if (!tituloInput.value.trim()) {
-                        event.preventDefault();
-                    }
-                });
-            </script> --}}
-
             <ul class="navbar-nav ms-auto me-2 align-items-center">
                 <li class="nav-item me-4">
                     <a href="{{ route('wishlist') }}" class="text-decoration-none" id="heart">
@@ -193,14 +183,14 @@
 </nav>
 
 
-<x-offcanvas-mobile :categorias="$categorias"/> <!-- Offcanvas para moviles -->
+<x-offcanvas-mobile :categorias="$categorias" /> <!-- Offcanvas para moviles -->
 @livewire('cart.cart-show-inicio')
 
 <script>
     function showSearch() {
-        var searchBox = document.querySelector('.search-box');
-        searchBox.classList.toggle('show');
-        searchBox.querySelector('input').focus();
+        var searchBox = document.querySelector('.search-box'); // Se obtiene la referencia al elemento con la clase 'search-box'
+        searchBox.classList.toggle('show'); // Alterna la clase 'show' en el elemento, lo que controla su visibilidad.
+        searchBox.querySelector('input').focus(); // Obtiene la referencia al elemento <input> dentro de la caja de búsqueda y le da el enfoque.
     }
 </script>
 
