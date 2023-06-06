@@ -39,7 +39,7 @@
                     </a>
                 </li>
 
-                @if(url()->current() != url('/cart/cart-show'))
+                @if(url()->current() != url('/carrito'))
                 <li class="nav-item me-4">
                     <!-- Contenedor del icono y el badge -->
 

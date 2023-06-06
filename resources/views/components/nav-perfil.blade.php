@@ -5,9 +5,9 @@
         Perfil
     </a>
     <a href="{{route('pedidos')}}"
-        class="list-group-item list-group-item-action fs-5 {{ Request::is('user/pedidos') ? 'active' : '' }}">Mis
+        class="list-group-item list-group-item-action fs-5 {{ Request::is('perfil/pedidos') ? 'active' : '' }}">Mis
         pedidos</a>
-    <a href="{{route('opiniones')}}" class="list-group-item list-group-item-action fs-5 {{ Request::is('user/review') ? 'active' : '' }}">Mis Opiniones</a>
+    <a href="{{route('opiniones')}}" class="list-group-item list-group-item-action fs-5 {{ Request::is('perfil/reseñas') ? 'active' : '' }}">Mis Opiniones</a>
 </div>
 <style>
     .list-group {
