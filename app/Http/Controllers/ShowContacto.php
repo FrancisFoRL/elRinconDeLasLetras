@@ -24,7 +24,7 @@ class ShowContacto extends Controller
         try {
             //Se crea una instancia de la clase ContactoMailable y se le envía al correo electrónico especificado ('contacto@elrincondelasletras.com') utilizando Mail.
             Mail::to('contacto@elrincondelasletras.com')->send(new ContactoMailable($request->all()));
-            return redirect()->route('contacto.show')->with('email-send', 'Error al enviar el email');
+            return redirect()->route('contacto.show')->with('email-send', 'Correo enviado correctamente');
         } catch (Exception $e) {
             //Se redirige al usuario a la ruta de contacto en caso de error.
             return redirect()->route('contacto.show')->with('email-error', 'Error al enviar el email');

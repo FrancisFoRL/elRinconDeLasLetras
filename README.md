@@ -1,66 +1,64 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# El Rincón de las Letras
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+El Rincón de las Letras es una tienda en línea de libros que ofrece una amplia variedad de títulos para lectores de todas las edades e intereses. Se dedica a proporcionar una experiencia de compra de libros en línea fácil, accesible y agradable para los clientes.
 
-## About Laravel
+## 📋 Tabla de Contenidos
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+- [Descripción](#descripción)
+- [Instalación](#instalación)
+- [Uso](#uso)
+- [Contacto](#contacto)
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## 📖 Descripción
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+El Rincón de las Letras es una plataforma web dedicada a la venta de libros en línea. Nuestro objetivo es brindar a los amantes de la lectura una experiencia única y conveniente para explorar, descubrir y adquirir una amplia variedad de libros de diferentes géneros y autores.
 
-## Learning Laravel
+## 🚀 Instalación
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+Para la instalación y puesta en marcha de projecto nos hara falta lo siguiente: 
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+- PHP 8.0 o superior.
+- Laravel 9.5.2 o superior.
+- Jetstream y Livewire.
+- Composer
+- MySQL
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+Cuando se cumplan todos los requisitos anteriores y se clone en projecto habra hacerlos siguientes comandos:
+    
+    composer install
+    composer update 
 
-## Laravel Sponsors
+Con esto tendriamos ya todas las dependencias necesarias para que el projecto funcione. 
+Paso seguido tendremos que indicar la demas configuraciones en el .env de projecto:
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+    cp .env.example .env
 
-### Premium Partners
+Generaremos una key nueva para el projecto: 
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+    php artisan key:generate
 
-## Contributing
+Una vez ya añadida nuestra base de datos, ya por ultimo podremos ejecutar las migraciones, para crear las tablas necesarias para el projecto:
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+    php artisan migrate
 
-## Code of Conduct
+## 💡 Uso
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+- **Explora el catálogo:** Navega por nuestro amplio catálogo de libros para descubrir nuevas lecturas. Utiliza la barra de búsqueda para encontrar libros por título. También puedes explorar las secciones destacadas.
 
-## Security Vulnerabilities
+- **Detalles de los libros:** Haz clic en un libro para acceder a su página de detalles. Allí encontrarás información completa sobre el libro, el autor, las reseñas de otros lectores y la disponibilidad.
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+- **Añadir al carrito:** Cuando encuentres un libro que desees compra, simplemente haz clic en el botón "Añadir al carrito". Puedes ajustar la cantidad deseada y el carrito se actualizará automáticamente. ¿Cual será tu proxima historia?
 
-## License
+- **Proceso de compra:** Una vez que hayas seleccionado todos los libros que deseas comprar, ve a tu carrito y revisa los detalles. Confirma tus libros seleccionados y procede al proceso de pago. Proporciona la información de envío requerida y elige el método de pago que prefieras. Nuestro proceso de pago es seguro y protegido, a traves de Paypal o tarjeta de crédito o débito.
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+- **Historial de pedidos:** Si deseas revisar tus compras anteriores, puedes acceder a tu historial de pedidos. Allí encontrarás información detallada sobre cada compra, incluyendo los libros adquiridos en dicha compra.
+
+## 📝 Licencia
+
+Indica la licencia del proyecto y cualquier información adicional sobre los derechos de autor o las restricciones de uso.
+
+## 📧 Contacto
+
+Si tienes alguna pregunta, comentario o inquietud relacionada con el projecto, te invito a ponerte en contacto a través de los canales de contacto. Estaremos encantados de ayudarte y brindarte la información necesaria.
+
+- **Correo electrónico:** francis.cb12@gmail.com
