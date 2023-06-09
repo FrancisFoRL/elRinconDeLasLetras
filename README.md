@@ -1,4 +1,11 @@
-# El Rincón de las Letras
+<p align="center">
+<img src="https://raw.githubusercontent.com/FrancisFoRL/
+elRinconDeLasLetras/master/Logo.svg" width="120" height="100" style="text-align:center">
+</p>
+
+<h1 align="center">
+    El Rincón de las Letras
+</h1>
 
 El Rincón de las Letras es una tienda en línea de libros que ofrece una amplia variedad de títulos para lectores de todas las edades e intereses. Se dedica a proporcionar una experiencia de compra de libros en línea fácil, accesible y agradable para los clientes.
 

@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="500" zoomAndPan="magnify"
+    viewBox="0 0 375 374.999991" height="500" preserveAspectRatio="xMidYMid meet" version="1.0">
+    <defs>
+        <g />
+    </defs>
+    <path stroke-linecap="butt" transform="matrix(0.750347, 0, 0, 0.75, 11.123433, 7.351661)" fill="none"
+        stroke-linejoin="miter" d="M 0.0020883 3.499869 L 472.78859 3.499869 " stroke="#f6f6f6" stroke-width="7"
+        stroke-opacity="1" stroke-miterlimit="4" />
+    <path stroke-linecap="butt"
+        transform="matrix(0.000000000000000046, 0.750347, -0.75, 0.000000000000000046, 15.962245, 7.762847)" fill="none"
+        stroke-linejoin="miter" d="M -0.00150429 3.501743 L 472.784998 3.501743 " stroke="#f6f6f6" stroke-width="7"
+        stroke-opacity="1" stroke-miterlimit="4" />
+    <path stroke-linecap="butt"
+        transform="matrix(0.000000000000000046, 0.750347, -0.75, 0.000000000000000046, 366.120537, 7.762847)"
+        fill="none" stroke-linejoin="miter" d="M -0.00150429 3.499258 L 472.784998 3.499258 " stroke="#f6f6f6"
+        stroke-width="7" stroke-opacity="1" stroke-miterlimit="4" />
+    <path stroke-linecap="butt" transform="matrix(0.748661, 0, 0, 0.75, 214.683432, 357.101139)" fill="none"
+        stroke-linejoin="miter" d="M 0.000216049 3.500565 L 201.375256 3.500565 " stroke="#f6f6f6" stroke-width="7"
+        stroke-opacity="1" stroke-miterlimit="4" />
+    <g fill="#f6f6f6" fill-opacity="1">
+        <g transform="translate(41.921688, 359.479906)">
+            <g>
+                <path
+                    d="M 36.824219 0 L 36.824219 -168.699219 L 73.472656 -168.699219 C 93.683594 -168.699219 101.734375 -156.367188 101.734375 -140.269531 C 101.734375 -95.394531 50.011719 -93.339844 50.011719 -76.726562 C 50.011719 -65.765625 71.933594 -31.855469 86.320312 -13.015625 C 95.226562 -1.371094 95.738281 0 105.84375 0 L 134.101562 0 L 134.101562 -1.027344 C 121.769531 -1.027344 69.878906 -76.554688 69.878906 -88.375 C 69.878906 -98.820312 126.566406 -100.535156 126.566406 -141.808594 C 126.566406 -155.851562 117.488281 -171.265625 98.820312 -171.265625 L 11.988281 -171.265625 L 11.988281 0 Z M 36.824219 0 " />
+            </g>
+        </g>
+    </g>
+</svg>
