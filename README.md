@@ -61,7 +61,7 @@ Una vez ya añadida nuestra base de datos, ya por ultimo podremos ejecutar las m
 
 ## 📝 Licencia
 
-Este proyecto está licenciado bajo la Licencia MIT. Consulte el archivo [LICENSE.md](LICENSE) para obtener más información.
+Este proyecto está licenciado bajo la Licencia MIT. Consulte el archivo [LICENSE](LICENSE.md) para obtener más información.
 
 ## 📧 Contacto
 
