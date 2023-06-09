@@ -1,6 +1,5 @@
 <p align="center">
-<img src="https://raw.githubusercontent.com/FrancisFoRL/
-elRinconDeLasLetras/master/img/Logo.svg" width="120" height="100" style="text-align:center">
+<img src="https://raw.githubusercontent.com/FrancisFoRL/elRinconDeLasLetras/master/img/Logo.svg" width="120" height="100" style="text-align:center">
 </p>
 
 <h1 align="center">
