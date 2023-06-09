@@ -10,12 +10,12 @@ El Rincón de las Letras es una tienda en línea de libros que ofrece una amplia
 
 ## 📋 Tabla de Contenidos
 
-- [Descripción](#descripción)
-- [Instalación](#instalación)
-- [Uso](#uso)
-- [Posibles errores](#⚠️-posibles-errores)
-- [Licencia](#licencia)
-- [Contacto](#contacto)
+- [Descripción](#Descripción)
+- [Instalación](#Instalación)
+- [Uso](#Uso)
+- [Posibles errores](#⚠️-Posibles-errores)
+- [Licencia](#Licencia)
+- [Contacto](#Contacto)
 
 ## 📖 Descripción
 
