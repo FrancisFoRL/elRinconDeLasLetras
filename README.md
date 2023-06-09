@@ -13,6 +13,7 @@ El Rincón de las Letras es una tienda en línea de libros que ofrece una amplia
 - [Descripción](#descripción)
 - [Instalación](#instalación)
 - [Uso](#uso)
+- [Posibles errores](#⚠️-posibles-errores)
 - [Licencia](#licencia)
 - [Contacto](#contacto)
 
@@ -44,6 +45,10 @@ Generaremos una key nueva para el projecto:
 
     php artisan key:generate
 
+Crearemos también un enlace simbolico, ya que usamos como almacenamiento storage:
+
+    php artisan storage:link
+
 Una vez ya añadida nuestra base de datos, ya por ultimo podremos ejecutar las migraciones, para crear las tablas necesarias para el projecto:
 
     php artisan migrate
@@ -59,6 +64,69 @@ Una vez ya añadida nuestra base de datos, ya por ultimo podremos ejecutar las m
 - **Proceso de compra:** Una vez que hayas seleccionado todos los libros que deseas comprar, ve a tu carrito y revisa los detalles. Confirma tus libros seleccionados y procede al proceso de pago. Proporciona la información de envío requerida y elige el método de pago que prefieras. Nuestro proceso de pago es seguro y protegido, a traves de Paypal o tarjeta de crédito o débito.
 
 - **Historial de pedidos:** Si deseas revisar tus compras anteriores, puedes acceder a tu historial de pedidos. Allí encontrarás información detallada sobre cada compra, incluyendo los libros adquiridos en dicha compra.
+
+## ⚠️ Posibles errores
+
+### Bootstrap 5 no carga los estilos
+
+Puede ocurrir el caso en el que después de clonar el proyecto y lo despleguemos, no se muestren correctamente los estilos de este. Esto es debido a que Bootstrap no se cargó correctamente.
+Para solucionar este error, deberemos volver a instalar Bootstrap 5 en el proyecto.
+
+Comenzamos abriendo una terminal y ejecutamos el siguiente comando para instalar Boostrap 5:
+
+    composer require twbs/bootstrap:5.3.0-alpha1 
+
+Ahora instalamos Laravel UI ejecutando el siguiente comando en la consola de comandos:
+
+    composer require laravel/ui:* 
+
+Tendremos que usar scaffolding ui bootstrap, para ello ejecuto el siguiente comando en la consola:
+
+    php artisan ui bootstrap
+
+Paso seguido ejecutamos el siguiente comando para instalar las dependencias necesarias:
+
+    npm install 
+
+Cuando ejecutamos el comando anterior, se nos ha creará un directorio llamado node_modules en el directorio principal del proyecto.
+
+Ahora vamos ha importar Bootstrap 5 en el archivo vite.config.js. Este archivo se encuentra en el directorio principal del proyecto:
+
+    import { defineConfig } from 'vite';
+    import laravel from 'laravel-vite-plugin';
+    import path from 'path';
+    
+    export default defineConfig({
+        plugins: [
+            laravel({
+                input: [
+                    'resources/sass/app.scss',
+                    'resources/js/app.js',
+                ],
+                refresh: true,
+                // Importamos Bootstrap 5 
+                resolve:{
+                    alias:{
+                        '~bootstrap': path.resolve(__dirname, 'node_modules/bootstrap'),
+                    }
+                },
+                // Fin Importamos Bootstrap 5 
+            }),
+        ],
+    });
+
+Paso seguido abrimos el archivo bootstrap.js e importamos el archivo app.scss. El archivo bootstrap.js se encuentra en resources > js > bootstrap.js:
+
+    // importamos el archivo app.scss 
+    import '../sass/app.scss';
+
+Luego ejecutamos el siguiente comando para compilar todo lo configurado:
+
+    npm run build
+
+Se nos habran creado algunos archivos necesarios como el CSS y JS de Bootstrap 5 en el directorio public.
+
+Con esto, nuestro projecto deberia detectar correctamente Bootstrap 5 y mostrar el diseño de la web correctamente.
 
 ## 📝 Licencia
 
