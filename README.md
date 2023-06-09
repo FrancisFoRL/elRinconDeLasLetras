@@ -13,6 +13,7 @@ El Rincón de las Letras es una tienda en línea de libros que ofrece una amplia
 - [Descripción](#descripción)
 - [Instalación](#instalación)
 - [Uso](#uso)
+- [Licencia](#licencia)
 - [Contacto](#contacto)
 
 ## 📖 Descripción
@@ -63,8 +64,6 @@ Una vez ya añadida nuestra base de datos, ya por ultimo podremos ejecutar las m
 
 Este proyecto está licenciado bajo la Licencia MIT. Consulte el archivo [LICENSE](LICENSE.md) para obtener más información.
 
-## 📧 Contacto
+## 📧 Soporte
 
-Si tienes alguna pregunta, comentario o inquietud relacionada con el projecto, te invito a ponerte en contacto a través de los canales de contacto. Estaremos encantados de ayudarte y brindarte la información necesaria.
-
-- **Correo electrónico:** francis.cb12@gmail.com
+Si tienes algún problema o necesitas ayuda con este proyecto, puedes abrir un nuevo issue en el repositorio de GitHub o contactarme por correo electrónico a [francis.cb12@gmail.com](mailto:support@example.com).
